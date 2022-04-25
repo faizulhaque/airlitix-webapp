@@ -48,8 +48,6 @@ let currentGreenhouse;
 let currentBay;
 
 
-
-
 //Home Button Functionality
 function checkForHome(){
     console.log('function ran')
@@ -69,7 +67,6 @@ homeBtn.addEventListener('click', () => {
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
-  alert('HELLOOO?')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   handleAdminMode();
@@ -111,7 +108,7 @@ for (const btn of bayBtns) {
     calculator.style.display = 'flex';	
     for(const resultText of resultTexts){
     	resultText.display = 'none';
-      resultText.innerHTML = ''
+        resultText.innerHTML = ''
     }
   });
 }
@@ -127,10 +124,10 @@ for (const btn of keypadBtns) {
 
 //Clicking Step 1
 step1.addEventListener("click", () => {
-		step1.style.opacity = '100%';
-        step2.style.opacity = '50%';
-   		step3.style.opacity = '50%';
-	  resetFields()          
+    step1.style.opacity = '100%';
+    step2.style.opacity = '50%';
+    step3.style.opacity = '50%';
+	resetFields()          
  })
 
  //Function to reset all fields back to initial state
