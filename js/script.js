@@ -7,7 +7,6 @@ let greenhouses = document.getElementsByClassName("main-greenhouse-div");
 let step1 = document.getElementById("step-1");
 let step2 = document.getElementById("step-2");
 let step3 = document.getElementById("step-3");
-let step2Overlay = document.getElementById("step-2-overlay");
 let bgOverlay = document.getElementById("bg-gradient");
 
 //Different Views
@@ -43,6 +42,7 @@ let bayOutcomeNum = document.getElementById("bay-outcome-num");
 let backBtn = document.getElementById('back-btn')
 
 //General
+let home = true;
 let adminMode = false;
 let currentGreenhouse;
 let currentBay;
@@ -93,7 +93,6 @@ for (const btn of bayBtns) {
     }
     step1.style.opacity = '50%'
     step2.style.opacity = '100%'
-    step2Overlay.style.display = 'none'
     btn.classList.toggle("selected");
     currentBay = btn.id.slice(-1)
     let calculator = btn.parentNode.parentNode.nextElementSibling;
@@ -116,25 +115,23 @@ for (const btn of keypadBtns) {
 
 //Clicking Step 1
 step1.addEventListener("click", () => {
-						currentGreenhouse = '';
-						currentBay = '';
-						step1.style.opacity = '100%';
-            step2.style.opacity = '50%';
-   					step3.style.opacity = '50%';
-						resetFields()          
+		step1.style.opacity = '100%';
+        step2.style.opacity = '50%';
+   		step3.style.opacity = '50%';
+	  resetFields()          
  })
 
  //Function to reset all fields back to initial state
  function resetFields(){
  	 for (let i = 0; i < resultTexts.length; i++){
-    					resultTexts[i].innerText = '';
-              resultTexts[i].style.display = 'none'
+    		resultTexts[i].innerText = '';
+            resultTexts[i].style.display = 'none'
    				 } 
            for (let i = 0; i < bayCalculationDivs.length; i++){
-    					bayCalculationDivs[i].style.display = 'none';
+    		bayCalculationDivs[i].style.display = 'none';
    				 } 
            for (const btn of bayBtns) {
-    					btn.classList.remove("selected");
+    		btn.classList.remove("selected");
     				}
            for (const bar of sideBars) {
               bar.style.height = '0'
@@ -152,7 +149,6 @@ step1.addEventListener("click", () => {
               greenhouse4View.style.display = 'none';
               greenhouse5View.style.display = 'none';
               outcomeView.style.display = 'none';
-              step2Overlay.style.display = 'block'
  }
 
 //Display selected Greenhouse, hide the others
