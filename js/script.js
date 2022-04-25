@@ -47,7 +47,7 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 
-console.log('HELLOOO?')
+
 
 
 //Home Button Functionality
@@ -69,6 +69,7 @@ homeBtn.addEventListener('click', () => {
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
+    console.log('HELLOOO?')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   handleAdminMode();
