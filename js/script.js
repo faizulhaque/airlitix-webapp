@@ -47,8 +47,17 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 
-
 //Home Button Functionality
+function checkForHome(){
+    if(home) {
+        homeBtn.style.display = 'none'
+    } else {
+        homeBtn.style.display = 'block'
+    }
+}
+
+
+
 homeBtn.addEventListener('click', () => {
 	for (const btn of bayBtns) {
   	btn.classList.remove('selected')
@@ -58,7 +67,7 @@ homeBtn.addEventListener('click', () => {
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
-	toggleDiv.classList.toggle('admin');
+  toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   handleAdminMode();
 })
@@ -123,6 +132,8 @@ step1.addEventListener("click", () => {
 
  //Function to reset all fields back to initial state
  function resetFields(){
+     home = true;
+     checkForHome();
  	 for (let i = 0; i < resultTexts.length; i++){
     		resultTexts[i].innerText = '';
             resultTexts[i].style.display = 'none'
@@ -154,7 +165,9 @@ step1.addEventListener("click", () => {
 //Display selected Greenhouse, hide the others
 for (let i = 0; i < greenhouses.length; i++) {
     greenhouses[i].addEventListener("click", () => {
-    		if(greenhouses[i].id === "gh1"){
+        home = false;
+        checkForHome();
+    	if(greenhouses[i].id === "gh1"){
           currentGreenhouse = 1;    
           allGreenhousesView.style.display = 'none';
         	greenhouse2View.style.display = 'none';
