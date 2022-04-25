@@ -47,6 +47,9 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 
+console.log('HELLOOO?')
+
+
 //Home Button Functionality
 function checkForHome(){
     console.log('function ran')
