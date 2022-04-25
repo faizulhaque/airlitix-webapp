@@ -7,9 +7,10 @@ let greenhouses = document.getElementsByClassName("main-greenhouse-div");
 let step1 = document.getElementById("step-1");
 let step2 = document.getElementById("step-2");
 let step3 = document.getElementById("step-3");
+let step2Overlay = document.getElementById("step-2-overlay");
 let bgOverlay = document.getElementById("bg-gradient");
 
-//Different Vies
+//Different Views
 let allGreenhousesView = document.getElementById("all-greenhouses-view");
 let greenhouse1View = document.getElementById("greenhouse-1-view");
 let greenhouse2View = document.getElementById("greenhouse-2-view");
@@ -92,6 +93,7 @@ for (const btn of bayBtns) {
     }
     step1.style.opacity = '50%'
     step2.style.opacity = '100%'
+    step2Overlay.style.display = 'none'
     btn.classList.toggle("selected");
     currentBay = btn.id.slice(-1)
     let calculator = btn.parentNode.parentNode.nextElementSibling;
@@ -142,14 +144,15 @@ step1.addEventListener("click", () => {
               container.style.display= 'none'
            }
               currentGreenhouse = '';
-						  currentBay = '';
-            	allGreenhousesView.style.display = 'flex';
+			  currentBay = '';
+              allGreenhousesView.style.display = 'flex';
               greenhouse1View.style.display = 'none';
               greenhouse2View.style.display = 'none';
               greenhouse3View.style.display = 'none';
               greenhouse4View.style.display = 'none';
               greenhouse5View.style.display = 'none';
               outcomeView.style.display = 'none';
+              step2Overlay.style.display = 'block'
  }
 
 //Display selected Greenhouse, hide the others
