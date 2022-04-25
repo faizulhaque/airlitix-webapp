@@ -49,14 +49,13 @@ let currentBay;
 
 //Home Button Functionality
 function checkForHome(){
+    console.log('function ran')
     if(home) {
         homeBtn.style.display = 'none'
     } else {
         homeBtn.style.display = 'block'
     }
 }
-
-
 
 homeBtn.addEventListener('click', () => {
 	for (const btn of bayBtns) {
