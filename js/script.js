@@ -69,7 +69,7 @@ homeBtn.addEventListener('click', () => {
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
-    console.log('HELLOOO?')
+  alert('HELLOOO?')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   handleAdminMode();
