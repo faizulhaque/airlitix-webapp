@@ -65,6 +65,7 @@ homeBtn.addEventListener('click', () => {
 	for (const btn of bayBtns) {
   	btn.classList.remove('selected')
   }
+  handleAdminMode();
   step1.click()
 })
 
