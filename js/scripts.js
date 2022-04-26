@@ -30,7 +30,7 @@ let cancelBtns = document.getElementsByClassName("cancel-btn");
 
 //Hamburger and Menus
 let hamburgerMenus = document.getElementsByClassName("hamburger-menu");
-let menuContainer = document.getElementsByClassName("menu-container");
+let menuContainers = document.getElementsByClassName("menu-container");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
 let userOperationBtns = document.getElementsByClassName("user-operation-div");
@@ -86,8 +86,8 @@ function handleAdminMode(){
     for (const menu of adminMenus){
     	menu.style.display = 'block'
     }
-    for (const menu of menuContainer){
-      menu.style.backgroundColor = '#274690'
+    for (const menu of menuContainers){
+      menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
   } else {
     step3.style.display = 'none'
@@ -98,7 +98,7 @@ function handleAdminMode(){
     	menu.style.display = 'none'
     }
     for (const menu of menuContainer){
-      menu.style.backgroundColor = '#27402b'
+      menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
   }
 }
