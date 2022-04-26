@@ -28,11 +28,14 @@ let resetBtns = document.getElementsByClassName("reset-btn");
 let confirmBtns = document.getElementsByClassName("confirm-btn");
 let cancelBtns = document.getElementsByClassName("cancel-btn");
 
-//Hamburger Menu
+//Hamburger and Menus
 let hamburgerMenus = document.getElementsByClassName("hamburger-menu");
-let operationBtns = document.getElementsByClassName("operation-div");
+let userMenus = document.getElementsByClassName("user-menu");
+let adminMenus = document.getElementsByClassName("admin-menu");
+let userOperationBtns = document.getElementsByClassName("user-operation-div");
+let adminOperationBtns = document.getElementsByClassName("admin-operation-div");
 let sideBars = document.getElementsByClassName("admin-menu");
-let operationBtnContainers = document.getElementsByClassName("operation-buttons");
+let adminOperationBtnContainers = document.getElementsByClassName("admin-operation-buttons");
 
 //Outcome View
 let logData = document.getElementById("log-data");
@@ -76,21 +79,20 @@ function handleAdminMode(){
 	bgOverlay.classList.toggle('admin')
 	if(adminMode){
   	step3.style.display = 'flex'
-  	for (const hamburgerMenu of hamburgerMenus){
-    	hamburgerMenu.style.display = 'block'
+  	for (const menu of userMenus){
+    	menu.style.display = 'none'
+    }
+    for (const menu of adminMenus){
+    	menu.style.display = 'block'
     }
   } else {
     step3.style.display = 'none'
-  	for (const hamburgerMenu of hamburgerMenus){
-    	hamburgerMenu.style.display = 'none'
+    for (const menu of userMenus){
+    	menu.style.display = 'block'
     }
-    for (const bar of sideBars) {
-  	  bar.style.height = '0'
+    for (const menu of adminMenus){
+    	menu.style.display = 'none'
     }
-    for (const container of operationBtnContainers) {
-  	  container.style.opacity = '0'
-  	  container.style.display = 'none'
-  }
   }
 }
 
@@ -147,9 +149,11 @@ step1.addEventListener("click", () => {
            for (const bar of sideBars) {
               bar.style.height = '0'
             }
-           for (const container of operationBtnContainers) {
-              container.style.opacity = '0'
-              container.style.display= 'none'
+           for (const menu of adminMenus) {
+              menu.display = 'none';
+            }
+            for (const menu of userMenus) {
+              menu.display = 'none';
             }
 
               currentGreenhouse = '';
@@ -256,7 +260,28 @@ for(const cancelBtn of cancelBtns){
 }
 
 //Behavior for clicking an operation button in admin mode
-for(const btn of operationBtns){
+for(const btn of adminOperationBtns){
+	btn.addEventListener('click', () => {
+  //If they have already selected a bay to run a test on:
+  if(currentBay){
+    step2.style.opacity = '50%';
+    step3.style.opacity = '100%';
+    greenhouse1View.style.display = 'none';
+    greenhouse2View.style.display = 'none';
+    greenhouse3View.style.display = 'none';
+    greenhouse4View.style.display = 'none';
+    greenhouse5View.style.display = 'none';
+    outcomeView.style.display = 'flex'
+    ghOutcomeNum.textContent = currentGreenhouse;
+    bayOutcomeNum.textContent = currentBay;    
+  }  else {
+  	alert('Select a bay')
+  }
+  })
+}
+
+//Behavior for clicking an operation button in user mode
+for(const btn of userOperationBtns){
 	btn.addEventListener('click', () => {
   //If they have already selected a bay to run a test on:
   if(currentBay){
