@@ -166,19 +166,9 @@ step1.addEventListener("click", () => {
            for (const btn of bayBtns) {
     		      btn.classList.remove("selected");
     				}
-            
             for (const menu of menuContainers) {
               menu.style.backgroundColor = 'transparent'
-              menu.style.height = '0'
             }
-          //  for (const menu of adminMenus) {
-          //     menu.display = 'none';
-          //   }
-          //   for (const menu of userMenus) {
-          //     menu.display = 'none';
-          //   }
-
-
               currentGreenhouse = '';
 			        currentBay = '';
               handleResetBtn();
