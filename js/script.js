@@ -30,6 +30,7 @@ let cancelBtns = document.getElementsByClassName("cancel-btn");
 
 //Hamburger and Menus
 let hamburgerMenus = document.getElementsByClassName("hamburger-menu");
+let menuContainer = document.getElementsByClassName("menu-container");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
 let userOperationBtns = document.getElementsByClassName("user-operation-div");
@@ -85,6 +86,9 @@ function handleAdminMode(){
     for (const menu of adminMenus){
     	menu.style.display = 'block'
     }
+    for (const menu of menuContainer){
+      menu.style.backgroundColor = '#274690'
+    }
   } else {
     step3.style.display = 'none'
     for (const menu of userMenus){
@@ -92,6 +96,9 @@ function handleAdminMode(){
     }
     for (const menu of adminMenus){
     	menu.style.display = 'none'
+    }
+    for (const menu of menuContainer){
+      menu.style.backgroundColor = '#27402b'
     }
   }
 }
@@ -106,6 +113,7 @@ for (const btn of bayBtns) {
     step2.style.opacity = '100%'
     btn.classList.toggle("selected");
     currentBay = btn.id.slice(-1)
+    handleResetBtn();
     let calculator = btn.parentNode.parentNode.nextElementSibling;
     calculator.style.display = 'flex';	
     for(const resultText of resultTexts){
@@ -113,6 +121,19 @@ for (const btn of bayBtns) {
         resultText.innerHTML = ''
     }
   });
+}
+
+//Only display reset buttons if a bay is selected
+function handleResetBtn(){
+  if(currentBay != ''){
+    for(const btn of resetBtns){
+      btn.style.display = 'block'
+    }
+    } else {
+      for(const btn of resetBtns){
+        btn.style.display = 'none'
+      }
+    }
 }
 
 //Keypad Button Functionality
@@ -158,6 +179,7 @@ step1.addEventListener("click", () => {
 
               currentGreenhouse = '';
 			        currentBay = '';
+              handleResetBtn();
               allGreenhousesView.style.display = 'flex';
               greenhouse1View.style.display = 'none';
               greenhouse2View.style.display = 'none';
@@ -248,6 +270,9 @@ for(const confirmBtn of confirmBtns){
     //Hide calculator
     let calculator = overlay.parentNode.getElementsByClassName('bay-calculation-div')[0];
   	calculator.style.display = 'none'
+    //Clear currently selected and hide reset Button
+    currentBay = ''
+    handleResetBtn()
   })
 }
 
