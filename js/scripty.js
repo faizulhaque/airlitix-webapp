@@ -35,7 +35,6 @@ let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
 let userOperationBtns = document.getElementsByClassName("user-operation-div");
 let adminOperationBtns = document.getElementsByClassName("admin-operation-div");
-let sideBars = document.getElementsByClassName("admin-menu");
 let adminOperationBtnContainers = document.getElementsByClassName("admin-operation-buttons");
 
 //Outcome View
@@ -77,7 +76,7 @@ toggleDiv.addEventListener('click', () => {
 })
 
 function handleAdminMode(){
-	bgOverlay.classList.toggle('admin')
+	// bgOverlay.classList.toggle('admin')
 	if(adminMode){
   	step3.style.display = 'flex'
   	for (const menu of userMenus){
@@ -150,7 +149,7 @@ step1.addEventListener("click", () => {
     step1.style.opacity = '100%';
     step2.style.opacity = '50%';
     step3.style.opacity = '50%';
-	resetFields()          
+	  resetFields()          
  })
 
  //Function to reset all fields back to initial state
@@ -167,15 +166,18 @@ step1.addEventListener("click", () => {
            for (const btn of bayBtns) {
     		      btn.classList.remove("selected");
     				}
-           for (const bar of sideBars) {
-              bar.style.height = '0'
+            
+            for (const menu of menuContainers) {
+              menu.style.backgroundColor = 'transparent'
+              menu.style.height = '0'
             }
-           for (const menu of adminMenus) {
-              menu.display = 'none';
-            }
-            for (const menu of userMenus) {
-              menu.display = 'none';
-            }
+          //  for (const menu of adminMenus) {
+          //     menu.display = 'none';
+          //   }
+          //   for (const menu of userMenus) {
+          //     menu.display = 'none';
+          //   }
+
 
               currentGreenhouse = '';
 			        currentBay = '';
