@@ -54,7 +54,7 @@ let currentBay;
 
 //Home Button Functionality
 function checkForHome(){
-    console.log('function ran 2')
+    console.log('newest version')
     if(home) {
         homeBtn.style.display = 'none'
     } else {
@@ -97,7 +97,7 @@ function handleAdminMode(){
     for (const menu of adminMenus){
     	menu.style.display = 'none'
     }
-    for (const menu of menuContainer){
+    for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
   }
