@@ -151,9 +151,7 @@ step1.addEventListener("click", () => {
               container.style.opacity = '0'
               container.style.display= 'none'
             }
-            for (const menu of hamburgerMenus) {
-              menu.reset();
-            }
+
               currentGreenhouse = '';
 			        currentBay = '';
               allGreenhousesView.style.display = 'flex';
