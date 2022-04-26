@@ -54,7 +54,7 @@ let currentBay;
 
 //Home Button Functionality
 function checkForHome(){
-    console.log('newest version')
+    console.log('newest version 2')
     if(home) {
         homeBtn.style.display = 'none'
     } else {
@@ -194,6 +194,7 @@ for (let i = 0; i < greenhouses.length; i++) {
     greenhouses[i].addEventListener("click", () => {
         home = false;
         checkForHome();
+        handleAdminMode();
     	if(greenhouses[i].id === "gh1"){
           currentGreenhouse = 1;    
           allGreenhousesView.style.display = 'none';
