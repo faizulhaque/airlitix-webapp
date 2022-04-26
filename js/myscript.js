@@ -70,13 +70,13 @@ homeBtn.addEventListener('click', () => {
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
+	bgOverlay.classList.toggle('admin')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   handleAdminMode();
 })
 
 function handleAdminMode(){
-	// bgOverlay.classList.toggle('admin')
 	if(adminMode){
   	step3.style.display = 'flex'
   	for (const menu of userMenus){
