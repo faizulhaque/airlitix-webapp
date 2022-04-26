@@ -50,7 +50,7 @@ let currentBay;
 
 //Home Button Functionality
 function checkForHome(){
-    console.log('function ran')
+    console.log('function ran 2')
     if(home) {
         homeBtn.style.display = 'none'
     } else {
@@ -134,15 +134,15 @@ step1.addEventListener("click", () => {
  function resetFields(){
      home = true;
      checkForHome();
- 	 for (let i = 0; i < resultTexts.length; i++){
-    		resultTexts[i].innerText = '';
-            resultTexts[i].style.display = 'none'
+ 	         for (let i = 0; i < resultTexts.length; i++){
+    		      resultTexts[i].innerText = '';
+              resultTexts[i].style.display = 'none'
    				 } 
            for (let i = 0; i < bayCalculationDivs.length; i++){
-    		bayCalculationDivs[i].style.display = 'none';
+    		      bayCalculationDivs[i].style.display = 'none';
    				 } 
            for (const btn of bayBtns) {
-    		btn.classList.remove("selected");
+    		      btn.classList.remove("selected");
     				}
            for (const bar of sideBars) {
               bar.style.height = '0'
@@ -150,9 +150,12 @@ step1.addEventListener("click", () => {
            for (const container of operationBtnContainers) {
               container.style.opacity = '0'
               container.style.display= 'none'
-           }
+            }
+            for (const menu of hamburgerMenus) {
+              menu.reset();
+            }
               currentGreenhouse = '';
-			  currentBay = '';
+			        currentBay = '';
               allGreenhousesView.style.display = 'flex';
               greenhouse1View.style.display = 'none';
               greenhouse2View.style.display = 'none';
