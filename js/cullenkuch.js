@@ -175,7 +175,10 @@ for (const arrow of stoplightTriggers){
   arrow.addEventListener('click', () => {
     let stoplight = arrow.previousElementSibling
     console.log('take 2')
-    stoplight.style.display == 'flex' ? stoplight.style.display = 'none' : stoplight.style.display = 'flex'
+    if(stoplight.style.display == 'none'){
+      stoplight.style.display = 'flex'
+    } else if (stoplight.style.display == 'flex')
+      stoplight.style.display = 'none'
   })
 }
 
