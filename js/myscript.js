@@ -97,6 +97,8 @@ toggleDiv.addEventListener('click', () => {
 
 function handleAdminMode(){
 	if(adminMode){
+    console.log('admin mode enabled')
+    hamburgerMain.style.display = 'block'
   	step3.style.display = 'flex'
   	for (const menu of userMenus){
     	menu.style.display = 'none'
@@ -107,8 +109,8 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
-    hamburgerMain.style.display = 'block'
   } else {
+    hamburgerMain.style.display = 'none'
     step3.style.display = 'none'
     for (const menu of userMenus){
     	menu.style.display = 'block'
@@ -119,7 +121,6 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
-      hamburgerMain.style.display = 'none'
   }
 }
 
