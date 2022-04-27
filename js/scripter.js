@@ -4,6 +4,7 @@ let homeBtn = document.getElementById('home-btn')
 let toggleDiv = document.getElementById('toggle-div')
 let toggleHandle = document.getElementById('toggle-handle')
 let greenhouses = document.getElementsByClassName("main-greenhouse-div");
+let office = document.getElementById('office')
 let step1 = document.getElementById("step-1");
 let step2 = document.getElementById("step-2");
 let step3 = document.getElementById("step-3");
@@ -30,6 +31,7 @@ let confirmBtns = document.getElementsByClassName("confirm-btn");
 let cancelBtns = document.getElementsByClassName("cancel-btn");
 
 //Hamburger and Menus
+let hamburgerMain = document.getElementById("hamburger-main");
 let hamburgerMenus = document.getElementsByClassName("hamburger-menu");
 let menuContainers = document.getElementsByClassName("menu-container");
 let userMenus = document.getElementsByClassName("user-menu");
@@ -37,6 +39,8 @@ let adminMenus = document.getElementsByClassName("admin-menu");
 let userOperationBtns = document.getElementsByClassName("user-operation-div");
 let adminOperationBtns = document.getElementsByClassName("admin-operation-div");
 let adminOperationBtnContainers = document.getElementsByClassName("admin-operation-buttons");
+let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
+
 
 //Outcome View
 let logData = document.getElementById("log-data");
@@ -50,6 +54,7 @@ let home = true;
 let adminMode = false;
 let currentGreenhouse;
 let currentBay;
+let buildingSelected = false;
 
 
 //Home Button Functionality
@@ -102,6 +107,7 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
+    hamburgerMain.style.display = 'block'
   } else {
     step3.style.display = 'none'
     for (const menu of userMenus){
@@ -113,6 +119,7 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
+      hamburgerMain.style.display = 'none'
   }
 }
 
@@ -215,9 +222,9 @@ step1.addEventListener("click", () => {
               btn.classList.remove("in-progress")
               btn.classList.remove("success")
     				}
-            for (const menu of menuContainers) {
-              menu.style.backgroundColor = 'transparent'
-            }
+            // for (const menu of menuContainers) {
+            //   menu.style.backgroundColor = 'transparent'
+            // }
               currentGreenhouse = '';
 			        currentBay = '';
               handleResetBtn();
@@ -368,6 +375,20 @@ for(const btn of userOperationBtns){
   }
   })
 }
+
+//Homepage Office Operation Buttons 
+office.addEventListener('click', () => {
+  buildingSelected = !buildingSelected
+  office.classList.toggle('office-select')
+})
+
+buildingOperationBtns.addEventListener('click', () => {
+  if(buildingSelected){
+    alert('Office Status Here')
+  } else {
+    alert('Please Select a building')
+  }
+})
 
 //Back button functionality
 backBtn.addEventListener('click', () => {
