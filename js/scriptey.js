@@ -382,13 +382,16 @@ office.addEventListener('click', () => {
   office.classList.toggle('office-select')
 })
 
-buildingOperationBtns.addEventListener('click', () => {
-  if(buildingSelected){
-    alert('Office Status Here')
-  } else {
-    alert('Please Select a building')
-  }
-})
+for(const btn of buildingOperationBtns){
+  btn.addEventListener('click', () => {
+    if(buildingSelected){
+      alert('Office Status Here')
+    } else {
+      alert('Please Select a building')
+    }
+  })
+  
+}
 
 //Back button functionality
 backBtn.addEventListener('click', () => {
