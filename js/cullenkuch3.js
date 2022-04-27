@@ -173,7 +173,7 @@ for (const btn of bayBtns) {
 //Display or hide Stoplight Buttons on Arrow Click
 for (const arrow of stoplightTriggers){
   arrow.addEventListener('click', () => {
-    let stoplight = arrow.previousElementSibling
+    let stoplight = arrow.parentNode.getElementsByClassName('stoplight-div')[0]
     console.log(stoplight)
     if(stoplight.style.display == 'none'){
       stoplight.style.display = 'flex'
