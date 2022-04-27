@@ -65,10 +65,21 @@ function checkForHome(){
 homeBtn.addEventListener('click', () => {
 	for (const btn of bayBtns) {
   	btn.classList.remove('selected')
+  	btn.classList.remove('outline')
   }
-  handleAdminMode();
+  handleAdminMode(); 
   home = true;
   checkForHome();
+  currentGreenhouse = '';
+  currentBay = '';
+  handleResetBtn();
+  allGreenhousesView.style.display = 'flex';
+  greenhouse1View.style.display = 'none';
+  greenhouse2View.style.display = 'none';
+  greenhouse3View.style.display = 'none';
+  greenhouse4View.style.display = 'none';
+  greenhouse5View.style.display = 'none';
+  outcomeView.style.display = 'none';
 })
 
 //User/Admin Toggle
