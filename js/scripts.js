@@ -24,6 +24,7 @@ let resultTexts = document.getElementsByClassName("result-text");
 let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
 let keypadBtns = document.getElementsByClassName("keypad-btn");
 let bayBtns = document.getElementsByClassName("bay-div");
+let stoplightBtns = document.getElementsByClassName("status-select");
 let resetBtns = document.getElementsByClassName("reset-btn");
 let confirmBtns = document.getElementsByClassName("confirm-btn");
 let cancelBtns = document.getElementsByClassName("cancel-btn");
@@ -66,7 +67,8 @@ homeBtn.addEventListener('click', () => {
   	btn.classList.remove('selected')
   }
   handleAdminMode();
-  step1.click()
+  home = true;
+  checkForHome();
 })
 
 //User/Admin Toggle
@@ -107,8 +109,14 @@ function handleAdminMode(){
 for (const btn of bayBtns) {
   btn.addEventListener('click', function() {
   	for(const btn of bayBtns) {
-    	btn.classList.remove("selected");
+    	btn.classList.remove("selected")
+    	btn.classList.remove("outline")
     }
+    //If the clicked bay has already been assigned a status color, outline it instead
+    if(btn.classList.contains('error') || btn.classList.contains('in-progress') || btn.classList.contains('success')){
+      btn.classList.add('outline')
+    }
+
     step1.style.opacity = '50%'
     step2.style.opacity = '100%'
     btn.classList.toggle("selected");
@@ -121,6 +129,31 @@ for (const btn of bayBtns) {
         resultText.innerHTML = ''
     }
   });
+}
+
+//Stoplight Status Buttons
+for(const btn of stoplightBtns){
+  btn.addEventListener('click', () => {
+    let bayDiv = btn.parentNode.parentNode
+    if(btn.classList.contains('error')){
+      bayDiv.classList.remove('selected')
+      bayDiv.classList.remove('success')
+      bayDiv.classList.remove('in-progress')
+      bayDiv.classList.add('error')
+    }
+    if(btn.classList.contains("in-progress")){
+      bayDiv.classList.remove('selected')
+      bayDiv.classList.remove('success')
+      bayDiv.classList.remove('error')
+      bayDiv.classList.add('in-progress')
+    }
+    if(btn.classList.contains('success')){
+      bayDiv.classList.remove('selected')
+      bayDiv.classList.remove('error')
+      bayDiv.classList.remove('in-progress')
+      bayDiv.classList.add('success')
+    }
+  })
 }
 
 //Only display reset buttons if a bay is selected
@@ -165,7 +198,11 @@ step1.addEventListener("click", () => {
     		      bayCalculationDivs[i].style.display = 'none';
    				 } 
            for (const btn of bayBtns) {
-    		      btn.classList.remove("selected");
+    		      btn.classList.remove("selected")
+              btn.classList.remove("outline")
+              btn.classList.remove("error")
+              btn.classList.remove("in-progress")
+              btn.classList.remove("success")
     				}
             for (const menu of menuContainers) {
               menu.style.backgroundColor = 'transparent'
@@ -255,6 +292,7 @@ for(const confirmBtn of confirmBtns){
     	bayDiv.classList.remove('success')
       bayDiv.classList.remove('selected')
       bayDiv.classList.remove('error')
+      bayDiv.classList.remove('in-progress')
     }
     //Remove checked opacity from all icons
     let bayIcons = overlay.parentNode.getElementsByClassName('bay-icon');
