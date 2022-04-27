@@ -25,6 +25,8 @@ let resultTexts = document.getElementsByClassName("result-text");
 let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
 let keypadBtns = document.getElementsByClassName("keypad-btn");
 let bayBtns = document.getElementsByClassName("bay-div");
+let stoplightTriggers = document.getElementsByClassName("stoplight-trigger");
+let stoplightDivs = document.getElementsByClassName("stoplight-div");
 let stoplightBtns = document.getElementsByClassName("status-select");
 let resetBtns = document.getElementsByClassName("reset-btn");
 let confirmBtns = document.getElementsByClassName("confirm-btn");
@@ -131,6 +133,15 @@ for (const btn of bayBtns) {
     	btn.classList.remove("selected")
     	btn.classList.remove("outline")
     }
+    //hide all of the selected arrows when you click on a new bay
+    for(const trigger of stoplightTriggers){
+      trigger.style.display = 'none'
+    }
+    //hide all of the stoplight divs when you click on a new bay
+    for(const div of stoplightDivs){
+      div.style.display = 'none'
+    }
+
     //If the clicked bay has already been assigned a status color, outline it instead
     if(btn.classList.contains('error') || btn.classList.contains('in-progress') || btn.classList.contains('success')){
       btn.classList.add('outline')
@@ -138,16 +149,33 @@ for (const btn of bayBtns) {
 
     step1.style.opacity = '50%'
     step2.style.opacity = '100%'
+
+    //Toggle the selected class on this bay, hide or show the stoplight arrow trigger
     btn.classList.toggle("selected");
+    let selectedArrow = btn.getElementsByClassName('stoplight-trigger')[0]
+    if(selectedArrow.style.display == 'block'){
+      selectedArrow.style.display = 'none'
+    } else if (selectedArrow.style.display == 'none'){
+      selectedArrow.style.display = 'block'
+    }
+    
     currentBay = btn.id.slice(-1)
     handleResetBtn();
     let calculator = btn.parentNode.parentNode.nextElementSibling;
     calculator.style.display = 'flex';	
     for(const resultText of resultTexts){
     	resultText.display = 'none';
-        resultText.innerHTML = ''
+      resultText.innerHTML = ''
     }
   });
+}
+
+//Display or hide Stoplight Buttons on Arrow Click
+for (const arrow of stoplightTriggers){
+  arrow.addEventListener('click', () => {
+    let stoplight = arrow.previousSibling
+    stoplight.style.display = 'flex' ? stoplight.style.display = 'none' : stoplight.style.display = 'flex'
+  })
 }
 
 //Stoplight Status Buttons
