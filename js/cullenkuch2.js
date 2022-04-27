@@ -174,7 +174,7 @@ for (const btn of bayBtns) {
 for (const arrow of stoplightTriggers){
   arrow.addEventListener('click', () => {
     let stoplight = arrow.previousElementSibling
-    console.log('take 2')
+    console.log(stoplight)
     if(stoplight.style.display == 'none'){
       stoplight.style.display = 'flex'
     } else if (stoplight.style.display == 'flex')
