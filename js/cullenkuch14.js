@@ -59,7 +59,6 @@ let buildingSelected = false;
 
 //Home Button Functionality
 function checkForHome(){
-    console.log('newest version 2')
     if(home) {
         homeBtn.style.display = 'none'
     } else {
@@ -231,6 +230,7 @@ for (const btn of keypadBtns) {
      for (let i = 0; i < gridMenus.length; i++){
       let screen = gridMenus[i];
       let compStyles = window.getComputedStyle(screen);
+      console.log(compStyles.getPropertyValue('display'))
        if (compStyles.getPropertyValue('display') == 'grid'){
           currentGridDisplayed = gridMenus[i];
        }
