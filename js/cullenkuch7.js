@@ -229,12 +229,13 @@ for (const btn of keypadBtns) {
      let gridMenus = panelScreen.children
      let currentGridDisplayed = null;
      console.log(gridMenus)
+     console.log(currentGridDisplayed)
      for (let i = 0; i < gridMenus.length; i++){
        if (gridMenus[i].style.display == 'grid'){
           currentGridDisplayed = gridMenus[i];
+          console.log(currentGridDisplayed)
        }
      }
-     console.log(currentGridDisplayed)
   });
 }
 
