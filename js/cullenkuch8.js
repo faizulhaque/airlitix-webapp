@@ -225,12 +225,13 @@ function handleResetBtn(){
 //Keypad Button Functionality
 for (const btn of keypadBtns) {
   btn.addEventListener('click', function() {
-  	 let panelScreen = btn.parentNode.parentNode.getElementsByClassName('panel-screen')[0]
-     let gridMenus = panelScreen.children
+  	 let panelScreen = btn.parentNode.parentNode.getElementsByClassName('panel-screen')[0];
+     let gridMenus = Array.from(panelScreen.children);
      let currentGridDisplayed = null;
      console.log(gridMenus)
      console.log(currentGridDisplayed)
      for (let i = 0; i < gridMenus.length; i++){
+       console.log(gridMenus[i])
        if (gridMenus[i].style.display == 'grid'){
           currentGridDisplayed = gridMenus[i];
           console.log(currentGridDisplayed)
