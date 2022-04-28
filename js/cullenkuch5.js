@@ -20,8 +20,6 @@ let greenhouse5View = document.getElementById("greenhouse-5-view");
 let outcomeView = document.getElementById("outcome-view");
 
 //Greenhouse commands view
-let calculationTexts = document.getElementsByClassName("calculation-text");
-let resultTexts = document.getElementsByClassName("result-text");
 let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
 let keypadBtns = document.getElementsByClassName("keypad-btn");
 let bayBtns = document.getElementsByClassName("bay-div");
@@ -69,10 +67,17 @@ function checkForHome(){
     }
 }
 
+//Home button click - hide all selected state stylings
 homeBtn.addEventListener('click', () => {
 	for (const btn of bayBtns) {
   	btn.classList.remove('selected')
   	btn.classList.remove('outline')
+  }
+  for (const arrow of stoplightTriggers){
+    arrow.style.display = 'none'
+  }
+  for (const div of stoplightDivs){
+    div.style.display = 'none'
   }
   handleAdminMode(); 
   home = true;
@@ -224,9 +229,15 @@ function handleResetBtn(){
 //Keypad Button Functionality
 for (const btn of keypadBtns) {
   btn.addEventListener('click', function() {
-  	 let resultText = btn.parentNode.parentNode.getElementsByClassName('result-text')[0]
-     resultText.style.display = 'block'
-     resultText.innerText = 'Calculation results will appear here'
+  	 let panelScreen = btn.parentNode.parentNode.getElementsByClassName('panel-screen')[0]
+     let gridMenus = panelScreen.children
+     let currentGridDisplayed = null;
+     for (let i = 0; i < gridMenus.length; i++){
+       if (gridMenus[i].style.display == 'grid'){
+          currentGridDisplayed = gridMenus[i];
+       }
+     }
+     console.log(currentGridDisplayed)
   });
 }
 
@@ -345,6 +356,13 @@ for(const confirmBtn of confirmBtns){
       bayDiv.classList.remove('selected')
       bayDiv.classList.remove('error')
       bayDiv.classList.remove('in-progress')
+    }
+    //Remove selected arrows
+    for(const arrow of stoplightTriggers){
+      arrow.style.display = 'none'
+    }
+    for (const div of stoplightDivs){
+      div.style.display = 'none'
     }
     //Remove checked opacity from all icons
     let bayIcons = overlay.parentNode.getElementsByClassName('bay-icon');
