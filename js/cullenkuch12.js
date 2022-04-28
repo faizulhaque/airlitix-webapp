@@ -229,7 +229,7 @@ for (const btn of keypadBtns) {
      let gridMenus = Array.from(panelScreen.children);
      let currentGridDisplayed = null;
      for (let i = 0; i < gridMenus.length; i++){
-       console.log(gridMenus[i])
+       console.log(gridMenus[i].style.display)
        if (gridMenus[i].style.display === 'grid' || gridMenus[i].style.display === '-ms-grid'){
           currentGridDisplayed = gridMenus[i];
        }
