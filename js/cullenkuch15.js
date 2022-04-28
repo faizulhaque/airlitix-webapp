@@ -230,12 +230,13 @@ for (const btn of keypadBtns) {
      for (let i = 0; i < gridMenus.length; i++){
       let screen = gridMenus[i];
       let compStyles = window.getComputedStyle(screen);
-      console.log(compStyles.getPropertyValue('display'))
        if (compStyles.getPropertyValue('display') == 'grid'){
           currentGridDisplayed = gridMenus[i];
        }
      }
      console.log(currentGridDisplayed)
+     currentGridDisplayed.style.display = 'none';
+     gridMenus[1].style.display = 'grid'
   });
 }
 
