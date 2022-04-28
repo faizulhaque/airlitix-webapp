@@ -168,10 +168,6 @@ for (const btn of bayBtns) {
     handleResetBtn();
     let calculator = btn.parentNode.parentNode.nextElementSibling;
     calculator.style.display = 'flex';	
-    for(const resultText of resultTexts){
-    	resultText.display = 'none';
-      resultText.innerHTML = ''
-    }
   });
 }
 
@@ -232,6 +228,7 @@ for (const btn of keypadBtns) {
   	 let panelScreen = btn.parentNode.parentNode.getElementsByClassName('panel-screen')[0]
      let gridMenus = panelScreen.children
      let currentGridDisplayed = null;
+     console.log(gridMenus)
      for (let i = 0; i < gridMenus.length; i++){
        if (gridMenus[i].style.display == 'grid'){
           currentGridDisplayed = gridMenus[i];
@@ -253,10 +250,6 @@ step1.addEventListener("click", () => {
  function resetFields(){
      home = true;
      checkForHome();
- 	         for (let i = 0; i < resultTexts.length; i++){
-    		      resultTexts[i].innerText = '';
-              resultTexts[i].style.display = 'none'
-   				 } 
            for (let i = 0; i < bayCalculationDivs.length; i++){
     		      bayCalculationDivs[i].style.display = 'none';
    				 } 
