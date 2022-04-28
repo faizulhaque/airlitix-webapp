@@ -224,9 +224,11 @@ function handleResetBtn(){
 //Keypad Button Functionality
 for (const btn of keypadBtns) {
   btn.addEventListener('click', function() {
+
   	 let panelScreen = btn.parentNode.parentNode.getElementsByClassName('panel-screen')[0];
      let gridMenus = Array.from(panelScreen.children);
      let currentGridDisplayed = null;
+     //Figure out which screen the user is currently on
      for (let i = 0; i < gridMenus.length; i++){
       let screen = gridMenus[i];
       let compStyles = window.getComputedStyle(screen);
@@ -234,9 +236,18 @@ for (const btn of keypadBtns) {
           currentGridDisplayed = gridMenus[i];
        }
      }
-     console.log(currentGridDisplayed)
+     //Figure out where to direct the next screen to
      currentGridDisplayed.style.display = 'none';
      gridMenus[1].style.display = 'grid'
+
+     //Return to main menu if button is "E"
+     console.log(btn.firstElementChild.innerHTML)
+     if(btn.firstElementChild.innerHTML == 'E'){
+       for(const menu of gridMenus){
+        menu.style.display = 'none'
+       } 
+       gridMenus[0].style.display = 'grid'
+     }
   });
 }
 
