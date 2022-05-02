@@ -43,6 +43,8 @@ let buildingOperationBtns = document.getElementsByClassName("admin-operation-div
 
 
 //Outcome View
+let closebtn = document.getElementById("close-btn");
+let homeLogDisplay = document.getElementById('home-log-display')
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
 let ghOutcomeNum = document.getElementById("gh-outcome-num");
@@ -443,13 +445,17 @@ office.addEventListener('click', () => {
 for(const btn of buildingOperationBtns){
   btn.addEventListener('click', () => {
     if(buildingSelected){
-      alert('Office Status Here')
+      homeLogDisplay.style.display = 'block'
     } else {
       alert('Please Select a building')
     }
   })
-  
 }
+
+closebtn.addEventListener('click', () => {
+  homeLogDisplay.style.display = 'none'
+})
+
 
 //Back button functionality
 backBtn.addEventListener('click', () => {
