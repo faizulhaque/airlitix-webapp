@@ -90,7 +90,7 @@ homeBtn.addEventListener('click', () => {
     div.style.display = 'none'
   }
   handleOperationMenuIfOpen()
-  handleHomeMenuIfOpen()
+  
   handleAdminMode(); 
   home = true;
   checkForHome();
@@ -339,6 +339,7 @@ step1.addEventListener("click", () => {
 //Display selected Greenhouse, hide the others
 for (let i = 0; i < greenhouses.length; i++) {
     greenhouses[i].addEventListener("click", () => {
+        handleHomeMenuIfOpen()
         home = false;
         checkForHome();
         handleAdminMode();
