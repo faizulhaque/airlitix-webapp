@@ -432,7 +432,7 @@ for(const cancelBtn of cancelBtns){
 //Behavior for clicking an operation button in admin mode
 for(const btn of adminOperationBtns){
 	btn.addEventListener('click', () => {
-  let outcomeDiv = btn.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
@@ -449,7 +449,7 @@ for(const btn of adminOperationBtns){
 //Behavior for clicking an operation button in user mode
 for(const btn of userOperationBtns){
 	btn.addEventListener('click', () => {
-  let outcomeDiv = btn.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
