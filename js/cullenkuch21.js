@@ -120,9 +120,9 @@ function handleOperationMenuIfOpen(){
 
   console.log(hamburgerMenu)
   console.log(menuContainer)
-  console.log(menuContainer.height)
+  console.log(menuContainer.style.height)
 
-  if(menuContainer.height == '100%'){
+  if(menuContainer.style.height == '100%'){
     console.log('menu was open')
     hamburgerMenu.click()
   }
