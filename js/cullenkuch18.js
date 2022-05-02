@@ -113,6 +113,16 @@ function handleOperationMenuIfOpen(){
        console.log(currentGreenhouseDisplayed)
     }
   }
+
+  //target the hamburger menu to close it if it's open
+  let hamburgerMenu = currentGreenhouseDisplayed.getElementsByClassName('hamburger-menu')[0]
+  let menuContainer = currentGreenhouseDisplayed.getElementsByClassName('menu-container')[0]
+
+  if(menuContainer.height > 0){
+    console.log('menu was open')
+    hamburgerMenu.click()
+  }
+
 }
 
 //User/Admin Toggle
