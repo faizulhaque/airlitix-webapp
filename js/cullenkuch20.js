@@ -118,7 +118,11 @@ function handleOperationMenuIfOpen(){
   let hamburgerMenu = currentGreenhouseDisplayed.getElementsByClassName('hamburger-menu')[0]
   let menuContainer = currentGreenhouseDisplayed.getElementsByClassName('menu-container')[0]
 
-  if(menuContainer.height > 0){
+  console.log(hamburgerMenu)
+  console.log(menuContainer)
+  console.log(menuContainer.height)
+
+  if(menuContainer.height == '100%'){
     console.log('menu was open')
     hamburgerMenu.click()
   }
