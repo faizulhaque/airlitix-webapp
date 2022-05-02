@@ -18,7 +18,7 @@ let greenhouse2View = document.getElementById("greenhouse-2-view");
 let greenhouse3View = document.getElementById("greenhouse-3-view");
 let greenhouse4View = document.getElementById("greenhouse-4-view");
 let greenhouse5View = document.getElementById("greenhouse-5-view");
-let outcomeView = document.getElementById("outcome-view");
+let outcomeViews = document.getElementsByClassName("outcome-view");
 
 //Greenhouse commands view
 let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
@@ -45,6 +45,7 @@ let buildingOperationBtns = document.getElementsByClassName("admin-operation-div
 
 //Outcome View
 let closebtn = document.getElementById("close-btn");
+let greenhouseCloseBtns = document.getElementsByClassName("greenhouse-close-btn");
 let homeLogDisplay = document.getElementById('home-log-display')
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
@@ -431,16 +432,12 @@ for(const cancelBtn of cancelBtns){
 //Behavior for clicking an operation button in admin mode
 for(const btn of adminOperationBtns){
 	btn.addEventListener('click', () => {
+  let outcomeDiv = btn.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
-    greenhouse1View.style.display = 'none';
-    greenhouse2View.style.display = 'none';
-    greenhouse3View.style.display = 'none';
-    greenhouse4View.style.display = 'none';
-    greenhouse5View.style.display = 'none';
-    outcomeView.style.display = 'flex'
+    outcomeDiv.style.display = 'flex'
     ghOutcomeNum.textContent = currentGreenhouse;
     bayOutcomeNum.textContent = currentBay;    
   }  else {
@@ -452,16 +449,12 @@ for(const btn of adminOperationBtns){
 //Behavior for clicking an operation button in user mode
 for(const btn of userOperationBtns){
 	btn.addEventListener('click', () => {
+  let outcomeDiv = btn.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
-    greenhouse1View.style.display = 'none';
-    greenhouse2View.style.display = 'none';
-    greenhouse3View.style.display = 'none';
-    greenhouse4View.style.display = 'none';
-    greenhouse5View.style.display = 'none';
-    outcomeView.style.display = 'flex'
+    outcomeDiv.style.display = 'flex'
     ghOutcomeNum.textContent = currentGreenhouse;
     bayOutcomeNum.textContent = currentBay;    
   }  else {
@@ -469,6 +462,15 @@ for(const btn of userOperationBtns){
   }
   })
 }
+
+//Greenhouse status close button
+for(const btn of greenhouseCloseBtns){
+  btn.addEventListener('click', () => {
+    let outcomeDiv = btn.parentNode;
+    outcomeDiv.style.display = 'none'
+  })
+}
+
 
 //Homepage Office Operation Buttons 
 office.addEventListener('click', () => {
