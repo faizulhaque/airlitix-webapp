@@ -9,6 +9,7 @@ let step1 = document.getElementById("step-1");
 let step2 = document.getElementById("step-2");
 let step3 = document.getElementById("step-3");
 let bgOverlay = document.getElementById("bg-gradient");
+let mainContentSection = document.getElementById("main-content");
 
 //Different Views
 let allGreenhousesView = document.getElementById("all-greenhouses-view");
@@ -80,6 +81,10 @@ homeBtn.addEventListener('click', () => {
   for (const div of stoplightDivs){
     div.style.display = 'none'
   }
+  for (const div of bayCalculationDivs){
+    div.style.display = 'none'
+  }
+  handleOperationMenuIfOpen()
   handleAdminMode(); 
   home = true;
   checkForHome();
@@ -94,6 +99,21 @@ homeBtn.addEventListener('click', () => {
   greenhouse5View.style.display = 'none';
   outcomeView.style.display = 'none';
 })
+
+//Close operation menu if it's still open when the user clicks to go home
+function handleOperationMenuIfOpen(){
+  let greenhouseViews = Array.from(mainContentSection.children);
+  let currentGreenhouseDisplayed = null;
+  //Figure out which greenhouse the user is currently on
+  for (let i = 0; i < greenhouseViews.length; i++){
+   let greenhouse = greenhouseViews[i];
+   let compStyles = window.getComputedStyle(greenhouse);
+    if (compStyles.getPropertyValue('display') == 'flex'){
+       currentGreenhouseDisplayed = greenhouseViews[i];
+       console.log(currentGreenhouseDisplayed)
+    }
+  }
+}
 
 //User/Admin Toggle
 toggleDiv.addEventListener('click', () => {
