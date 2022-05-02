@@ -85,6 +85,9 @@ homeBtn.addEventListener('click', () => {
   for (const div of bayCalculationDivs){
     div.style.display = 'none'
   }
+  for (const div of outcomeViews){
+    div.style.display = 'none'
+  }
   handleOperationMenuIfOpen()
   handleAdminMode(); 
   home = true;
@@ -98,7 +101,6 @@ homeBtn.addEventListener('click', () => {
   greenhouse3View.style.display = 'none';
   greenhouse4View.style.display = 'none';
   greenhouse5View.style.display = 'none';
-  outcomeView.style.display = 'none';
 })
 
 //Close operation menu if it's still open when the user clicks to go home
@@ -338,7 +340,6 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse3View.style.display = 'none';
         	greenhouse4View.style.display = 'none';
         	greenhouse5View.style.display = 'none';
-          outcomeView.style.display = 'none';
         	greenhouse1View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh2"){
           currentGreenhouse = 2;    
@@ -347,7 +348,6 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse3View.style.display = 'none';
         	greenhouse4View.style.display = 'none';
         	greenhouse5View.style.display = 'none';
-          outcomeView.style.display = 'none';
         	greenhouse2View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh3"){
           currentGreenhouse = 3;    
@@ -356,7 +356,6 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse2View.style.display = 'none';
         	greenhouse4View.style.display = 'none';
         	greenhouse5View.style.display = 'none';
-          outcomeView.style.display = 'none';
         	greenhouse3View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh4"){
           currentGreenhouse = 4;    
@@ -365,7 +364,6 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse2View.style.display = 'none';
         	greenhouse3View.style.display = 'none';
         	greenhouse5View.style.display = 'none';
-          outcomeView.style.display = 'none';
         	greenhouse4View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh5"){
           currentGreenhouse = 5; 
@@ -374,7 +372,6 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse2View.style.display = 'none';
         	greenhouse3View.style.display = 'none';
         	greenhouse4View.style.display = 'none';
-          outcomeView.style.display = 'none';
         	greenhouse5View.style.display = 'flex';
         }
     });
@@ -405,6 +402,9 @@ for(const confirmBtn of confirmBtns){
       arrow.style.display = 'none'
     }
     for (const div of stoplightDivs){
+      div.style.display = 'none'
+    }
+    for (const div of outcomeViews){
       div.style.display = 'none'
     }
     //Remove checked opacity from all icons
@@ -494,19 +494,19 @@ closebtn.addEventListener('click', () => {
 
 
 //Back button functionality
-backBtn.addEventListener('click', () => {
-	outcomeView.style.display = 'none'
-  step2.style.opacity = '100%';
-  step3.style.opacity = '50%';
-	if(currentGreenhouse === 1){
-      greenhouse1View.style.display = 'flex';
-  } else if (currentGreenhouse === 2){
-      greenhouse2View.style.display = 'flex';
-  } else if (currentGreenhouse === 3){
-      greenhouse3View.style.display = 'flex';
-  } else if (currentGreenhouse === 4){
-      greenhouse4View.style.display = 'flex';
-  } else if (currentGreenhouse === 5){
-      greenhouse5View.style.display = 'flex';
-  }
-})
+// backBtn.addEventListener('click', () => {
+// 	outcomeView.style.display = 'none'
+//   step2.style.opacity = '100%';
+//   step3.style.opacity = '50%';
+// 	if(currentGreenhouse === 1){
+//       greenhouse1View.style.display = 'flex';
+//   } else if (currentGreenhouse === 2){
+//       greenhouse2View.style.display = 'flex';
+//   } else if (currentGreenhouse === 3){
+//       greenhouse3View.style.display = 'flex';
+//   } else if (currentGreenhouse === 4){
+//       greenhouse4View.style.display = 'flex';
+//   } else if (currentGreenhouse === 5){
+//       greenhouse5View.style.display = 'flex';
+//   }
+// })
