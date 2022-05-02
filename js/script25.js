@@ -35,6 +35,7 @@ let cancelBtns = document.getElementsByClassName("cancel-btn");
 let hamburgerMain = document.getElementById("hamburger-main");
 let hamburgerMenus = document.getElementsByClassName("hamburger-menu");
 let menuContainers = document.getElementsByClassName("menu-container");
+let menuContainerMain = document.getElementById("menu-container-main");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
 let userOperationBtns = document.getElementsByClassName("user-operation-div");
@@ -89,6 +90,7 @@ homeBtn.addEventListener('click', () => {
     div.style.display = 'none'
   }
   handleOperationMenuIfOpen()
+  handleHomeMenuIfOpen()
   handleAdminMode(); 
   home = true;
   checkForHome();
@@ -137,7 +139,8 @@ toggleDiv.addEventListener('click', () => {
 	bgOverlay.classList.toggle('admin')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
-  handleAdminMode();
+  handleAdminMode()
+  handleHomeMenuIfOpen()
 })
 
 function handleAdminMode(){
@@ -166,6 +169,12 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
+  }
+}
+
+function handleHomeMenuIfOpen(){
+  if(menuContainerMain.style.height == '100%'){
+    hamburgerMain.click()
   }
 }
 
