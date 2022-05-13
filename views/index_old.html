@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src='/socket.io/socket.io.js'></script>
+  <script>
+    let theLogDiv;
+    let wifiClient = '';
+    let socket = io.connect('/', {
+      transports: ['websocket'],
+      upgrade: false,
+      rejectUnauthorized: false,
+      secure: false,
+      reconnection: true,
+      reconnectionDelay: 500,
+      reconnectionAttempts: 10      
+    });
+
+    socket.on('WIFI-CLIENT-CONNECTED', (data) => {
+      if (data.socketId) {
+        wifiClient = data.socketId;
+        appendLogs(`WIFI Client ${data.socketId} connected.`);
+      } else {
+        appendLogs(`Not WIFI Client available yet.`);
+      }      
+    });
+    socket.on('WIFI-CLIENT-DISCONNECTED', (data) => {
+      wifiClient = '';
+      appendLogs(`WIFI Client ${data.socketId} disconnected.`);
+    });
+    socket.on('message', (data) => {
+      appendLogs(`Message received from WIFI Client ${data.msg}.`);
+    });
+    socket.emit('join', {type: 'WEB'});
+
+    function appendLogs(msg) {
+      theLogDiv.innerHTML += `<p> ${msg} </p>`;
+    }
+    $(document).ready(() => {
+      theLogDiv = document.getElementById("logs");
+      $('#command').keypress(function (e) {
+        var key = e.which;
+        if (key == 13) {
+
+          if (wifiClient === '') {
+            alert('No WIFI client is available.');
+            return;
+          }
+
+          socket.emit('message', {
+            receiverId: wifiClient,
+            senderId: socket.id,
+            msg: this.value
+          });
+          this.value = '';
+          return false;
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <label>Command</label>
+  <input type="text" name="command" id="command" /><br /><br />
+
+  <label>Response</label><br />
+  <div id="logs"></div>
+</body>
+
+</html>
