@@ -1,73 +1,1294 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html><!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Mon May 02 2022 21:40:14 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="6249bc1ba58f8c6bbdc46fd2" data-wf-site="6249bc1ba58f8c8228c46fd1">
 <head>
-  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <title>Airlitix WebApp</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/airlitix-webapp.webflow.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Inconsolata:400,700"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src='/socket.io/socket.io.js'></script>
-  <script>
-    let theLogDiv;
-    let wifiClient = '';
-    let socket = io.connect('/', {
-      transports: ['websocket'],
-      upgrade: false,
-      rejectUnauthorized: false,
-      secure: false,
-      reconnection: true,
-      reconnectionDelay: 500,
-      reconnectionAttempts: 10      
-    });
-
-    socket.on('WIFI-CLIENT-CONNECTED', (data) => {
-      if (data.socketId) {
-        wifiClient = data.socketId;
-        appendLogs(`WIFI Client ${data.socketId} connected.`);
-      } else {
-        appendLogs(`Not WIFI Client available yet.`);
-      }      
-    });
-    socket.on('WIFI-CLIENT-DISCONNECTED', (data) => {
-      wifiClient = '';
-      appendLogs(`WIFI Client ${data.socketId} disconnected.`);
-    });
-    socket.on('message', (data) => {
-      appendLogs(`Message received from WIFI Client ${data.msg}.`);
-    });
-    socket.emit('join', {type: 'WEB'});
-
-    function appendLogs(msg) {
-      theLogDiv.innerHTML += `<p> ${msg} </p>`;
-    }
-    $(document).ready(() => {
-      theLogDiv = document.getElementById("logs");
-      $('#command').keypress(function (e) {
-        var key = e.which;
-        if (key == 13) {
-
-          if (wifiClient === '') {
-            alert('No WIFI client is available.');
-            return;
-          }
-
-          socket.emit('message', {
-            receiverId: wifiClient,
-            senderId: socket.id,
-            msg: this.value
-          });
-          this.value = '';
-          return false;
-        }
-      });
-    });
-  </script>
 </head>
-
-<body>
-  <label>Command</label>
-  <input type="text" name="command" id="command" /><br /><br />
-
-  <label>Response</label><br />
-  <div id="logs"></div>
+<body class="body">
+  <div id="bg-gradient" class="bg-gradient"></div>
+  <div class="main-container w-container">
+    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+      <div class="navbar-container w-container">
+        <a href="#" class="w-nav-brand"><img src="images/logo.png" loading="lazy" alt="" class="westside-logo"></a>
+        <div class="nav-btn-div">
+          <a id="home-btn" href="#" class="home-btn w-button">Home</a>
+          <div class="toggle-container">
+            <div id="toggle-div" class="toggle-div">
+              <div id="toggle-handle" class="toggle-handle"></div>
+            </div>
+            <div class="toggle-text-container">
+              <div class="toggle-text mr">USER</div>
+              <div class="toggle-text">ADMIN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-div">
+      <div id="step-1" class="step _1">
+        <div class="tab-circle">
+          <div class="tab-number">1</div>
+        </div>
+        <div class="tab-text">Choose a target</div>
+      </div>
+      <div id="step-2" class="step _2">
+        <div class="tab-circle">
+          <div class="tab-number">2</div>
+        </div>
+        <div class="tab-text">Choose a Command</div>
+      </div>
+      <div id="step-3" class="step _3">
+        <div class="tab-circle">
+          <div class="tab-number">3</div>
+        </div>
+        <div class="tab-text">Outcome</div>
+        <div class="step-overlay"></div>
+      </div>
+    </div>
+    <div id="main-content" class="main-content wf-section">
+      <div id="all-greenhouses-view" class="all-greenhouses-view">
+        <div class="w-layout-grid greenhouse-grid">
+          <div id="w-node-_6a3a8d96-bd7b-a459-9d04-42bfff0d48b0-bdc46fd2" class="greenhouse-cell-div flex-end">
+            <div id="gh1" class="main-greenhouse-div w-node-_63b126b9-b8d8-1499-32f8-0a8662ca25ce-bdc46fd2">
+              <h2 class="greenhouse-heading">Greenhouse 1</h2>
+            </div>
+          </div>
+          <div id="w-node-fb55399e-b140-2b2b-0443-caf90a8c00c6-bdc46fd2" class="greenhouse-cell-div flex-start">
+            <div id="gh2" class="main-greenhouse-div w-node-_24a70bae-9a1b-67a6-e6bb-7ca4378a1d50-bdc46fd2">
+              <h2 class="greenhouse-heading">Greenhouse 2</h2>
+            </div>
+          </div>
+          <div id="w-node-d31f9961-20f7-4295-0b85-bd53e711a82f-bdc46fd2" class="greenhouse-cell-div flex-end">
+            <div id="gh3" class="main-greenhouse-div w-node-a5fe2042-4b9d-3510-e24a-78468385ff39-bdc46fd2">
+              <h2 class="greenhouse-heading">Greenhouse 3</h2>
+            </div>
+          </div>
+          <div id="w-node-a46084c2-dd68-153d-f8fe-ea74f9ebf73f-bdc46fd2" class="greenhouse-cell-div flex-start">
+            <div id="office" class="office-div w-node-_8bbd2f2a-7937-bc08-c3c9-c7b283609070-bdc46fd2">
+              <h3 class="office-title">Office</h3>
+            </div>
+          </div>
+          <div id="w-node-_8ba3801e-0d41-78ca-6e18-0638657271fe-bdc46fd2" class="greenhouse-cell-div flex-end">
+            <div id="gh4" class="main-greenhouse-div w-node-_5617e86d-798f-ae21-0017-244ea92fb215-bdc46fd2">
+              <h2 class="greenhouse-heading">Greenhouse 4</h2>
+            </div>
+          </div>
+          <div id="w-node-b0f86575-e7f6-e4f8-e326-4c2d7c5219bf-bdc46fd2" class="greenhouse-cell-div flex-start">
+            <div id="gh5" class="main-greenhouse-div w-node-_95a3c8f4-2832-4663-f106-d5f90955a51d-bdc46fd2">
+              <h2 class="greenhouse-heading">Greenhouse 5</h2>
+            </div>
+          </div>
+        </div>
+        <div id="hamburger-main" data-w-id="b9dd9310-8880-26d8-3c29-1577ecb7c889" data-is-ix2-target="1" class="hamburger-menu-main" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0"></div>
+        <div id="menu-container-main" style="height:0%" class="menu-container-main">
+          <div class="admin-menu-main">
+            <div style="opacity:0" class="admin-operation-buttons-main">
+              <div id="wifi" class="admin-operation-div-main"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="wifi" class="admin-operation-div-main"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">system</div>
+              </div>
+              <div id="wifi" class="admin-operation-div-main"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="home-log-display" class="home-log-display">
+          <h3 class="heading-3">Log</h3>
+          <div class="home-log">
+            <div class="home-log-text">This is where the greenhouse status information will appear.</div>
+          </div><img src="images/closebtn.svg" loading="lazy" id="close-btn" alt="" class="closebtn">
+        </div>
+      </div>
+      <div id="greenhouse-1-view" class="greenhouse-1-view">
+        <div class="bay-info-div">
+          <h1 class="greenhouse-view-heading">Greenhouse 1</h1>
+          <div class="bay-container">
+            <div id="gh1-b1" class="bay-div">
+              <h3 class="bay-heading">Bay 1</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b2" class="bay-div">
+              <h3 class="bay-heading">Bay 2</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b3" class="bay-div">
+              <h3 class="bay-heading">Bay 3</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b4" class="bay-div">
+              <h3 class="bay-heading">Bay 4</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b5" class="bay-div">
+              <h3 class="bay-heading">Bay 5</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+          </div>
+          <div class="reset-btn">
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+        <div class="bay-calculation-div">
+          <div class="panel-body">
+            <div class="panel-screen-container">
+              <div class="panel-screen">
+                <div class="w-layout-grid main-menu-grid">
+                  <div id="w-node-f67f80d1-349a-25ea-698a-631c12ff3de5-bdc46fd2" class="screen-text">BOOM NAME</div>
+                  <div id="w-node-fb8e9093-c020-b0ea-df73-d25790be888d-bdc46fd2" class="screen-text">02:16:01</div>
+                  <div id="w-node-_63a1a33d-5703-9c25-9a0c-2360e16fc5fe-bdc46fd2" class="screen-text">WIC - 3.30</div>
+                  <div id="w-node-a2f3ce39-98de-6b4e-7052-adbc8cad0a1e-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-f491b932-1e56-d2a9-481f-2ba7d7170e8f-bdc46fd2" class="screen-text">1 = MANUAL</div>
+                  <div id="w-node-ea63a5e8-7dec-fd31-94be-49c4f1a8ffef-bdc46fd2" class="screen-text">3 = SETUP</div>
+                  <div id="w-node-_27b683e3-6aab-8685-2580-1d82e914ab5e-bdc46fd2" class="screen-text no-underline">2 = AUTO</div>
+                  <div id="w-node-_16d2bf90-15bd-95e5-e246-51156f06c043-bdc46fd2" class="screen-text no-underline">4 = DIAGS</div>
+                </div>
+                <div class="w-layout-grid manual-menu-grid">
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e659197e-bdc46fd2" class="screen-text">1 = MANUAl run</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e6591980-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e6591982-bdc46fd2" class="screen-text">2 = walk &amp; Water</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e6591984-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e6591986-bdc46fd2" class="screen-text">3 = Quick water</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e6591988-bdc46fd2" class="screen-text">4 = park</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e659198a-bdc46fd2" class="screen-text no-underline">5 = area viewer</div>
+                  <div id="w-node-_2d760419-c117-cba4-1fa9-9b33e659198c-bdc46fd2" class="screen-text no-underline">6 = list</div>
+                </div>
+                <div class="w-layout-grid auto-menu-grid">
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b463-bdc46fd2" class="screen-text">autozone</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b465-bdc46fd2" class="screen-text">#01 003.32f</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b467-bdc46fd2" class="screen-text">crop #01</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b469-bdc46fd2" class="screen-text">a01 r03</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b46b-bdc46fd2" class="screen-text">speed 020</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b46d-bdc46fd2" class="screen-text">pass: 06</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b46f-bdc46fd2" class="screen-text no-underline">pass 01</div>
+                  <div id="w-node-ab0160f9-aee0-0f63-a8da-ae6bf746b471-bdc46fd2" class="screen-text no-underline">23:13:06</div>
+                </div>
+                <div class="w-layout-grid setup-menu-grid">
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ec4-bdc46fd2" class="screen-text">setup menu</div>
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ec6-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ec8-bdc46fd2" class="screen-text">1 = crop settings</div>
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ecc-bdc46fd2" class="screen-text">2 = boom settings</div>
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ed0-bdc46fd2" class="screen-text no-underline">3 = system</div>
+                  <div id="w-node-b889a52e-0fd5-2c36-c297-5a20cd275ed2-bdc46fd2" class="screen-text no-underline">4 = motor</div>
+                </div>
+                <div class="w-layout-grid diagnostic-menu-grid">
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c988c-bdc46fd2" class="screen-text">diag menu</div>
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c988e-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c9890-bdc46fd2" class="screen-text">1 = Motor &amp; motion</div>
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c9894-bdc46fd2" class="screen-text">2 = switches/Solenoids</div>
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c9898-bdc46fd2" class="screen-text no-underline">3 = markers</div>
+                  <div id="w-node-_58f4c9bc-9508-472c-d600-5a1f4b2c989a-bdc46fd2" class="screen-text no-underline">4 = keypad</div>
+                </div>
+              </div>
+              <div class="panel-image"></div>
+            </div>
+            <div class="w-layout-grid panel-button-grid">
+              <div id="0" class="keypad-btn w-node-_0887d0f1-66cd-1663-d1ae-285815ac0d78-bdc46fd2">
+                <div class="keypad-btn-num">0</div>
+              </div>
+              <div id="1" class="keypad-btn w-node-f87d1af5-7119-2207-1fed-0424ea757e26-bdc46fd2">
+                <div class="keypad-btn-num">1</div>
+              </div>
+              <div id="2" class="keypad-btn w-node-e6a745b1-44f1-6643-cba0-eed8ee806504-bdc46fd2">
+                <div class="keypad-btn-num">2</div>
+              </div>
+              <div id="3" class="keypad-btn w-node-a3486c3f-4e7d-74da-291f-2dbd08a00553-bdc46fd2">
+                <div class="keypad-btn-num">3</div>
+              </div>
+              <div id="4" class="keypad-btn w-node-_49f2eba1-cb25-4c1f-6344-1c0ae75e7ba5-bdc46fd2">
+                <div class="keypad-btn-num">4</div>
+              </div>
+              <div id="5" class="keypad-btn w-node-b74aa6e3-925d-10df-b6f3-61449a7997a1-bdc46fd2">
+                <div class="keypad-btn-num">5</div>
+              </div>
+              <div id="6" class="keypad-btn w-node-eac9700e-2015-66d9-3e93-cbe48fedc2ca-bdc46fd2">
+                <div class="keypad-btn-num">6</div>
+              </div>
+              <div id="7" class="keypad-btn w-node-fa7eaa7c-4ab3-f106-2db1-3faf8d5ffa0f-bdc46fd2">
+                <div class="keypad-btn-num">7</div>
+              </div>
+              <div id="8" class="keypad-btn w-node-_370d8b69-665b-5bcd-1380-f67a8130d88f-bdc46fd2">
+                <div class="keypad-btn-num">8</div>
+              </div>
+              <div id="9" class="keypad-btn w-node-c79539a4-d8ff-19e4-598f-1d6e8ecad224-bdc46fd2">
+                <div class="keypad-btn-num">9</div>
+              </div>
+              <div id="A" class="keypad-btn w-node-_1806eb2f-5821-23fd-c62e-9395aa7a4ed0-bdc46fd2">
+                <div class="keypad-btn-num">A</div>
+              </div>
+              <div id="B" class="keypad-btn w-node-_817dbc23-ff8c-8e63-9119-3eb861b2dfd2-bdc46fd2"><img loading="lazy" src="images/up.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">B</div>
+              </div>
+              <div id="C" class="keypad-btn vertical w-node-_152b83ce-e857-eb31-ee0f-ee3979f43e70-bdc46fd2">
+                <div class="keypad-btn-num">C</div><img loading="lazy" src="images/left.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="D" class="keypad-btn vertical w-node-_88e82ec6-5073-e82a-430d-bb52bae3a1e8-bdc46fd2">
+                <div class="keypad-btn-num">D</div><img loading="lazy" src="images/right.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="E" class="keypad-btn vertical w-node-_42f47c57-5fca-fc2d-ad3c-ff02d0ba0e16-bdc46fd2">
+                <div class="keypad-btn-num">E</div>
+                <div class="enter-exit">Enter/Exit</div>
+              </div>
+              <div id="F" class="keypad-btn w-node-af23d8f7-d09d-8cb6-fc8f-cbc94f4acc42-bdc46fd2"><img loading="lazy" src="images/down.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">F</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="g1-overlay" class="overlay-confirmation">
+          <div class="overlay-content">
+            <h2 class="overlay-text">Are you sure you want to reset the tests for this greenhouse?</h2>
+            <div class="overlay-btn-div">
+              <a href="#" class="confirm-btn w-button">Yes</a>
+              <a href="#" class="cancel-btn w-button">Cancel</a>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="040aef24-41da-35aa-9637-60fb822a5083" data-is-ix2-target="1" class="hamburger-menu" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0" data-ix2-initial-state="0"></div>
+        <div style="display:none;height:0px" class="menu-container">
+          <div class="user-menu">
+            <div style="display:none;opacity:0" class="user-operation-buttons">
+              <div id="wifi" class="user-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Water</div>
+              </div>
+              <div id="network" class="user-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Mapping</div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-menu">
+            <div style="display:none;opacity:0" class="admin-operation-buttons">
+              <div id="wifi" class="admin-operation-div"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="network" class="admin-operation-div"><img src="images/wifi-gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Network</div>
+              </div>
+              <div id="settings" class="admin-operation-div"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Settings</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outcome-view">
+          <div class="outcome-header">
+            <div class="locations">
+              <div class="location-container mr">
+                <h2 class="location-heading">Greenhouse:</h2>
+                <div id="gh-outcome-num" class="outcome-target">1</div>
+              </div>
+              <div class="location-container">
+                <h2 class="location-heading">Bay:</h2>
+                <div id="bay-outcome-num" class="outcome-target">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="outcomes-div">
+            <div class="log-container">
+              <h3 class="outcome-heading">Log</h3>
+              <div class="log-div">
+                <div class="log-text-content">Log results appear here.</div>
+              </div>
+            </div>
+            <div class="status-container">
+              <h3 class="outcome-heading">Status</h3>
+              <div class="status-div">
+                <div id="status-data" class="status-text-content">Status results appear here.</div>
+              </div>
+            </div>
+          </div><img src="images/closebtn.svg" loading="lazy" alt="" class="greenhouse-close-btn">
+        </div>
+      </div>
+      <div id="greenhouse-2-view" class="greenhouse-2-view">
+        <div class="bay-info-div">
+          <h1 class="greenhouse-view-heading">Greenhouse 2</h1>
+          <div class="bay-container">
+            <div id="gh1-b1" class="bay-div">
+              <h3 class="bay-heading">Bay 1</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b2" class="bay-div">
+              <h3 class="bay-heading">Bay 2</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b3" class="bay-div">
+              <h3 class="bay-heading">Bay 3</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b4" class="bay-div">
+              <h3 class="bay-heading">Bay 4</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b5" class="bay-div">
+              <h3 class="bay-heading">Bay 5</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+          </div>
+          <div class="reset-btn">
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+        <div class="bay-calculation-div">
+          <div class="panel-body">
+            <div class="panel-screen-container">
+              <div class="panel-screen">
+                <div class="w-layout-grid main-menu-grid">
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda2395-bdc46fd2" class="screen-text">BOOM NAME</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda2397-bdc46fd2" class="screen-text">02:16:01</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda2399-bdc46fd2" class="screen-text">WIC - 3.30</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda239b-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda239d-bdc46fd2" class="screen-text">1 = MANUAL</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda239f-bdc46fd2" class="screen-text">3 = SETUP</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23a1-bdc46fd2" class="screen-text no-underline">2 = AUTO</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23a3-bdc46fd2" class="screen-text no-underline">4 = DIAGS</div>
+                </div>
+                <div class="w-layout-grid manual-menu-grid">
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23a6-bdc46fd2" class="screen-text">1 = MANUAl run</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23a8-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23aa-bdc46fd2" class="screen-text">2 = walk &amp; Water</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23ac-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23ae-bdc46fd2" class="screen-text">3 = Quick water</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23b0-bdc46fd2" class="screen-text">4 = park</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23b2-bdc46fd2" class="screen-text no-underline">5 = area viewer</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23b4-bdc46fd2" class="screen-text no-underline">6 = list</div>
+                </div>
+                <div class="w-layout-grid auto-menu-grid">
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23b7-bdc46fd2" class="screen-text">autozone</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23b9-bdc46fd2" class="screen-text">#01 003.32f</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23bb-bdc46fd2" class="screen-text">crop #01</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23bd-bdc46fd2" class="screen-text">a01 r03</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23bf-bdc46fd2" class="screen-text">speed 020</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23c1-bdc46fd2" class="screen-text">pass: 06</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23c3-bdc46fd2" class="screen-text no-underline">pass 01</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23c5-bdc46fd2" class="screen-text no-underline">23:13:06</div>
+                </div>
+                <div class="w-layout-grid setup-menu-grid">
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23c8-bdc46fd2" class="screen-text">setup menu</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23ca-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23cc-bdc46fd2" class="screen-text">1 = crop settings</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23ce-bdc46fd2" class="screen-text">2 = boom settings</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23d0-bdc46fd2" class="screen-text no-underline">3 = system</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23d2-bdc46fd2" class="screen-text no-underline">4 = motor</div>
+                </div>
+                <div class="w-layout-grid diagnostic-menu-grid">
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23d5-bdc46fd2" class="screen-text">diag menu</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23d7-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23d9-bdc46fd2" class="screen-text">1 = Motor &amp; motion</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23db-bdc46fd2" class="screen-text">2 = switches/Solenoids</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23dd-bdc46fd2" class="screen-text no-underline">3 = markers</div>
+                  <div id="w-node-_93ea3688-26e2-77ed-2b93-77bd8cda23df-bdc46fd2" class="screen-text no-underline">4 = keypad</div>
+                </div>
+              </div>
+              <div class="panel-image"></div>
+            </div>
+            <div class="w-layout-grid panel-button-grid">
+              <div id="0" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1abf-bdc46fd2">
+                <div class="keypad-btn-num">0</div>
+              </div>
+              <div id="1" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ac2-bdc46fd2">
+                <div class="keypad-btn-num">1</div>
+              </div>
+              <div id="2" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ac5-bdc46fd2">
+                <div class="keypad-btn-num">2</div>
+              </div>
+              <div id="3" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ac8-bdc46fd2">
+                <div class="keypad-btn-num">3</div>
+              </div>
+              <div id="4" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1acb-bdc46fd2">
+                <div class="keypad-btn-num">4</div>
+              </div>
+              <div id="5" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ace-bdc46fd2">
+                <div class="keypad-btn-num">5</div>
+              </div>
+              <div id="6" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ad1-bdc46fd2">
+                <div class="keypad-btn-num">6</div>
+              </div>
+              <div id="7" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ad4-bdc46fd2">
+                <div class="keypad-btn-num">7</div>
+              </div>
+              <div id="8" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ad7-bdc46fd2">
+                <div class="keypad-btn-num">8</div>
+              </div>
+              <div id="9" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ada-bdc46fd2">
+                <div class="keypad-btn-num">9</div>
+              </div>
+              <div id="A" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1add-bdc46fd2">
+                <div class="keypad-btn-num">A</div>
+              </div>
+              <div id="B" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ae0-bdc46fd2"><img loading="lazy" src="images/up.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">B</div>
+              </div>
+              <div id="C" class="keypad-btn vertical w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ae4-bdc46fd2">
+                <div class="keypad-btn-num">C</div><img loading="lazy" src="images/left.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="D" class="keypad-btn vertical w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1ae8-bdc46fd2">
+                <div class="keypad-btn-num">D</div><img loading="lazy" src="images/right.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="E" class="keypad-btn vertical w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1aec-bdc46fd2">
+                <div class="keypad-btn-num">E</div>
+                <div class="enter-exit">Enter/Exit</div>
+              </div>
+              <div id="F" class="keypad-btn w-node-f2e6de7e-2978-f1f4-f319-5f4b943e1af1-bdc46fd2"><img loading="lazy" src="images/down.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">F</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="g1-overlay" class="overlay-confirmation">
+          <div class="overlay-content">
+            <h2 class="overlay-text">Are you sure you want to reset the tests for this greenhouse?</h2>
+            <div class="overlay-btn-div">
+              <a href="#" class="confirm-btn w-button">Yes</a>
+              <a href="#" class="cancel-btn w-button">Cancel</a>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="215bdd86-b9c3-279b-8f99-251a0f311082" data-is-ix2-target="1" class="hamburger-menu" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0"></div>
+        <div style="display:none;height:0px" class="menu-container">
+          <div class="user-menu">
+            <div style="display:none;opacity:0" class="user-operation-buttons">
+              <div id="wifi" class="user-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Water</div>
+              </div>
+              <div id="network" class="user-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Mapping</div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-menu">
+            <div style="display:none;opacity:0" class="admin-operation-buttons">
+              <div id="wifi" class="admin-operation-div"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="network" class="admin-operation-div"><img src="images/wifi-gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Network</div>
+              </div>
+              <div id="settings" class="admin-operation-div"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Settings</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outcome-view">
+          <div class="outcome-header">
+            <div class="locations">
+              <div class="location-container mr">
+                <h2 class="location-heading">Greenhouse:</h2>
+                <div id="gh-outcome-num" class="outcome-target">1</div>
+              </div>
+              <div class="location-container">
+                <h2 class="location-heading">Bay:</h2>
+                <div id="bay-outcome-num" class="outcome-target">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="outcomes-div">
+            <div class="log-container">
+              <h3 class="outcome-heading">Log</h3>
+              <div class="log-div">
+                <div class="log-text-content">Log results appear here.</div>
+              </div>
+            </div>
+            <div class="status-container">
+              <h3 class="outcome-heading">Status</h3>
+              <div class="status-div">
+                <div id="status-data" class="status-text-content">Status results appear here.</div>
+              </div>
+            </div>
+          </div><img src="images/closebtn.svg" loading="lazy" alt="" class="greenhouse-close-btn">
+        </div>
+      </div>
+      <div id="greenhouse-3-view" class="greenhouse-3-view">
+        <div class="bay-info-div">
+          <h1 class="greenhouse-view-heading">Greenhouse 3</h1>
+          <div class="bay-container">
+            <div id="gh1-b1" class="bay-div">
+              <h3 class="bay-heading">Bay 1</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b2" class="bay-div">
+              <h3 class="bay-heading">Bay 2</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b3" class="bay-div">
+              <h3 class="bay-heading">Bay 3</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b4" class="bay-div">
+              <h3 class="bay-heading">Bay 4</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b5" class="bay-div">
+              <h3 class="bay-heading">Bay 5</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+          </div>
+          <div class="reset-btn">
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+        <div class="bay-calculation-div">
+          <div class="panel-body">
+            <div class="panel-screen-container">
+              <div class="panel-screen">
+                <div class="w-layout-grid main-menu-grid">
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a533-bdc46fd2" class="screen-text">BOOM NAME</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a535-bdc46fd2" class="screen-text">02:16:01</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a537-bdc46fd2" class="screen-text">WIC - 3.30</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a539-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a53b-bdc46fd2" class="screen-text">1 = MANUAL</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a53d-bdc46fd2" class="screen-text">3 = SETUP</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a53f-bdc46fd2" class="screen-text no-underline">2 = AUTO</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a541-bdc46fd2" class="screen-text no-underline">4 = DIAGS</div>
+                </div>
+                <div class="w-layout-grid manual-menu-grid">
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a544-bdc46fd2" class="screen-text">1 = MANUAl run</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a546-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a548-bdc46fd2" class="screen-text">2 = walk &amp; Water</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a54a-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a54c-bdc46fd2" class="screen-text">3 = Quick water</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a54e-bdc46fd2" class="screen-text">4 = park</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a550-bdc46fd2" class="screen-text no-underline">5 = area viewer</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a552-bdc46fd2" class="screen-text no-underline">6 = list</div>
+                </div>
+                <div class="w-layout-grid auto-menu-grid">
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a555-bdc46fd2" class="screen-text">autozone</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a557-bdc46fd2" class="screen-text">#01 003.32f</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a559-bdc46fd2" class="screen-text">crop #01</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a55b-bdc46fd2" class="screen-text">a01 r03</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a55d-bdc46fd2" class="screen-text">speed 020</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a55f-bdc46fd2" class="screen-text">pass: 06</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a561-bdc46fd2" class="screen-text no-underline">pass 01</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a563-bdc46fd2" class="screen-text no-underline">23:13:06</div>
+                </div>
+                <div class="w-layout-grid setup-menu-grid">
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a566-bdc46fd2" class="screen-text">setup menu</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a568-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a56a-bdc46fd2" class="screen-text">1 = crop settings</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a56c-bdc46fd2" class="screen-text">2 = boom settings</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a56e-bdc46fd2" class="screen-text no-underline">3 = system</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a570-bdc46fd2" class="screen-text no-underline">4 = motor</div>
+                </div>
+                <div class="w-layout-grid diagnostic-menu-grid">
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a573-bdc46fd2" class="screen-text">diag menu</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a575-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a577-bdc46fd2" class="screen-text">1 = Motor &amp; motion</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a579-bdc46fd2" class="screen-text">2 = switches/Solenoids</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a57b-bdc46fd2" class="screen-text no-underline">3 = markers</div>
+                  <div id="w-node-e5b34683-86d5-02dd-af0a-0fd86da7a57d-bdc46fd2" class="screen-text no-underline">4 = keypad</div>
+                </div>
+              </div>
+              <div class="panel-image"></div>
+            </div>
+            <div class="w-layout-grid panel-button-grid">
+              <div id="0" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36dc-bdc46fd2">
+                <div class="keypad-btn-num">0</div>
+              </div>
+              <div id="1" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36df-bdc46fd2">
+                <div class="keypad-btn-num">1</div>
+              </div>
+              <div id="2" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36e2-bdc46fd2">
+                <div class="keypad-btn-num">2</div>
+              </div>
+              <div id="3" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36e5-bdc46fd2">
+                <div class="keypad-btn-num">3</div>
+              </div>
+              <div id="4" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36e8-bdc46fd2">
+                <div class="keypad-btn-num">4</div>
+              </div>
+              <div id="5" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36eb-bdc46fd2">
+                <div class="keypad-btn-num">5</div>
+              </div>
+              <div id="6" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36ee-bdc46fd2">
+                <div class="keypad-btn-num">6</div>
+              </div>
+              <div id="7" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36f1-bdc46fd2">
+                <div class="keypad-btn-num">7</div>
+              </div>
+              <div id="8" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36f4-bdc46fd2">
+                <div class="keypad-btn-num">8</div>
+              </div>
+              <div id="9" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36f7-bdc46fd2">
+                <div class="keypad-btn-num">9</div>
+              </div>
+              <div id="A" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36fa-bdc46fd2">
+                <div class="keypad-btn-num">A</div>
+              </div>
+              <div id="B" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c36fd-bdc46fd2"><img loading="lazy" src="images/up.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">B</div>
+              </div>
+              <div id="C" class="keypad-btn vertical w-node-a16df700-8405-660d-85c6-f3930e1c3701-bdc46fd2">
+                <div class="keypad-btn-num">C</div><img loading="lazy" src="images/left.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="D" class="keypad-btn vertical w-node-a16df700-8405-660d-85c6-f3930e1c3705-bdc46fd2">
+                <div class="keypad-btn-num">D</div><img loading="lazy" src="images/right.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="E" class="keypad-btn vertical w-node-a16df700-8405-660d-85c6-f3930e1c3709-bdc46fd2">
+                <div class="keypad-btn-num">E</div>
+                <div class="enter-exit">Enter/Exit</div>
+              </div>
+              <div id="F" class="keypad-btn w-node-a16df700-8405-660d-85c6-f3930e1c370e-bdc46fd2"><img loading="lazy" src="images/down.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">F</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="g1-overlay" class="overlay-confirmation">
+          <div class="overlay-content">
+            <h2 class="overlay-text">Are you sure you want to reset the tests for this greenhouse?</h2>
+            <div class="overlay-btn-div">
+              <a href="#" class="confirm-btn w-button">Yes</a>
+              <a href="#" class="cancel-btn w-button">Cancel</a>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="4b904ee0-848c-87f1-965e-b7cb81291cf2" data-is-ix2-target="1" class="hamburger-menu" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0"></div>
+        <div style="display:none;height:0px" class="menu-container">
+          <div class="user-menu">
+            <div style="display:none;opacity:0" class="user-operation-buttons">
+              <div id="wifi" class="user-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Water</div>
+              </div>
+              <div id="network" class="user-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Mapping</div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-menu">
+            <div style="display:none;opacity:0" class="admin-operation-buttons">
+              <div id="wifi" class="admin-operation-div"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="network" class="admin-operation-div"><img src="images/wifi-gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Network</div>
+              </div>
+              <div id="settings" class="admin-operation-div"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Settings</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outcome-view">
+          <div class="outcome-header">
+            <div class="locations">
+              <div class="location-container mr">
+                <h2 class="location-heading">Greenhouse:</h2>
+                <div id="gh-outcome-num" class="outcome-target">1</div>
+              </div>
+              <div class="location-container">
+                <h2 class="location-heading">Bay:</h2>
+                <div id="bay-outcome-num" class="outcome-target">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="outcomes-div">
+            <div class="log-container">
+              <h3 class="outcome-heading">Log</h3>
+              <div class="log-div">
+                <div class="log-text-content">Log results appear here.</div>
+              </div>
+            </div>
+            <div class="status-container">
+              <h3 class="outcome-heading">Status</h3>
+              <div class="status-div">
+                <div id="status-data" class="status-text-content">Status results appear here.</div>
+              </div>
+            </div>
+          </div><img src="images/closebtn.svg" loading="lazy" alt="" class="greenhouse-close-btn">
+        </div>
+      </div>
+      <div id="greenhouse-4-view" class="greenhouse-4-view">
+        <div class="bay-info-div">
+          <h1 class="greenhouse-view-heading">Greenhouse 4</h1>
+          <div class="bay-container">
+            <div id="gh1-b1" class="bay-div">
+              <h3 class="bay-heading">Bay 1</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b2" class="bay-div">
+              <h3 class="bay-heading">Bay 2</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b3" class="bay-div">
+              <h3 class="bay-heading">Bay 3</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b4" class="bay-div">
+              <h3 class="bay-heading">Bay 4</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b5" class="bay-div">
+              <h3 class="bay-heading">Bay 5</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+          </div>
+          <div class="reset-btn">
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+        <div class="bay-calculation-div">
+          <div class="panel-body">
+            <div class="panel-screen-container">
+              <div class="panel-screen">
+                <div class="w-layout-grid main-menu-grid">
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15512b-bdc46fd2" class="screen-text">BOOM NAME</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15512d-bdc46fd2" class="screen-text">02:16:01</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15512f-bdc46fd2" class="screen-text">WIC - 3.30</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155131-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155133-bdc46fd2" class="screen-text">1 = MANUAL</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155135-bdc46fd2" class="screen-text">3 = SETUP</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155137-bdc46fd2" class="screen-text no-underline">2 = AUTO</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155139-bdc46fd2" class="screen-text no-underline">4 = DIAGS</div>
+                </div>
+                <div class="w-layout-grid manual-menu-grid">
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15513c-bdc46fd2" class="screen-text">1 = MANUAl run</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15513e-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155140-bdc46fd2" class="screen-text">2 = walk &amp; Water</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155142-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155144-bdc46fd2" class="screen-text">3 = Quick water</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155146-bdc46fd2" class="screen-text">4 = park</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155148-bdc46fd2" class="screen-text no-underline">5 = area viewer</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15514a-bdc46fd2" class="screen-text no-underline">6 = list</div>
+                </div>
+                <div class="w-layout-grid auto-menu-grid">
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15514d-bdc46fd2" class="screen-text">autozone</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15514f-bdc46fd2" class="screen-text">#01 003.32f</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155151-bdc46fd2" class="screen-text">crop #01</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155153-bdc46fd2" class="screen-text">a01 r03</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155155-bdc46fd2" class="screen-text">speed 020</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155157-bdc46fd2" class="screen-text">pass: 06</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155159-bdc46fd2" class="screen-text no-underline">pass 01</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15515b-bdc46fd2" class="screen-text no-underline">23:13:06</div>
+                </div>
+                <div class="w-layout-grid setup-menu-grid">
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15515e-bdc46fd2" class="screen-text">setup menu</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155160-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155162-bdc46fd2" class="screen-text">1 = crop settings</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155164-bdc46fd2" class="screen-text">2 = boom settings</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155166-bdc46fd2" class="screen-text no-underline">3 = system</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155168-bdc46fd2" class="screen-text no-underline">4 = motor</div>
+                </div>
+                <div class="w-layout-grid diagnostic-menu-grid">
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15516b-bdc46fd2" class="screen-text">diag menu</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15516d-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b15516f-bdc46fd2" class="screen-text">1 = Motor &amp; motion</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155171-bdc46fd2" class="screen-text">2 = switches/Solenoids</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155173-bdc46fd2" class="screen-text no-underline">3 = markers</div>
+                  <div id="w-node-_6804a545-1c48-c9ab-2a1c-cba19b155175-bdc46fd2" class="screen-text no-underline">4 = keypad</div>
+                </div>
+              </div>
+              <div class="panel-image"></div>
+            </div>
+            <div class="w-layout-grid panel-button-grid">
+              <div id="0" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec0885-bdc46fd2">
+                <div class="keypad-btn-num">0</div>
+              </div>
+              <div id="1" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec0888-bdc46fd2">
+                <div class="keypad-btn-num">1</div>
+              </div>
+              <div id="2" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec088b-bdc46fd2">
+                <div class="keypad-btn-num">2</div>
+              </div>
+              <div id="3" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec088e-bdc46fd2">
+                <div class="keypad-btn-num">3</div>
+              </div>
+              <div id="4" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec0891-bdc46fd2">
+                <div class="keypad-btn-num">4</div>
+              </div>
+              <div id="5" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec0894-bdc46fd2">
+                <div class="keypad-btn-num">5</div>
+              </div>
+              <div id="6" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec0897-bdc46fd2">
+                <div class="keypad-btn-num">6</div>
+              </div>
+              <div id="7" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec089a-bdc46fd2">
+                <div class="keypad-btn-num">7</div>
+              </div>
+              <div id="8" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec089d-bdc46fd2">
+                <div class="keypad-btn-num">8</div>
+              </div>
+              <div id="9" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08a0-bdc46fd2">
+                <div class="keypad-btn-num">9</div>
+              </div>
+              <div id="A" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08a3-bdc46fd2">
+                <div class="keypad-btn-num">A</div>
+              </div>
+              <div id="B" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08a6-bdc46fd2"><img loading="lazy" src="images/up.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">B</div>
+              </div>
+              <div id="C" class="keypad-btn vertical w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08aa-bdc46fd2">
+                <div class="keypad-btn-num">C</div><img loading="lazy" src="images/left.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="D" class="keypad-btn vertical w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08ae-bdc46fd2">
+                <div class="keypad-btn-num">D</div><img loading="lazy" src="images/right.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="E" class="keypad-btn vertical w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08b2-bdc46fd2">
+                <div class="keypad-btn-num">E</div>
+                <div class="enter-exit">Enter/Exit</div>
+              </div>
+              <div id="F" class="keypad-btn w-node-_55c91d73-22b6-caf3-c47f-a3c40eec08b7-bdc46fd2"><img loading="lazy" src="images/down.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">F</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="g1-overlay" class="overlay-confirmation">
+          <div class="overlay-content">
+            <h2 class="overlay-text">Are you sure you want to reset the tests for this greenhouse?</h2>
+            <div class="overlay-btn-div">
+              <a href="#" class="confirm-btn w-button">Yes</a>
+              <a href="#" class="cancel-btn w-button">Cancel</a>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="12ac8e68-783c-62b9-2695-ad8ea3e15e56" data-is-ix2-target="1" class="hamburger-menu" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0"></div>
+        <div style="display:none;height:0px" class="menu-container">
+          <div class="user-menu">
+            <div style="display:none;opacity:0" class="user-operation-buttons">
+              <div id="wifi" class="user-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Water</div>
+              </div>
+              <div id="network" class="user-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Mapping</div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-menu">
+            <div style="display:none;opacity:0" class="admin-operation-buttons">
+              <div id="wifi" class="admin-operation-div"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="network" class="admin-operation-div"><img src="images/wifi-gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Network</div>
+              </div>
+              <div id="settings" class="admin-operation-div"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Settings</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outcome-view">
+          <div class="outcome-header">
+            <div class="locations">
+              <div class="location-container mr">
+                <h2 class="location-heading">Greenhouse:</h2>
+                <div id="gh-outcome-num" class="outcome-target">1</div>
+              </div>
+              <div class="location-container">
+                <h2 class="location-heading">Bay:</h2>
+                <div id="bay-outcome-num" class="outcome-target">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="outcomes-div">
+            <div class="log-container">
+              <h3 class="outcome-heading">Log</h3>
+              <div class="log-div">
+                <div class="log-text-content">Log results appear here.</div>
+              </div>
+            </div>
+            <div class="status-container">
+              <h3 class="outcome-heading">Status</h3>
+              <div class="status-div">
+                <div id="status-data" class="status-text-content">Status results appear here.</div>
+              </div>
+            </div>
+          </div><img src="images/closebtn.svg" loading="lazy" alt="" class="greenhouse-close-btn">
+        </div>
+      </div>
+      <div id="greenhouse-5-view" class="greenhouse-5-view">
+        <div class="bay-info-div">
+          <h1 class="greenhouse-view-heading">Greenhouse 5</h1>
+          <div class="bay-container">
+            <div id="gh1-b1" class="bay-div">
+              <h3 class="bay-heading">Bay 1</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b2" class="bay-div">
+              <h3 class="bay-heading">Bay 2</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b3" class="bay-div">
+              <h3 class="bay-heading">Bay 3</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b4" class="bay-div">
+              <h3 class="bay-heading">Bay 4</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+            <div id="gh1-b5" class="bay-div">
+              <h3 class="bay-heading">Bay 5</h3>
+              <div class="bay-icon-div"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon checked"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"><img src="images/checkmark.svg" loading="lazy" alt="" class="bay-icon"></div>
+              <div class="stoplight-div">
+                <div class="status-select error"></div>
+                <div class="status-select in-progress"></div>
+                <div class="status-select success"></div>
+              </div><img src="images/selected-arrow.svg" loading="lazy" alt="" class="stoplight-trigger">
+            </div>
+          </div>
+          <div class="reset-btn">
+            <div class="reset">Reset</div>
+          </div>
+        </div>
+        <div class="bay-calculation-div">
+          <div class="panel-body">
+            <div class="panel-screen-container">
+              <div class="panel-screen">
+                <div class="w-layout-grid main-menu-grid">
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f454b-bdc46fd2" class="screen-text">BOOM NAME</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f454d-bdc46fd2" class="screen-text">02:16:01</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f454f-bdc46fd2" class="screen-text">WIC - 3.30</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4551-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4553-bdc46fd2" class="screen-text">1 = MANUAL</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4555-bdc46fd2" class="screen-text">3 = SETUP</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4557-bdc46fd2" class="screen-text no-underline">2 = AUTO</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4559-bdc46fd2" class="screen-text no-underline">4 = DIAGS</div>
+                </div>
+                <div class="w-layout-grid manual-menu-grid">
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f455c-bdc46fd2" class="screen-text">1 = MANUAl run</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f455e-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4560-bdc46fd2" class="screen-text">2 = walk &amp; Water</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4562-bdc46fd2" class="screen-text"> </div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4564-bdc46fd2" class="screen-text">3 = Quick water</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4566-bdc46fd2" class="screen-text">4 = park</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4568-bdc46fd2" class="screen-text no-underline">5 = area viewer</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f456a-bdc46fd2" class="screen-text no-underline">6 = list</div>
+                </div>
+                <div class="w-layout-grid auto-menu-grid">
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f456d-bdc46fd2" class="screen-text">autozone</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f456f-bdc46fd2" class="screen-text">#01 003.32f</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4571-bdc46fd2" class="screen-text">crop #01</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4573-bdc46fd2" class="screen-text">a01 r03</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4575-bdc46fd2" class="screen-text">speed 020</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4577-bdc46fd2" class="screen-text">pass: 06</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4579-bdc46fd2" class="screen-text no-underline">pass 01</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f457b-bdc46fd2" class="screen-text no-underline">23:13:06</div>
+                </div>
+                <div class="w-layout-grid setup-menu-grid">
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f457e-bdc46fd2" class="screen-text">setup menu</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4580-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4582-bdc46fd2" class="screen-text">1 = crop settings</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4584-bdc46fd2" class="screen-text">2 = boom settings</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4586-bdc46fd2" class="screen-text no-underline">3 = system</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4588-bdc46fd2" class="screen-text no-underline">4 = motor</div>
+                </div>
+                <div class="w-layout-grid diagnostic-menu-grid">
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f458b-bdc46fd2" class="screen-text">diag menu</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f458d-bdc46fd2" class="screen-text">e = exit</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f458f-bdc46fd2" class="screen-text">1 = Motor &amp; motion</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4591-bdc46fd2" class="screen-text">2 = switches/Solenoids</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4593-bdc46fd2" class="screen-text no-underline">3 = markers</div>
+                  <div id="w-node-_2514fea1-9ffd-e2ac-6ba8-5405e44f4595-bdc46fd2" class="screen-text no-underline">4 = keypad</div>
+                </div>
+              </div>
+              <div class="panel-image"></div>
+            </div>
+            <div class="w-layout-grid panel-button-grid">
+              <div id="0" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8c7-bdc46fd2">
+                <div class="keypad-btn-num">0</div>
+              </div>
+              <div id="1" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8ca-bdc46fd2">
+                <div class="keypad-btn-num">1</div>
+              </div>
+              <div id="2" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8cd-bdc46fd2">
+                <div class="keypad-btn-num">2</div>
+              </div>
+              <div id="3" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8d0-bdc46fd2">
+                <div class="keypad-btn-num">3</div>
+              </div>
+              <div id="4" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8d3-bdc46fd2">
+                <div class="keypad-btn-num">4</div>
+              </div>
+              <div id="5" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8d6-bdc46fd2">
+                <div class="keypad-btn-num">5</div>
+              </div>
+              <div id="6" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8d9-bdc46fd2">
+                <div class="keypad-btn-num">6</div>
+              </div>
+              <div id="7" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8dc-bdc46fd2">
+                <div class="keypad-btn-num">7</div>
+              </div>
+              <div id="8" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8df-bdc46fd2">
+                <div class="keypad-btn-num">8</div>
+              </div>
+              <div id="9" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8e2-bdc46fd2">
+                <div class="keypad-btn-num">9</div>
+              </div>
+              <div id="A" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8e5-bdc46fd2">
+                <div class="keypad-btn-num">A</div>
+              </div>
+              <div id="B" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8e8-bdc46fd2"><img loading="lazy" src="images/up.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">B</div>
+              </div>
+              <div id="C" class="keypad-btn vertical w-node-_33e86bf2-4074-169a-6596-b73d830da8ec-bdc46fd2">
+                <div class="keypad-btn-num">C</div><img loading="lazy" src="images/left.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="D" class="keypad-btn vertical w-node-_33e86bf2-4074-169a-6596-b73d830da8f0-bdc46fd2">
+                <div class="keypad-btn-num">D</div><img loading="lazy" src="images/right.png" alt="" class="btn-arrow bigger">
+              </div>
+              <div id="E" class="keypad-btn vertical w-node-_33e86bf2-4074-169a-6596-b73d830da8f4-bdc46fd2">
+                <div class="keypad-btn-num">E</div>
+                <div class="enter-exit">Enter/Exit</div>
+              </div>
+              <div id="F" class="keypad-btn w-node-_33e86bf2-4074-169a-6596-b73d830da8f9-bdc46fd2"><img loading="lazy" src="images/down.png" alt="" class="btn-arrow">
+                <div class="keypad-btn-num">F</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="g1-overlay" class="overlay-confirmation">
+          <div class="overlay-content">
+            <h2 class="overlay-text">Are you sure you want to reset the tests for this greenhouse?</h2>
+            <div class="overlay-btn-div">
+              <a href="#" class="confirm-btn w-button">Yes</a>
+              <a href="#" class="cancel-btn w-button">Cancel</a>
+            </div>
+          </div>
+        </div>
+        <div data-w-id="0d0f4e1e-96f3-46ee-259c-5283f8e6a73b" data-is-ix2-target="1" class="hamburger-menu" data-animation-type="lottie" data-src="documents/lf30_editor_l4cgnajs.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.3333333333333335" data-duration="0"></div>
+        <div style="display:none;height:0px" class="menu-container">
+          <div class="user-menu">
+            <div style="display:none;opacity:0" class="user-operation-buttons">
+              <div id="wifi" class="user-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Water</div>
+              </div>
+              <div id="network" class="user-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Mapping</div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-menu">
+            <div style="display:none;opacity:0" class="admin-operation-buttons">
+              <div id="wifi" class="admin-operation-div"><img src="images/wifi.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Wifi</div>
+              </div>
+              <div id="network" class="admin-operation-div"><img src="images/wifi-gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Network</div>
+              </div>
+              <div id="settings" class="admin-operation-div"><img src="images/gear.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Settings</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/status.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/water.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+              <div id="status" class="admin-operation-div"><img src="images/map.svg" loading="lazy" alt="" class="operation-icon">
+                <div class="operation-text">Status</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outcome-view">
+          <div class="outcome-header">
+            <div class="locations">
+              <div class="location-container mr">
+                <h2 class="location-heading">Greenhouse:</h2>
+                <div id="gh-outcome-num" class="outcome-target">1</div>
+              </div>
+              <div class="location-container">
+                <h2 class="location-heading">Bay:</h2>
+                <div id="bay-outcome-num" class="outcome-target">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="outcomes-div">
+            <div class="log-container">
+              <h3 class="outcome-heading">Log</h3>
+              <div class="log-div">
+                <div class="log-text-content">Log results appear here.</div>
+              </div>
+            </div>
+            <div class="status-container">
+              <h3 class="outcome-heading">Status</h3>
+              <div class="status-div">
+                <div id="status-data" class="status-text-content">Status results appear here.</div>
+              </div>
+            </div>
+          </div><img src="images/closebtn.svg" loading="lazy" alt="" class="greenhouse-close-btn">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6249bc1ba58f8c8228c46fd1" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script src="/js/script26.js"></script>
+  <script src="/js/common.js" ></script>
+  <script>
+</script>
 </body>
-
 </html>
