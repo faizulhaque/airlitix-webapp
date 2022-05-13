@@ -11,18 +11,19 @@ const errorHandlers = require('./helper/errors');
 const routes = require('./routes');
 const socketRoutes = require('./socketRoutes');
 
-let server;
-if (config.isLocal()) {
-  server = https.createServer({
-    key: fs.readFileSync('./ssl/server.key'),
-    cert: fs.readFileSync('./ssl/server.cert'),
-    requestCert: false,
-    rejectUnauthorized: false
-  }, app);
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-} else {
-  server = http.createServer(app);
-}
+let server = http.createServer(app);
+
+// if (config.isLocal()) {
+//   server = https.createServer({
+//     key: fs.readFileSync('./ssl/server.key'),
+//     cert: fs.readFileSync('./ssl/server.cert'),
+//     requestCert: false,
+//     rejectUnauthorized: false
+//   }, app);
+//   process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+// } else {
+//   server = http.createServer(app);
+// }
 
 errorHandlers.handleUncaughtExceptions();
 errorHandlers.handleKillSignals();

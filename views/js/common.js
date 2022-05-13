@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
   let wifiClient = '';
-  let socket = io.connect('//socketio0.herokuapp.com', {
+  let socket = io.connect('/', {
     transports: ['websocket'],
     upgrade: false,
     rejectUnauthorized: false,
@@ -68,6 +68,6 @@ function appendLogs(msg) {
   console.table('appendLogs', msg);
 
   if ($('.log-div').length) {
-    $('.log-div').prepend( `<div class='log-text-content'>${JSON.stringify(msg)}</div>`);
+    $('.log-div').html( `<div class='log-text-content'>${JSON.stringify(msg)}</div>`);
   }
 }
