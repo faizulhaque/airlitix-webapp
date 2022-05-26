@@ -44,20 +44,29 @@ let adminOperationBtns = document.getElementsByClassName("admin-operation-div");
 let adminOperationBtnContainers = document.getElementsByClassName("admin-operation-buttons");
 let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
 
+//Bay Icons
+let waterIcons = document.getElementsByClassName('bay-icon-container-water')
+let mapIcons = document.getElementsByClassName('bay-icon-container-map')
+let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
+let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 
-//Outcome View
+//Outcome Views
 let homeLogDisplay = document.getElementById('home-log-display')
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
 let ghOutcomeNum = document.getElementById("gh-outcome-num");
 let bayOutcomeNum = document.getElementById("bay-outcome-num");
+let actionOutcome = document.getElementById("action-outcome");
+
+//Outcome Views Home
 let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
-let bayOutcomeNumHome = document.getElementById("bay-outcome-num-home");
+let actionOutcomeHome = document.getElementById("gh-action-home");
 let gearDivs = document.getElementsByClassName("gear-div");
 let propagationDivs = document.getElementsByClassName("stop-propagation-div");
+let logDataHome = document.getElementById('log-data-home')
+let statusDataHome = document.getElementById('status-data-home')
 
-
-//General
+//Variables and Booleans
 let home = true;
 let adminMode = false;
 let currentGreenhouse;
@@ -457,32 +466,35 @@ for(const cancelBtn of cancelBtns){
   })
 }
 
-//Behavior for clicking an operation button for debugging/diagnostics on Home Page
-for(const btn of adminOperationBtns){
-	btn.addEventListener('click', () => {
-  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
-  //If they have already selected a bay to run a test on:
-  if(currentBay){
-    step2.style.opacity = '50%';
-    step3.style.opacity = '100%';
-    ghOutcomeNum.textContent = currentGreenhouse;
-    bayOutcomeNum.textContent = currentBay;    
-  }  else {
-  	alert('Select a bay')
-  }
-  })
-}
+// //Behavior for clicking an operation button for debugging/diagnostics on Home Page
+// for(const btn of adminOperationBtns){
+// 	btn.addEventListener('click', () => {
+//   let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+//   let action = btn.lastElementChild.innerHTML;
+//   //If they have already selected a bay to run a test on:
+//   if(currentBay){
+//     step2.style.opacity = '50%';
+//     step3.style.opacity = '100%';
+//     ghOutcomeNum.textContent = currentGreenhouse;
+//     bayOutcomeNum.textContent = currentBay;    
+//     actionOutcome.textContent = action;
+//   }  else {
+//   	alert('Select a bay')
+//   }
+//   })
+// }
 
 //Behavior for clicking an operation button in admin mode
 for(const btn of adminOperationBtns){
 	btn.addEventListener('click', () => {
-  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  let action = btn.lastElementChild.innerHTML;
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
     ghOutcomeNum.textContent = currentGreenhouse;
-    bayOutcomeNum.textContent = currentBay;    
+    bayOutcomeNum.textContent = currentBay;
+    actionOutcome.textContent = action;
   }  else {
   	alert('Select a bay')
   }
@@ -493,6 +505,7 @@ for(const btn of adminOperationBtns){
 for(const btn of userOperationBtns){
 	btn.addEventListener('click', () => {
   let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  let action = btn.lastElementChild.innerHTML;
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
@@ -500,12 +513,33 @@ for(const btn of userOperationBtns){
     outcomeDiv.style.display = 'flex'
     ghOutcomeNum.textContent = currentGreenhouse;
     bayOutcomeNum.textContent = currentBay;    
+    actionOutcome.textContent = action;
   }  else {
   	alert('Select a bay')
   }
   })
 }
 
+// Bay Icons Color Changing
+for(const icon of waterIcons){
+  icon.addEventListener('click', () => {
+    if(!icon.classList.includes('in-progress') && !icon.classList.includes('success') && !icon.classList.includes('error')){
+      icon.classList.add('in-progress')
+    } else if(icon.classList.contains('in-progress') || icon.classList.contains('success')){
+      icon.classList.remove('in-progress')
+      icon.classList.remove('success')
+      icon.classList.add('error')
+    } else if (icon.classList.contains('in-progress') || icon.classList.contains('error')){
+      icon.classList.remove('in-progress')
+      icon.classList.remove('error')
+      icon.classList.add('success')
+    } else if (icon.classList.contains('success') || icon.classList.contains('error')){
+      icon.classList.remove('success')
+      icon.classList.remove('error')
+      icon.classList.add('in-progress')
+    }
+  })
+}
 
 //Homepage Office Operation Buttons 
 office.addEventListener('click', () => {
@@ -522,7 +556,7 @@ for(const gear of gearDivs){
       gear.classList.add('selected')
       buildingSelected = 'true'
       currentBuilding = gear.parentNode.lastElementChild.firstElementChild.innerHTML;
-      console.log(currentBuilding)
+      ghOutcomeNumHome.textContent = currentBuilding;
     } else {
       gear.classList.remove('selected')
       buildingSelected = 'false'
@@ -534,7 +568,10 @@ for(const gear of gearDivs){
 for(const btn of buildingOperationBtns){
   btn.addEventListener('click', () => {
     if(buildingSelected){
-      ghOutcomeNumHome.textContent = currentBuilding;
+      let action = btn.lastElementChild.innerHTML;
+      actionOutcomeHome.textContent = action;
+      logDataHome.textContent = 'Log data appears here.';
+      statusDataHome.textContent = 'Status data appears here.';
     } else {
       alert('Please select a building target')
     }
