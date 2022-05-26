@@ -250,7 +250,6 @@ for (const arrow of stoplightTriggers){
   arrow.addEventListener('click', (e) => {
     e.stopPropagation()
     let stoplight = arrow.parentNode.getElementsByClassName('stoplight-div')[0]
-    console.log(stoplight)
     if(stoplight.style.display == 'none'){
       stoplight.style.display = 'flex'
     } else if (stoplight.style.display == 'flex')
@@ -523,7 +522,7 @@ for(const btn of userOperationBtns){
 // Bay Icons Color Changing
 for(const icon of waterIcons){
   icon.addEventListener('click', () => {
-    if(!icon.classList.includes('in-progress') && !icon.classList.includes('success') && !icon.classList.includes('error')){
+    if(!icon.classList.contains('in-progress') && !icon.classList.contains('success') && !icon.classList.contains('error')){
       icon.classList.add('in-progress')
     } else if(icon.classList.contains('in-progress') || icon.classList.contains('success')){
       icon.classList.remove('in-progress')
