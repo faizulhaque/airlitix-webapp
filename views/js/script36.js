@@ -238,7 +238,7 @@ for (const btn of bayBtns) {
       selectedArrow.style.display = 'block'
     }
     
-    currentBay = btn.id.slice(-1)
+    currentBay = btn.id.slice(-2)
     handleResetBtn();
     let calculator = btn.parentNode.parentNode.nextElementSibling;
     calculator.style.display = 'flex';	
@@ -622,21 +622,3 @@ for(const btn of buildingOperationBtns){
 }
 
 
-
-//Back button functionality
-// backBtn.addEventListener('click', () => {
-// 	outcomeView.style.display = 'none'
-//   step2.style.opacity = '100%';
-//   step3.style.opacity = '50%';
-// 	if(currentGreenhouse === 1){
-//       greenhouse1View.style.display = 'flex';
-//   } else if (currentGreenhouse === 2){
-//       greenhouse2View.style.display = 'flex';
-//   } else if (currentGreenhouse === 3){
-//       greenhouse3View.style.display = 'flex';
-//   } else if (currentGreenhouse === 4){
-//       greenhouse4View.style.display = 'flex';
-//   } else if (currentGreenhouse === 5){
-//       greenhouse5View.style.display = 'flex';
-//   }
-// })
