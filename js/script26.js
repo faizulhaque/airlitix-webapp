@@ -54,6 +54,8 @@ let bayOutcomeNum = document.getElementById("bay-outcome-num");
 let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
 let bayOutcomeNumHome = document.getElementById("bay-outcome-num-home");
 let gearDivs = document.getElementsByClassName("gear-div");
+let propagationDivs = document.getElementsByClassName("stop-propagation-div");
+
 
 //General
 let home = true;
@@ -155,6 +157,9 @@ function handleAdminMode(){
     for (const menu of outcomeViews){
       menu.style.display = 'flex'
     }
+    for (const div of propagationDivs){
+      div.style.display = 'block'
+    }
     for (const gear of gearDivs){
       gear.style.display = 'block'
     }
@@ -174,6 +179,9 @@ function handleAdminMode(){
     }
     for (const menu of outcomeViews){
       menu.style.display = 'none'
+    }
+    for (const div of propagationDivs){
+      div.style.display = 'none'
     }
     for (const gear of gearDivs){
       gear.style.display = 'none'
@@ -506,8 +514,7 @@ office.addEventListener('click', () => {
 })
 
 for(const gear of gearDivs){
-  gear.addEventListener('click', (e) => {
-    e.stopPropagation()
+  gear.addEventListener('click', () => {
     for(const gear of gearDivs){
       gear.classList.remove('selected')
     }
