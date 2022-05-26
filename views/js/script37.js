@@ -22,7 +22,7 @@ let outcomeViews = document.getElementsByClassName("outcome-view");
 let outcomeViewHome = document.getElementById("outcome-view-home");
 
 //Greenhouse commands view
-let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
+let mainActionDivs = document.getElementsByClassName("main-action-div")
 let keypadBtns = document.getElementsByClassName("keypad-btn");
 let bayBtns = document.getElementsByClassName("bay-div");
 let stoplightTriggers = document.getElementsByClassName("stoplight-trigger");
@@ -51,7 +51,6 @@ let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 
 //Outcome Views
-let homeLogDisplay = document.getElementById('home-log-display')
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
 let ghOutcomeNum = document.getElementById("gh-outcome-num");
@@ -59,6 +58,7 @@ let bayOutcomeNum = document.getElementById("bay-outcome-num");
 let actionOutcome = document.getElementById("action-outcome");
 
 //Outcome Views Home
+let homeLogDisplay = document.getElementById('home-log-display')
 let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
 let actionOutcomeHome = document.getElementById("gh-action-home");
 let gearDivs = document.getElementsByClassName("gear-div");
@@ -96,7 +96,7 @@ homeBtn.addEventListener('click', () => {
   for (const div of stoplightDivs){
     div.style.display = 'none'
   }
-  for (const div of bayCalculationDivs){
+  for (const div of mainActionDivs){
     div.style.display = 'none'
   }
   for (const div of outcomeViews){
@@ -240,8 +240,8 @@ for (const btn of bayBtns) {
     
     currentBay = btn.id.slice(-2)
     handleResetBtn();
-    let calculator = btn.parentNode.parentNode.nextElementSibling;
-    calculator.style.display = 'flex';	
+    let actionDiv = btn.parentNode.parentNode.nextElementSibling;
+    actionDiv.style.display = 'flex';	
   });
 }
 
@@ -337,8 +337,8 @@ step1.addEventListener("click", () => {
  function resetFields(){
      home = true;
      checkForHome();
-           for (let i = 0; i < bayCalculationDivs.length; i++){
-    		      bayCalculationDivs[i].style.display = 'none';
+           for (let i = 0; i < mainActionDivs.length; i++){
+    		      mainActionDivs[i].style.display = 'none';
    				 } 
            for (const btn of bayBtns) {
     		      btn.classList.remove("selected")
@@ -448,9 +448,9 @@ for(const confirmBtn of confirmBtns){
     for(const bayIcon of bayIcons){
     	bayIcon.classList.remove('checked')
     }
-    //Hide calculator
-    let calculator = overlay.parentNode.getElementsByClassName('bay-calculation-div')[0];
-  	calculator.style.display = 'none'
+    //Hide action div
+    let actionDiv = overlay.parentNode.getElementsByClassName('main-action-div')[0];
+  	actionDiv.style.display = 'none'
     //Clear currently selected and hide reset Button
     currentBay = ''
     handleResetBtn()
