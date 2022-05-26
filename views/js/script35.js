@@ -524,18 +524,62 @@ for(const icon of waterIcons){
   icon.addEventListener('click', () => {
     if(!icon.classList.contains('in-progress') && !icon.classList.contains('success') && !icon.classList.contains('error')){
       icon.classList.add('in-progress')
-    } else if(icon.classList.contains('in-progress') || icon.classList.contains('success')){
+    } else if(icon.classList.contains('in-progress')){
       icon.classList.remove('in-progress')
+      icon.classList.add('success')
+    } else if (icon.classList.contains('success')){
       icon.classList.remove('success')
       icon.classList.add('error')
-    } else if (icon.classList.contains('in-progress') || icon.classList.contains('error')){
-      icon.classList.remove('in-progress')
+    } else if (icon.classList.contains('error')){
       icon.classList.remove('error')
-      icon.classList.add('success')
-    } else if (icon.classList.contains('success') || icon.classList.contains('error')){
-      icon.classList.remove('success')
-      icon.classList.remove('error')
+    }
+  })
+}
+
+for(const icon of mapIcons){
+  icon.addEventListener('click', () => {
+    if(!icon.classList.contains('in-progress') && !icon.classList.contains('success') && !icon.classList.contains('error')){
       icon.classList.add('in-progress')
+    } else if(icon.classList.contains('in-progress')){
+      icon.classList.remove('in-progress')
+      icon.classList.add('success')
+    } else if (icon.classList.contains('success')){
+      icon.classList.remove('success')
+      icon.classList.add('error')
+    } else if (icon.classList.contains('error')){
+      icon.classList.remove('error')
+    }
+  })
+}
+
+for(const icon of wifiIcons){
+  icon.addEventListener('click', () => {
+    if(!icon.classList.contains('in-progress') && !icon.classList.contains('success') && !icon.classList.contains('error')){
+      icon.classList.add('in-progress')
+    } else if(icon.classList.contains('in-progress')){
+      icon.classList.remove('in-progress')
+      icon.classList.add('success')
+    } else if (icon.classList.contains('success')){
+      icon.classList.remove('success')
+      icon.classList.add('error')
+    } else if (icon.classList.contains('error')){
+      icon.classList.remove('error')
+    }
+  })
+}
+
+for(const icon of systemIcons){
+  icon.addEventListener('click', () => {
+    if(!icon.classList.contains('in-progress') && !icon.classList.contains('success') && !icon.classList.contains('error')){
+      icon.classList.add('in-progress')
+    } else if(icon.classList.contains('in-progress')){
+      icon.classList.remove('in-progress')
+      icon.classList.add('success')
+    } else if (icon.classList.contains('success')){
+      icon.classList.remove('success')
+      icon.classList.add('error')
+    } else if (icon.classList.contains('error')){
+      icon.classList.remove('error')
     }
   })
 }
