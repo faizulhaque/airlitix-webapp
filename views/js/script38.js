@@ -433,6 +433,27 @@ for(const confirmBtn of confirmBtns){
       bayDiv.classList.remove('error')
       bayDiv.classList.remove('in-progress')
     }
+    //Remove any bay icon status colors 
+    for(const icon of waterIcons){
+    	icon.classList.remove('success')
+      icon.classList.remove('in-progress')
+      icon.classList.remove('error')
+    }
+    for(const icon of mapIcons){
+    	icon.classList.remove('success')
+      icon.classList.remove('in-progress')
+      icon.classList.remove('error')
+    }
+    for(const icon of wifiIcons){
+    	icon.classList.remove('success')
+      icon.classList.remove('in-progress')
+      icon.classList.remove('error')
+    }
+    for(const icon of systemIcons){
+    	icon.classList.remove('success')
+      icon.classList.remove('in-progress')
+      icon.classList.remove('error')
+    }
     //Remove selected arrows
     for(const arrow of stoplightTriggers){
       arrow.style.display = 'none'
