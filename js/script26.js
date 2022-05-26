@@ -19,6 +19,7 @@ let greenhouse3View = document.getElementById("greenhouse-3-view");
 let greenhouse4View = document.getElementById("greenhouse-4-view");
 let greenhouse5View = document.getElementById("greenhouse-5-view");
 let outcomeViews = document.getElementsByClassName("outcome-view");
+let outcomeViewHome = document.getElementById("outcome-view-home");
 
 //Greenhouse commands view
 let bayCalculationDivs = document.getElementsByClassName("bay-calculation-div")
@@ -45,14 +46,14 @@ let buildingOperationBtns = document.getElementsByClassName("admin-operation-div
 
 
 //Outcome View
-let closebtn = document.getElementById("close-btn");
-let greenhouseCloseBtns = document.getElementsByClassName("greenhouse-close-btn");
 let homeLogDisplay = document.getElementById('home-log-display')
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
 let ghOutcomeNum = document.getElementById("gh-outcome-num");
 let bayOutcomeNum = document.getElementById("bay-outcome-num");
-let backBtn = document.getElementById('back-btn')
+let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
+let bayOutcomeNumHome = document.getElementById("bay-outcome-num-home");
+let gearDivs = document.getElementsByClassName("gear-div");
 
 //General
 let home = true;
@@ -60,6 +61,7 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 let buildingSelected = false;
+let currentBuilding;
 
 
 //Home Button Functionality
@@ -157,6 +159,14 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
+    for (const menu of outcomeViews){
+      menu.style.display = 'flex'
+    }
+    for (const gear of gearDivs){
+      gear.style.display = 'block'
+    }
+    outcomeViewHome.style.display = 'flex'
+
   } else {
     hamburgerMain.style.display = 'none'
     step3.style.display = 'none'
@@ -169,6 +179,13 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 64, 43)'
     }
+    for (const menu of outcomeViews){
+      menu.style.display = 'none'
+    }
+    for (const gear of gearDivs){
+      gear.style.display = 'none'
+    }
+    outcomeViewHome.style.display = 'none'
   }
 }
 
@@ -439,6 +456,22 @@ for(const cancelBtn of cancelBtns){
   })
 }
 
+//Behavior for clicking an operation button for debugging/diagnostics on Home Page
+for(const btn of adminOperationBtns){
+	btn.addEventListener('click', () => {
+  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  //If they have already selected a bay to run a test on:
+  if(currentBay){
+    step2.style.opacity = '50%';
+    step3.style.opacity = '100%';
+    ghOutcomeNum.textContent = currentGreenhouse;
+    bayOutcomeNum.textContent = currentBay;    
+  }  else {
+  	alert('Select a bay')
+  }
+  })
+}
+
 //Behavior for clicking an operation button in admin mode
 for(const btn of adminOperationBtns){
 	btn.addEventListener('click', () => {
@@ -447,7 +480,6 @@ for(const btn of adminOperationBtns){
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
-    outcomeDiv.style.display = 'flex'
     ghOutcomeNum.textContent = currentGreenhouse;
     bayOutcomeNum.textContent = currentBay;    
   }  else {
@@ -473,34 +505,37 @@ for(const btn of userOperationBtns){
   })
 }
 
-//Greenhouse status close button
-for(const btn of greenhouseCloseBtns){
-  btn.addEventListener('click', () => {
-    let outcomeDiv = btn.parentNode;
-    outcomeDiv.style.display = 'none'
-  })
-}
-
 
 //Homepage Office Operation Buttons 
 office.addEventListener('click', () => {
   buildingSelected = !buildingSelected
-  office.classList.toggle('office-select')
+  currentBuilding = 'Office'
 })
 
-for(const btn of buildingOperationBtns){
-  btn.addEventListener('click', () => {
-    if(buildingSelected){
-      homeLogDisplay.style.display = 'block'
+for(const gear of gearDivs){
+  gear.addEventListener('click', () => {
+    if(!gear.classList.contains('selected')){
+      gear.classList.add('selected')
+      buildingSelected = 'true'
+      currentBuilding = gear.parentNode.firstElementChild.innerHTML;
     } else {
-      alert('Please Select a building')
+      gear.classList.remove('selected')
+      buildingSelected = 'false'
+      currentBuilding = ''
     }
   })
 }
 
-closebtn.addEventListener('click', () => {
-  homeLogDisplay.style.display = 'none'
-})
+for(const btn of buildingOperationBtns){
+  btn.addEventListener('click', () => {
+    if(buildingSelected){
+      ghOutcomeNumHome.textContent = currentBuilding;
+    } else {
+      alert('Please select a building target')
+    }
+  })
+}
+
 
 
 //Back button functionality
