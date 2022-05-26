@@ -63,7 +63,7 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 let buildingSelected = false;
-let currentBuilding;
+let currentBuilding = '';
 
 
 //Home Button Functionality
@@ -521,7 +521,8 @@ for(const gear of gearDivs){
     if(!gear.classList.contains('selected')){
       gear.classList.add('selected')
       buildingSelected = 'true'
-      currentBuilding = gear.parentNode.firstElementChild.innerHTML;
+      currentBuilding = gear.parentNode.lastElementChild.firstElementChild.innerHTML;
+      console.log(currentBuilding)
     } else {
       gear.classList.remove('selected')
       buildingSelected = 'false'
