@@ -117,7 +117,6 @@ function handleOperationMenuIfOpen(){
    let compStyles = window.getComputedStyle(greenhouse);
     if (compStyles.getPropertyValue('display') == 'flex'){
        currentGreenhouseDisplayed = greenhouseViews[i];
-       console.log(currentGreenhouseDisplayed)
     }
   }
 
@@ -125,12 +124,7 @@ function handleOperationMenuIfOpen(){
   let hamburgerMenu = currentGreenhouseDisplayed.getElementsByClassName('hamburger-menu')[0]
   let menuContainer = currentGreenhouseDisplayed.getElementsByClassName('menu-container')[0]
 
-  console.log(hamburgerMenu)
-  console.log(menuContainer)
-  console.log(menuContainer.style.height)
-
   if(menuContainer.style.height == '100%'){
-    console.log('menu was open')
     hamburgerMenu.click()
   }
 
@@ -147,7 +141,6 @@ toggleDiv.addEventListener('click', () => {
 
 function handleAdminMode(){
 	if(adminMode){
-    console.log('admin mode enabled')
     hamburgerMain.style.display = 'block'
   	step3.style.display = 'flex'
   	for (const menu of userMenus){
