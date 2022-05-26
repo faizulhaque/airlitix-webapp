@@ -54,6 +54,8 @@ let bayOutcomeNum = document.getElementById("bay-outcome-num");
 let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
 let bayOutcomeNumHome = document.getElementById("bay-outcome-num-home");
 let gearDivs = document.getElementsByClassName("gear-div");
+let propagationDivs = document.getElementsByClassName("stop-propagation-div");
+
 
 //General
 let home = true;
@@ -61,7 +63,7 @@ let adminMode = false;
 let currentGreenhouse;
 let currentBay;
 let buildingSelected = false;
-let currentBuilding;
+let currentBuilding = '';
 
 
 //Home Button Functionality
@@ -117,7 +119,6 @@ function handleOperationMenuIfOpen(){
    let compStyles = window.getComputedStyle(greenhouse);
     if (compStyles.getPropertyValue('display') == 'flex'){
        currentGreenhouseDisplayed = greenhouseViews[i];
-       console.log(currentGreenhouseDisplayed)
     }
   }
 
@@ -125,12 +126,7 @@ function handleOperationMenuIfOpen(){
   let hamburgerMenu = currentGreenhouseDisplayed.getElementsByClassName('hamburger-menu')[0]
   let menuContainer = currentGreenhouseDisplayed.getElementsByClassName('menu-container')[0]
 
-  console.log(hamburgerMenu)
-  console.log(menuContainer)
-  console.log(menuContainer.style.height)
-
   if(menuContainer.style.height == '100%'){
-    console.log('menu was open')
     hamburgerMenu.click()
   }
 
@@ -147,7 +143,6 @@ toggleDiv.addEventListener('click', () => {
 
 function handleAdminMode(){
 	if(adminMode){
-    console.log('admin mode enabled')
     hamburgerMain.style.display = 'block'
   	step3.style.display = 'flex'
   	for (const menu of userMenus){
@@ -161,6 +156,9 @@ function handleAdminMode(){
     }
     for (const menu of outcomeViews){
       menu.style.display = 'flex'
+    }
+    for (const div of propagationDivs){
+      div.style.display = 'block'
     }
     for (const gear of gearDivs){
       gear.style.display = 'block'
@@ -181,6 +179,9 @@ function handleAdminMode(){
     }
     for (const menu of outcomeViews){
       menu.style.display = 'none'
+    }
+    for (const div of propagationDivs){
+      div.style.display = 'none'
     }
     for (const gear of gearDivs){
       gear.style.display = 'none'
@@ -514,10 +515,14 @@ office.addEventListener('click', () => {
 
 for(const gear of gearDivs){
   gear.addEventListener('click', () => {
+    for(const gear of gearDivs){
+      gear.classList.remove('selected')
+    }
     if(!gear.classList.contains('selected')){
       gear.classList.add('selected')
       buildingSelected = 'true'
-      currentBuilding = gear.parentNode.firstElementChild.innerHTML;
+      currentBuilding = gear.parentNode.lastElementChild.firstElementChild.innerHTML;
+      console.log(currentBuilding)
     } else {
       gear.classList.remove('selected')
       buildingSelected = 'false'
