@@ -451,7 +451,7 @@ for (let i = 0; i < greenhouses.length; i++) {
 //Display Popup to confirm a greenhouse reset
 for(const resetBtn of resetBtns){
 	resetBtn.addEventListener('click', () => {
-  	let overlay = resetBtn.parentNode.parentNode.querySelector('.overlay-confirmation')
+  	let overlay = resetBtn.parentNode.parentNode.parentNode.parentNode.querySelector('.overlay-confirmation')
     overlay.style.display = 'flex';
   })
 }
