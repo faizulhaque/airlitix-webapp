@@ -54,9 +54,9 @@ let disableEyes = document.getElementsByClassName('disable-eye')
 //Outcome Views
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
-let ghOutcomeNum = document.getElementById("gh-outcome-num");
-let bayOutcomeNum = document.getElementById("bay-outcome-num");
-let actionOutcome = document.getElementById("action-outcome");
+let ghOutcomeNums = document.getElementsByClassName('gh-outcome-num')
+let bayOutcomeNums = document.getElementsByClassName('bay-outcome-num')
+let actionOutcomes = document.getElementsByClassName('action-outcome')
 
 //Outcome Views Home
 let homeLogDisplay = document.getElementById('home-log-display')
@@ -548,9 +548,16 @@ for(const btn of adminOperationBtns){
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
-    ghOutcomeNum.textContent = currentGreenhouse;
-    bayOutcomeNum.textContent = currentBay;
-    actionOutcome.textContent = action;
+     //Change the text of the outcome divs to indicate what they clicked on
+    for (const text of ghOutcomeNums){
+      text.textContent = currentGreenhouse;
+    }
+    for (const text of bayOutcomeNums){
+      text.textContent = currentBay;  
+    }
+    for (const text of actionOutcomes){
+      text.textContent = action;
+    }
   }  else {
   	alert('Select a bay')
   }
@@ -567,9 +574,16 @@ for(const btn of userOperationBtns){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
     outcomeDiv.style.display = 'flex'
-    ghOutcomeNum.textContent = currentGreenhouse;
-    bayOutcomeNum.textContent = currentBay;    
-    actionOutcome.textContent = action;
+    //Change the text of the outcome divs to indicate what they clicked on
+    for (const text of ghOutcomeNums){
+      text.textContent = currentGreenhouse;
+    }
+    for (const text of bayOutcomeNums){
+      text.textContent = currentBay;  
+    }
+    for (const text of actionOutcomes){
+      text.textContent = action;
+    }
   }  else {
   	alert('Select a bay')
   }
