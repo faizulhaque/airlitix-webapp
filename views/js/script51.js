@@ -557,6 +557,7 @@ for(const btn of adminOperationBtns){
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
+    console.log('testing')
   //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
