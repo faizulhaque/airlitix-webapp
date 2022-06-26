@@ -49,6 +49,7 @@ let waterIcons = document.getElementsByClassName('bay-icon-container-water')
 let mapIcons = document.getElementsByClassName('bay-icon-container-map')
 let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
+let disableEyes = document.getElementsByClassName('disable-bay')
 
 //Outcome Views
 let logData = document.getElementById("log-data");
@@ -163,9 +164,10 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
-    for (const menu of outcomeViews){
-      menu.style.display = 'flex'
-    }
+    // for (const menu of outcomeViews){
+    //   menu.style.display = 'flex'
+    // }
+    // Invisible div to cover the home page greenhouses so you can't click them in admin mode
     for (const div of propagationDivs){
       div.style.display = 'block'
     }
@@ -173,6 +175,14 @@ function handleAdminMode(){
       gear.style.display = 'block'
     }
     outcomeViewHome.style.display = 'flex'
+
+    // display the wifi and system bay icons in admin mode
+    for (icon of wifiIcons){
+      icon.style.display = 'block'
+    }
+    for (icon of systemIcons){
+      icon.style.display = 'block'
+    }
 
   } else {
     hamburgerMain.style.display = 'none'
@@ -196,6 +206,12 @@ function handleAdminMode(){
       gear.style.display = 'none'
     }
     outcomeViewHome.style.display = 'none'
+    for (icon of wifiIcons){
+      icon.style.display = 'none'
+    }
+    for (icon of systemIcons){
+      icon.style.display = 'none'
+    }
   }
 }
 
@@ -278,6 +294,26 @@ for(const btn of stoplightBtns){
       bayDiv.classList.remove('error')
       bayDiv.classList.remove('in-progress')
       bayDiv.classList.add('success')
+    }
+  })
+}
+
+//Disbaled a bay when the eyeball is clicked
+for(const eye of disableEyes){
+  eye.addEventListener('click', () => {
+    let bay = eye.parentElement
+    let disableOverlay = bay.getElementsByClassName('disable-overlay')[0]
+    console.log(bay)
+    if(!bay.classList.contains('disabled')){
+      bay.classList.remove('selected')
+      bay.classList.remove('success')
+      bay.classList.remove('error')
+      bay.classList.remove('in-progress')
+      bay.classList.add('disable')
+      disableOverlay.style.display = 'block'
+    } else {
+      bay.classList.remove('disabled')
+      disableOverlay.style.display = 'none'
     }
   })
 }
