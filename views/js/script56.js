@@ -39,8 +39,7 @@ let menuContainers = document.getElementsByClassName("menu-container");
 let menuContainerMain = document.getElementById("menu-container-main");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
-let adminOperationBtns = document.getElementsByClassName("admin-operation-buttons").children;
-let userOperationBtns = document.getElementsByClassName("user-operation-buttons").children;
+
 let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
 
 //Bay Icons
@@ -548,8 +547,32 @@ for(const cancelBtn of cancelBtns){
 // }
 
 //Behavior for clicking an operation button in admin mode
-for(const btn of adminOperationBtns){
-	btn.addEventListener('click', () => {
+adminWaterBtns = document.getElementsByClassName('admin-water')
+for(const btn of adminWaterBtns){
+  handleAdminOperationBtn(btn)
+}
+adminMappingBtns = document.getElementsByClassName('admin-mapping')
+for(const btn of adminMappingBtns){
+  handleAdminOperationBtn(btn)
+}
+adminWifiBtns = document.getElementsByClassName('admin-wifi')
+for(const btn of adminWifiBtns){
+  handleAdminOperationBtn(btn)
+}
+adminWifiConfigBtns = document.getElementsByClassName('admin-wifi-config')
+for(const btn of adminWifiConfigBtns){
+  handleAdminOperationBtn(btn)
+}
+adminMpuBtns = document.getElementsByClassName('admin-mpu')
+for(const btn of adminMpuBtns){
+  handleAdminOperationBtn(btn)
+}
+adminMpuConfigBtns = document.getElementsByClassName('admin-mpu-config')
+for(const btn of adminMpuConfigBtns){
+  handleAdminOperationBtn(btn)
+}
+
+function handleAdminOperationBtn(btn){
   let action = btn.lastElementChild.innerHTML
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
@@ -580,37 +603,31 @@ for(const btn of adminOperationBtns){
   }
   // Display the appropriate action div in the middle  
   if (actionCategory === 'admin-water'){
-    let waterViews = document.getElementsByClassName('water-panel-container')
     for (const view of waterViews){
       view.style.display = 'flex'
     }
   } 
   if (actionCategory === 'admin-mapping'){
-    let mappingViews = document.getElementsByClassName('mapping-container')
     for (const view of mappingViews){
       view.style.display = 'flex'
     }
   } 
   if (actionCategory === 'admin-wifi'){
-    let wifiViews = document.getElementsByClassName('wifi-container')
     for (const view of wifiViews){
       view.style.display = 'flex'
     }
   } 
   if (actionCategory === 'admin-wifi-config'){
-    let wifiConfigViews = document.getElementsByClassName('wifi-config-container')
     for (const view of wifiConfigViews){
       view.style.display = 'flex'
     }
   } 
   if (actionCategory === 'admin-mpu'){
-    let mpuViews = document.getElementsByClassName('mpu-status-container')
     for (const view of mpuViews){
       view.style.display = 'flex'
     }
   } 
   if (actionCategory === 'admin-mpu-config'){
-    let mpuConfigViews = document.getElementsByClassName('mpu-config-container')
     for (const view of mpuConfigViews){
       view.style.display = 'flex'
     }
@@ -628,12 +645,19 @@ for(const btn of adminOperationBtns){
   }  else {
   	alert('Select a bay')
   }
-  })
 }
 
 //Behavior for clicking an operation button in user mode
-for(const btn of userOperationBtns){
-	btn.addEventListener('click', () => {
+userWaterBtns = document.getElementsByClassName('user-water')
+for(const btn of userWaterBtns){
+  handleUserOperationBtn(btn)
+}
+userMappingBtns = document.getElementsByClassName('user-mapping')
+for(const btn of userMappingBtns){
+  handleUserOperationBtn(btn)
+}
+
+function handleUserOperationBtn(btn){
   // let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   let action = btn.lastElementChild.innerHTML;
   let actionCategory = btn.className
@@ -663,18 +687,13 @@ for(const btn of userOperationBtns){
   for(const div of mainActionDivs){
     div.style.display = 'flex'
   }
-    step2.style.opacity = '50%';
-    step3.style.opacity = '100%';
-    outcomeDiv.style.display = 'flex'
      // Display the appropriate action div in the middle  
     if (actionCategory === 'user-water'){
-      let waterViews = document.getElementsByClassName('water-panel-container')
       for (const view of waterViews){
         view.style.display = 'flex'
       }
     } 
     if (actionCategory === 'user-mapping'){
-      let mappingViews = document.getElementsByClassName('mapping-container')
       for (const view of mappingViews){
         view.style.display = 'flex'
       }
@@ -692,8 +711,8 @@ for(const btn of userOperationBtns){
   }  else {
   	alert('Select a bay')
   }
-  })
 }
+
 
 // Bay Icons Color Changing
 for(const icon of waterIcons){
