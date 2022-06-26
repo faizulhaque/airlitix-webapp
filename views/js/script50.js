@@ -557,6 +557,10 @@ for(const btn of adminOperationBtns){
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
+  //Display the main action div
+  for(const div of mainActionDivs){
+    div.style.display = 'flex'
+  }
   //Hide all open views first 
   for(const view of waterViews){
     view.style.display = 'none'
@@ -635,6 +639,8 @@ for(const btn of userOperationBtns){
   // let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   let action = btn.lastElementChild.innerHTML;
   let actionCategory = btn.className
+  //If they have already selected a bay to run a test on:
+  if(currentBay){
     //Hide all open views first 
     for(const view of waterViews){
       view.style.display = 'none'
@@ -654,8 +660,11 @@ for(const btn of userOperationBtns){
     for(const view of mpuConfigViews){
       view.style.display = 'none'
     }
-  //If they have already selected a bay to run a test on:
-  if(currentBay){
+  
+    //Display the main action div
+  for(const div of mainActionDivs){
+    div.style.display = 'flex'
+  }
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
     outcomeDiv.style.display = 'flex'
