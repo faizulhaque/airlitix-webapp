@@ -303,7 +303,7 @@ for(const eye of disableEyes){
   eye.addEventListener('click', () => {
     console.log('clicked')
     let bayDiv = eye.parentElement.firstElementChild
-    let disableOverlay = bay.getElementsByClassName('disable-overlay')[0]
+    let disableOverlay = bayDiv.getElementsByClassName('disable-overlay')[0]
     if(!bayDiv.classList.contains('disabled')){
       bayDiv.classList.remove('selected')
       bayDiv.classList.remove('success')
