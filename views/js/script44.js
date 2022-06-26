@@ -298,31 +298,25 @@ for(const btn of stoplightBtns){
   })
 }
 
+// //Disbaled a bay when the eyeball is clicked
 for(const eye of disableEyes){
   eye.addEventListener('click', () => {
     console.log('clicked')
+    let bayDiv = eye.parentElement.firstElementChild
+    let disableOverlay = bay.getElementsByClassName('disable-overlay')[0]
+    if(!bayDiv.classList.contains('disabled')){
+      bayDiv.classList.remove('selected')
+      bayDiv.classList.remove('success')
+      bayDiv.classList.remove('error')
+      bayDiv.classList.remove('in-progress')
+      bayDiv.classList.add('disabled')
+      disableOverlay.style.display = 'block'
+    } else {
+      bayDiv.classList.remove('disabled')
+      disableOverlay.style.display = 'none'
+    }
   })
 }
-
-// //Disbaled a bay when the eyeball is clicked
-// for (const eye of disableEyes){
-//   eye.addEventListener('click', () => {
-//     let bayDiv = eye.parentElement.firstElementChild
-//     let disableOverlay = bay.getElementsByClassName('disable-overlay')[0]
-//     console.log('working')
-//     if(!bayDiv.classList.contains('disabled')){
-//       bayDiv.classList.remove('selected')
-//       bayDiv.classList.remove('success')
-//       bayDiv.classList.remove('error')
-//       bayDiv.classList.remove('in-progress')
-//       bayDiv.classList.add('disabled')
-//       disableOverlay.style.display = 'block'
-//     } else {
-//       bayDiv.classList.remove('disabled')
-//       disableOverlay.style.display = 'none'
-//     }
-//   })
-// }
 
 //Only display reset buttons if a bay is selected
 function handleResetBtn(){
