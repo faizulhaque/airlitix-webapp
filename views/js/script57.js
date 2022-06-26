@@ -549,27 +549,39 @@ for(const cancelBtn of cancelBtns){
 //Behavior for clicking an operation button in admin mode
 adminWaterBtns = document.getElementsByClassName('admin-water')
 for(const btn of adminWaterBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 adminMappingBtns = document.getElementsByClassName('admin-mapping')
 for(const btn of adminMappingBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 adminWifiBtns = document.getElementsByClassName('admin-wifi')
 for(const btn of adminWifiBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 adminWifiConfigBtns = document.getElementsByClassName('admin-wifi-config')
 for(const btn of adminWifiConfigBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 adminMpuBtns = document.getElementsByClassName('admin-mpu')
 for(const btn of adminMpuBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 adminMpuConfigBtns = document.getElementsByClassName('admin-mpu-config')
 for(const btn of adminMpuConfigBtns){
-  handleAdminOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleAdminOperationBtn(btn)
+  })
 }
 
 function handleAdminOperationBtn(btn){
@@ -650,11 +662,15 @@ function handleAdminOperationBtn(btn){
 //Behavior for clicking an operation button in user mode
 userWaterBtns = document.getElementsByClassName('user-water')
 for(const btn of userWaterBtns){
-  handleUserOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleUserOperationBtn(btn)
+  })
 }
 userMappingBtns = document.getElementsByClassName('user-mapping')
 for(const btn of userMappingBtns){
-  handleUserOperationBtn(btn)
+  btn.addEventListener('click', () => {
+    handleUserOperationBtn(btn)
+  })
 }
 
 function handleUserOperationBtn(btn){
