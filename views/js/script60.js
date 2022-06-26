@@ -48,6 +48,7 @@ let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 let disableEyes = document.getElementsByClassName('disable-eye')
 let operationsIcons = document.getElementsByClassName('operation-icon')
+let operationTexts = document.getElementsByClassName('operation-text')
 
 //Middle Category Views
 let waterViews = document.getElementsByClassName('water-panel-container')
@@ -589,13 +590,16 @@ function handleAdminOperationBtn(btn){
   //If they have already selected a bay to run a test on:
   if(currentBay){
   //Remove Green Backgrounds from others
-  console.log(operationsIcons)
   console.log(btn.firstElementChild)
     for(const icon of operationsIcons){
       icon.classList.remove('active')
     }
+    for(const text of operationTexts){
+      text.style.color = '#FFFFFF'
+    }
   //Add green selected icon to what was clicked 
   btn.firstElementChild.classList.add('active')
+  btn.lastElementChild.style.color = '#41EB5C'
   //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
@@ -685,12 +689,16 @@ function handleUserOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-  //Remove Green Backgrounds from others
-  for(const icon of operationsIcons){
-    icon.classList.remove('active')
-  }
-  //Add green selected icon to what was clicked 
+  //Remove Green Backgrounds and text from others
+    for(const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for(const text of operationTexts){
+      text.style.color = '#FFFFFF'
+    }
+  //Add green selected icon and text to what was clicked 
   btn.firstElementChild.classList.add('active')
+  btn.lastElementChild.style.color = '#41EB5C'
     //Hide all open views first 
     for(const view of waterViews){
       view.style.display = 'none'
