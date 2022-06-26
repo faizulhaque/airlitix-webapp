@@ -264,8 +264,6 @@ for (const btn of bayBtns) {
     
     currentBay = btn.id.slice(-2)
     handleResetBtn();
-    let actionDiv = btn.parentNode.parentNode.nextElementSibling;
-    actionDiv.style.display = 'flex';	
   });
 }
 
