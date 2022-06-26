@@ -39,9 +39,8 @@ let menuContainers = document.getElementsByClassName("menu-container");
 let menuContainerMain = document.getElementById("menu-container-main");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
-let userOperationBtns = document.getElementsByClassName("user-operation-div");
-let adminOperationBtns = document.getElementsByClassName("admin-operation-div");
-let adminOperationBtnContainers = document.getElementsByClassName("admin-operation-buttons");
+let adminOperationBtns = document.getElementsByClassName("admin-operation-buttons").children;
+let userOperationBtns = document.getElementsByClassName("user-operation-buttons").children;
 let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
 
 //Bay Icons
@@ -264,6 +263,7 @@ for (const btn of bayBtns) {
     }
     
     currentBay = btn.id.slice(-2)
+    console.log(currentBay)
     handleResetBtn();
   });
 }
