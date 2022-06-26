@@ -262,7 +262,6 @@ for (const btn of bayBtns) {
     }
     
     currentBay = btn.id.slice(-2)
-    console.log(currentBay)
     handleResetBtn();
   });
 }
@@ -590,6 +589,8 @@ function handleAdminOperationBtn(btn){
   //If they have already selected a bay to run a test on:
   if(currentBay){
   //Remove Green Backgrounds from others
+  console.log(operationsIcons)
+  console.log(btn.firstElementChild)
     for(const icon of operationsIcons){
       icon.classList.remove('active')
     }
@@ -640,7 +641,7 @@ function handleAdminOperationBtn(btn){
     }
   } 
   if (actionCategory === 'admin-mpu'){
-    for (const view of mpuViews){
+    for (const view of mpuStatusViews){
       view.style.display = 'flex'
     }
   } 
