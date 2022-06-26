@@ -51,6 +51,14 @@ let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 let disableEyes = document.getElementsByClassName('disable-eye')
 
+//Middle Category Views
+let waterViews = document.getElementsByClassName('water-panel-container')
+let mappingViews = document.getElementsByClassName('mapping-container')
+let wifiViews = document.getElementsByClassName('wifi-container')
+let wifiConfigViews = document.getElementsByClassName('wifi-config-container')
+let mpuStatusViews = document.getElementsByClassName('mpu-status-container')
+let mpuConfigViews = document.getElementsByClassName('mpu-config-container')
+
 //Outcome Views
 let logData = document.getElementById("log-data");
 let statusData = document.getElementById("status-data");
@@ -543,12 +551,69 @@ for(const cancelBtn of cancelBtns){
 //Behavior for clicking an operation button in admin mode
 for(const btn of adminOperationBtns){
 	btn.addEventListener('click', () => {
-  let action = btn.lastElementChild.innerHTML;
+  let action = btn.lastElementChild.innerHTML
+  let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
-     //Change the text of the outcome divs to indicate what they clicked on
+  //Hide all open views first 
+  for(const view of waterViews){
+    view.style.display = 'none'
+  }
+  for(const view of mappingViews){
+    view.style.display = 'none'
+  }
+  for(const view of wifiViews){
+    view.style.display = 'none'
+  }
+  for(const view of wifiConfigViews){
+    view.style.display = 'none'
+  }
+  for(const view of mpuStatusViews){
+    view.style.display = 'none'
+  }
+  for(const view of mpuConfigViews){
+    view.style.display = 'none'
+  }
+  // Display the appropriate action div in the middle  
+  if (actionCategory === 'admin-water'){
+    let waterViews = document.getElementsByClassName('water-panel-container')
+    for (const view of waterViews){
+      view.style.display = 'flex'
+    }
+  } 
+  if (actionCategory === 'admin-mapping'){
+    let mappingViews = document.getElementsByClassName('mapping-container')
+    for (const view of mappingViews){
+      view.style.display = 'flex'
+    }
+  } 
+  if (actionCategory === 'admin-wifi'){
+    let wifiViews = document.getElementsByClassName('wifi-container')
+    for (const view of wifiViews){
+      view.style.display = 'flex'
+    }
+  } 
+  if (actionCategory === 'admin-wifi-config'){
+    let wifiConfigViews = document.getElementsByClassName('wifi-config-container')
+    for (const view of wifiConfigViews){
+      view.style.display = 'flex'
+    }
+  } 
+  if (actionCategory === 'admin-mpu'){
+    let mpuViews = document.getElementsByClassName('mpu-status-container')
+    for (const view of mpuViews){
+      view.style.display = 'flex'
+    }
+  } 
+  if (actionCategory === 'admin-mpu-config'){
+    let mpuConfigViews = document.getElementsByClassName('mpu-config-container')
+    for (const view of mpuConfigViews){
+      view.style.display = 'flex'
+    }
+  } 
+  //Change the text of the outcome divs to indicate what they clicked on
     for (const text of ghOutcomeNums){
       text.textContent = currentGreenhouse;
     }
@@ -567,13 +632,46 @@ for(const btn of adminOperationBtns){
 //Behavior for clicking an operation button in user mode
 for(const btn of userOperationBtns){
 	btn.addEventListener('click', () => {
-  let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
+  // let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   let action = btn.lastElementChild.innerHTML;
+  let actionCategory = btn.className
+    //Hide all open views first 
+    for(const view of waterViews){
+      view.style.display = 'none'
+    }
+    for(const view of mappingViews){
+      view.style.display = 'none'
+    }
+    for(const view of wifiViews){
+      view.style.display = 'none'
+    }
+    for(const view of wifiConfigViews){
+      view.style.display = 'none'
+    }
+    for(const view of mpuStatusViews){
+      view.style.display = 'none'
+    }
+    for(const view of mpuConfigViews){
+      view.style.display = 'none'
+    }
   //If they have already selected a bay to run a test on:
   if(currentBay){
     step2.style.opacity = '50%';
     step3.style.opacity = '100%';
     outcomeDiv.style.display = 'flex'
+     // Display the appropriate action div in the middle  
+    if (actionCategory === 'user-water'){
+      let waterViews = document.getElementsByClassName('water-panel-container')
+      for (const view of waterViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'user-mapping'){
+      let mappingViews = document.getElementsByClassName('mapping-container')
+      for (const view of mappingViews){
+        view.style.display = 'flex'
+      }
+    } 
     //Change the text of the outcome divs to indicate what they clicked on
     for (const text of ghOutcomeNums){
       text.textContent = currentGreenhouse;
