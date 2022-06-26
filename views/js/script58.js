@@ -39,7 +39,6 @@ let menuContainers = document.getElementsByClassName("menu-container");
 let menuContainerMain = document.getElementById("menu-container-main");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
-
 let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
 
 //Bay Icons
@@ -48,6 +47,7 @@ let mapIcons = document.getElementsByClassName('bay-icon-container-map')
 let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 let disableEyes = document.getElementsByClassName('disable-eye')
+let operationsIcons = document.getElementsByClassName('operation-icon')
 
 //Middle Category Views
 let waterViews = document.getElementsByClassName('water-panel-container')
@@ -589,7 +589,12 @@ function handleAdminOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-    console.log('testing')
+  //Remove Green Backgrounds from others
+    for(const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+  //Add green selected icon to what was clicked 
+  btn.firstElementChild.classList.add('active')
   //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
@@ -616,7 +621,7 @@ function handleAdminOperationBtn(btn){
   // Display the appropriate action div in the middle  
   if (actionCategory === 'admin-water'){
     for (const view of waterViews){
-      view.style.display = 'flex'
+      view.style.display = 'block'
     }
   } 
   if (actionCategory === 'admin-mapping'){
@@ -679,6 +684,12 @@ function handleUserOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
+  //Remove Green Backgrounds from others
+  for(const icon of operationsIcons){
+    icon.classList.remove('active')
+  }
+  //Add green selected icon to what was clicked 
+  btn.firstElementChild.classList.add('active')
     //Hide all open views first 
     for(const view of waterViews){
       view.style.display = 'none'
@@ -706,7 +717,7 @@ function handleUserOperationBtn(btn){
      // Display the appropriate action div in the middle  
     if (actionCategory === 'user-water'){
       for (const view of waterViews){
-        view.style.display = 'flex'
+        view.style.display = 'block'
       }
     } 
     if (actionCategory === 'user-mapping'){
