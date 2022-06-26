@@ -231,7 +231,8 @@ function handleHomeMenuIfOpen(){
 
 //Bay Button Click Functionality
 for (const btn of bayBtns) {
-  btn.addEventListener('click', function() {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation()
   	for(const btn of bayBtns) {
     	btn.classList.remove("selected")
     	btn.classList.remove("outline")
@@ -553,8 +554,6 @@ for(const btn of adminOperationBtns){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-    step2.style.opacity = '50%';
-    step3.style.opacity = '100%';
     console.log('testing')
   //Display the main action div
   for(const div of mainActionDivs){
