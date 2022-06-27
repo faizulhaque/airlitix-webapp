@@ -258,7 +258,7 @@ for (const btn of bayBtns) {
     //Change the text of the outcome divs to indicate what they clicked on
     let outcomeHeaders = document.getElementsByClassName('outcome-header')
     for(const header of outcomeHeaders){
-      outcomeHeader.style.display = 'flex'
+      header.style.display = 'flex'
     }
     for (const text of ghOutcomeNums){
       text.textContent = currentGreenhouse;
