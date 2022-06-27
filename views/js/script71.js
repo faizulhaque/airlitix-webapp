@@ -254,6 +254,21 @@ for (const btn of bayBtns) {
     }
  
     currentBay = btn.id.slice(-2)
+
+    //Change the text of the outcome divs to indicate what they clicked on
+    let outcomeHeaders = document.getElementsByClassName('outcome-header')
+    for(const header of outcomeHeaders){
+      outcomeHeader.style.display = 'flex'
+    }
+    for (const text of ghOutcomeNums){
+      text.textContent = currentGreenhouse;
+    }
+    for (const text of bayOutcomeNums){
+      text.textContent = currentBay;  
+    }
+    for (const text of actionOutcomes){
+      text.textContent = action;
+    }
     handleResetBtn();
   });
 }
