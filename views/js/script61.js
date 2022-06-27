@@ -230,8 +230,7 @@ function handleHomeMenuIfOpen(){
 
 //Bay Button Click Functionality
 for (const btn of bayBtns) {
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation()
+  btn.addEventListener('click', function() {
   	for(const btn of bayBtns) {
     	btn.classList.remove("selected")
     	btn.classList.remove("outline")
@@ -253,8 +252,11 @@ for (const btn of bayBtns) {
     step1.style.opacity = '50%'
     step2.style.opacity = '100%'
 
-    //Toggle the selected class on this bay, hide or show the stoplight arrow trigger
-    btn.classList.toggle("selected");
+    //Toggle the selected class on this bay if it's not disabled, hide or show the stoplight arrow trigger
+    let disabledDiv = btn.getElementsByClassName('disable-overlay')[0]
+    if(disabledDiv.style.display === 'none'){
+      btn.classList.toggle("selected");
+    }
     let selectedArrow = btn.getElementsByClassName('stoplight-trigger')[0]
     if(selectedArrow.style.display == 'block'){
       selectedArrow.style.display = 'none'
