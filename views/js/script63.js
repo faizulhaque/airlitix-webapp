@@ -256,7 +256,6 @@ for (const btn of bayBtns) {
     let disabledDiv = btn.getElementsByClassName('disable-overlay')[0]
     let selectedArrow = btn.getElementsByClassName('stoplight-trigger')[0]
 
-    console.log(disabledDiv)
     if(disabledDiv.style.display == 'none'){
       btn.classList.toggle("selected");
       if(selectedArrow.style.display == 'block'){
@@ -264,8 +263,8 @@ for (const btn of bayBtns) {
       } else if (selectedArrow.style.display == 'none'){
         selectedArrow.style.display = 'block'
       }
-    }
-    
+    } 
+ 
     currentBay = btn.id.slice(-2)
     handleResetBtn();
   });
