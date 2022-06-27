@@ -1,13 +1,9 @@
-
 //Main Elements
 let homeBtn = document.getElementById('home-btn')
 let toggleDiv = document.getElementById('toggle-div')
 let toggleHandle = document.getElementById('toggle-handle')
 let greenhouses = document.getElementsByClassName("main-greenhouse-div");
 let office = document.getElementById('office')
-let step1 = document.getElementById("step-1");
-let step2 = document.getElementById("step-2");
-let step3 = document.getElementById("step-3");
 let bgOverlay = document.getElementById("bg-gradient");
 let mainContentSection = document.getElementById("main-content");
 
@@ -31,6 +27,7 @@ let stoplightBtns = document.getElementsByClassName("status-select");
 let resetBtns = document.getElementsByClassName("reset-btn");
 let confirmBtns = document.getElementsByClassName("confirm-btn");
 let cancelBtns = document.getElementsByClassName("cancel-btn");
+let outcomeCloseBtns = document.getElementsByClassName('outcome-close-btn')
 
 //Hamburger and Menus
 let hamburgerMain = document.getElementById("hamburger-main");
@@ -161,7 +158,6 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
-  	step3.style.display = 'flex'
   	for (const menu of userMenus){
     	menu.style.display = 'none'
     }
@@ -171,9 +167,7 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
-    // for (const menu of outcomeViews){
-    //   menu.style.display = 'flex'
-    // }
+
     // Invisible div to cover the home page greenhouses so you can't click them in admin mode
     for (const div of propagationDivs){
       div.style.display = 'block'
@@ -193,7 +187,6 @@ function handleAdminMode(){
 
   } else {
     hamburgerMain.style.display = 'none'
-    step3.style.display = 'none'
     for (const menu of userMenus){
     	menu.style.display = 'block'
     }
@@ -249,9 +242,6 @@ for (const btn of bayBtns) {
     if(btn.classList.contains('error') || btn.classList.contains('in-progress') || btn.classList.contains('success')){
       btn.classList.add('outline')
     }
-
-    step1.style.opacity = '50%'
-    step2.style.opacity = '100%'
 
     //Toggle the selected class on this bay if it's not disabled, hide or show the stoplight arrow trigger
     let selectedArrow = btn.getElementsByClassName('stoplight-trigger')[0]
@@ -325,6 +315,8 @@ for(const eye of disableEyes){
   })
 }
 
+
+
 //Only display reset buttons if a bay is selected
 function handleResetBtn(){
   if(currentBay != ''){
@@ -367,14 +359,6 @@ function handleResetBtn(){
 //      }
 //   });
 // }
-
-//Clicking Step 1
-step1.addEventListener("click", () => {
-    step1.style.opacity = '100%';
-    step2.style.opacity = '50%';
-    step3.style.opacity = '50%';
-	  resetFields()          
- })
 
  //Function to reset all fields back to initial state
  function resetFields(){
@@ -529,24 +513,6 @@ for(const cancelBtn of cancelBtns){
   })
 }
 
-// //Behavior for clicking an operation button for debugging/diagnostics on Home Page
-// for(const btn of adminOperationBtns){
-// 	btn.addEventListener('click', () => {
-//   let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
-//   let action = btn.lastElementChild.innerHTML;
-//   //If they have already selected a bay to run a test on:
-//   if(currentBay){
-//     step2.style.opacity = '50%';
-//     step3.style.opacity = '100%';
-//     ghOutcomeNum.textContent = currentGreenhouse;
-//     bayOutcomeNum.textContent = currentBay;    
-//     actionOutcome.textContent = action;
-//   }  else {
-//   	alert('Select a bay')
-//   }
-//   })
-// }
-
 //Behavior for clicking an operation button in admin mode
 adminWaterBtns = document.getElementsByClassName('admin-water')
 for(const btn of adminWaterBtns){
@@ -605,25 +571,8 @@ function handleAdminOperationBtn(btn){
   for(const div of mainActionDivs){
     div.style.display = 'flex'
   }
-  //Hide all open views first 
-  for(const view of waterViews){
-    view.style.display = 'none'
-  }
-  for(const view of mappingViews){
-    view.style.display = 'none'
-  }
-  for(const view of wifiViews){
-    view.style.display = 'none'
-  }
-  for(const view of wifiConfigViews){
-    view.style.display = 'none'
-  }
-  for(const view of mpuStatusViews){
-    view.style.display = 'none'
-  }
-  for(const view of mpuConfigViews){
-    view.style.display = 'none'
-  }
+  hideOpenOperationViews()
+  
   // Display the appropriate action div in the middle  
   if (actionCategory === 'admin-water'){
     for (const view of waterViews){
@@ -655,6 +604,7 @@ function handleAdminOperationBtn(btn){
       view.style.display = 'flex'
     }
   } 
+  
   //Change the text of the outcome divs to indicate what they clicked on
     for (const text of ghOutcomeNums){
       text.textContent = currentGreenhouse;
@@ -683,9 +633,14 @@ for(const btn of userMappingBtns){
     handleUserOperationBtn(btn)
   })
 }
+userInfoBtns = document.getElementsByClassName('user-info')
+for(const btn of userInfoBtns){
+  btn.addEventListener('click', () => {
+    handleUserOperationBtn(btn)
+  })
+}
 
 function handleUserOperationBtn(btn){
-  // let outcomeDiv = btn.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('outcome-view')[0]
   let action = btn.lastElementChild.innerHTML;
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
@@ -700,26 +655,7 @@ function handleUserOperationBtn(btn){
   //Add green selected icon and text to what was clicked 
   btn.firstElementChild.classList.add('active')
   btn.lastElementChild.style.color = '#41EB5C'
-    //Hide all open views first 
-    for(const view of waterViews){
-      view.style.display = 'none'
-    }
-    for(const view of mappingViews){
-      view.style.display = 'none'
-    }
-    for(const view of wifiViews){
-      view.style.display = 'none'
-    }
-    for(const view of wifiConfigViews){
-      view.style.display = 'none'
-    }
-    for(const view of mpuStatusViews){
-      view.style.display = 'none'
-    }
-    for(const view of mpuConfigViews){
-      view.style.display = 'none'
-    }
-  
+  hideOpenOperationViews()
     //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
@@ -732,6 +668,11 @@ function handleUserOperationBtn(btn){
     } 
     if (actionCategory === 'user-mapping'){
       for (const view of mappingViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'user-info'){
+      for (const view of outcomeViews){
         view.style.display = 'flex'
       }
     } 
@@ -750,6 +691,39 @@ function handleUserOperationBtn(btn){
   }
 }
 
+function hideOpenOperationViews(){
+  //Hide all open views first 
+  for(const view of waterViews){
+    view.style.display = 'none'
+  }
+  for(const view of mappingViews){
+    view.style.display = 'none'
+  }
+  for(const view of wifiViews){
+    view.style.display = 'none'
+  }
+  for(const view of wifiConfigViews){
+    view.style.display = 'none'
+  }
+  for(const view of mpuStatusViews){
+    view.style.display = 'none'
+  }
+  for(const view of mpuConfigViews){
+    view.style.display = 'none'
+  }
+  for(const view of outcomeViews){
+    view.style.display = 'none'
+  }
+}
+
+//Close Outcome Menu Button
+for(const btn of outcomeCloseBtns){
+  btn.addEventListener('click', () =>{
+    for(const view of outcomeViews){
+      view.style.display = 'none'
+    }
+  })
+}
 
 // Bay Icons Color Changing
 for(const icon of waterIcons){
