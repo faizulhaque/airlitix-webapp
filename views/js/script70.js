@@ -309,6 +309,7 @@ for(const eye of disableEyes){
     } else {
       bayDiv.classList.remove('disabled')
       disableOverlay.style.display = 'none'
+      bayDiv.style.pointerEvents = 'auto'
     }
   })
 }
