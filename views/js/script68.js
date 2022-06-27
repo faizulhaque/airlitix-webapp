@@ -315,8 +315,6 @@ for(const eye of disableEyes){
   })
 }
 
-
-
 //Only display reset buttons if a bay is selected
 function handleResetBtn(){
   if(currentBay != ''){
@@ -386,12 +384,7 @@ function handleResetBtn(){
               greenhouse5View.style.display = 'none';
               outcomeView.style.display = 'none';
 
-            for (const icon of operationsIcons){
-              icon.classList.remove('active')
-            }
-            for (const text of operationTexts){
-              text.style.color = '#FFFFFF'
-            }
+          
  }
 
 //Display selected Greenhouse, hide the others
@@ -507,6 +500,13 @@ for(const confirmBtn of confirmBtns){
     //Clear currently selected and hide reset Button
     currentBay = ''
     handleResetBtn()
+    //Remove Selected Operation Icon Coloring
+    for (const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for (const text of operationTexts){
+      text.style.color = '#FFFFFF'
+    }
   })
 }
 
@@ -697,7 +697,9 @@ function handleUserOperationBtn(btn){
 }
 
 function hideOpenOperationViews(actionCategory){
-  if(!actionCategory === 'user-info'){
+  if(actionCategory == 'user-info'){
+    return 
+  } else {
   //Unless they click info, hide the middle screens
   for(const view of waterViews){
     view.style.display = 'none'
