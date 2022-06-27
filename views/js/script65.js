@@ -230,7 +230,8 @@ function handleHomeMenuIfOpen(){
 
 //Bay Button Click Functionality
 for (const btn of bayBtns) {
-  btn.addEventListener('click', function() {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation()
   	for(const btn of bayBtns) {
     	btn.classList.remove("selected")
     	btn.classList.remove("outline")
