@@ -303,11 +303,9 @@ for(const eye of disableEyes){
     let disableOverlay = bayDiv.getElementsByClassName('disable-overlay')[0]
     if(!bayDiv.classList.contains('disabled')){
       bayDiv.classList.remove('selected')
-      bayDiv.classList.remove('success')
-      bayDiv.classList.remove('error')
-      bayDiv.classList.remove('in-progress')
       bayDiv.classList.add('disabled')
       disableOverlay.style.display = 'block'
+      bayDiv.style.pointerEvents = 'none'
     } else {
       bayDiv.classList.remove('disabled')
       disableOverlay.style.display = 'none'
