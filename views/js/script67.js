@@ -374,9 +374,7 @@ function handleResetBtn(){
               btn.classList.remove("in-progress")
               btn.classList.remove("success")
     				}
-            // for (const menu of menuContainers) {
-            //   menu.style.backgroundColor = 'transparent'
-            // }
+            
               currentGreenhouse = '';
 			        currentBay = '';
               handleResetBtn();
@@ -387,6 +385,13 @@ function handleResetBtn(){
               greenhouse4View.style.display = 'none';
               greenhouse5View.style.display = 'none';
               outcomeView.style.display = 'none';
+
+            for (const icon of operationsIcons){
+              icon.classList.remove('active')
+            }
+            for (const text of operationTexts){
+              text.style.color = '#FFFFFF'
+            }
  }
 
 //Display selected Greenhouse, hide the others
@@ -571,7 +576,7 @@ function handleAdminOperationBtn(btn){
   for(const div of mainActionDivs){
     div.style.display = 'flex'
   }
-  hideOpenOperationViews()
+  hideOpenOperationViews(actionCategory)
   
   // Display the appropriate action div in the middle  
   if (actionCategory === 'admin-water'){
@@ -655,7 +660,7 @@ function handleUserOperationBtn(btn){
   //Add green selected icon and text to what was clicked 
   btn.firstElementChild.classList.add('active')
   btn.lastElementChild.style.color = '#41EB5C'
-  hideOpenOperationViews()
+  hideOpenOperationViews(actionCategory)
     //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
@@ -691,8 +696,9 @@ function handleUserOperationBtn(btn){
   }
 }
 
-function hideOpenOperationViews(){
-  //Hide all open views first 
+function hideOpenOperationViews(actionCategory){
+  if(!actionCategory === 'user-info'){
+  //Unless they click info, hide the middle screens
   for(const view of waterViews){
     view.style.display = 'none'
   }
@@ -713,6 +719,7 @@ function hideOpenOperationViews(){
   }
   for(const view of outcomeViews){
     view.style.display = 'none'
+  }
   }
 }
 
