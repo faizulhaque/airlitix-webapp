@@ -253,17 +253,14 @@ for (const btn of bayBtns) {
     step2.style.opacity = '100%'
 
     //Toggle the selected class on this bay if it's not disabled, hide or show the stoplight arrow trigger
-    let disabledDiv = btn.getElementsByClassName('disable-overlay')[0]
     let selectedArrow = btn.getElementsByClassName('stoplight-trigger')[0]
+    btn.classList.toggle("selected");
 
-    if(disabledDiv.style.display == 'none'){
-      btn.classList.toggle("selected");
-      if(selectedArrow.style.display == 'block'){
-        selectedArrow.style.display = 'none'
-      } else if (selectedArrow.style.display == 'none'){
-        selectedArrow.style.display = 'block'
-      }
-    } 
+    if(selectedArrow.style.display == 'block'){
+      selectedArrow.style.display = 'none'
+    } else if (selectedArrow.style.display == 'none'){
+      selectedArrow.style.display = 'block'
+    }
  
     currentBay = btn.id.slice(-2)
     handleResetBtn();
