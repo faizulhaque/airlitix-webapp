@@ -821,12 +821,7 @@ for(const icon of systemIcons){
   })
 }
 
-//Homepage Office Operation Buttons 
-office.addEventListener('click', () => {
-  buildingSelected = !buildingSelected
-  currentBuilding = 'Office'
-})
-
+//Homepage Operation Buttons 
 for(const gear of gearDivs){
   gear.addEventListener('click', () => {
     for(const gear of gearDivs){
@@ -852,10 +847,10 @@ for(const gear of gearDivs){
 
 function checkIfOfficeSelected(){
   //If Office is selected, gray out the water and mapping options
-  if(currentBuilding == 'office'){
+  if(currentBuilding == 'Office'){
     console.log('Office Chosen')
     for(const btn of buildingOperationIcons){
-      if(btn.lastElementChild.innerHTML == 'water' || btn.lastElementChild.innerHTML == 'mapping'){
+      if(btn.lastElementChild.innerHTML == 'Water' || btn.lastElementChild.innerHTML == 'Mapping'){
         btn.style.opacity = '50'
         btn.style.pointerEvents = 'none'
       }
