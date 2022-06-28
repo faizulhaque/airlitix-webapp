@@ -36,7 +36,11 @@ let menuContainers = document.getElementsByClassName("menu-container");
 let menuContainerMain = document.getElementById("menu-container-main");
 let userMenus = document.getElementsByClassName("user-menu");
 let adminMenus = document.getElementsByClassName("admin-menu");
+
+//Home
 let buildingOperationBtns = document.getElementsByClassName("admin-operation-div-main");
+let buildingOperationIcons = document.getElementsByClassName("operation-btn-home");
+let homeOperationTexts = document.getElementsByClassName('home-operation-text')
 
 //Bay Icons
 let waterIcons = document.getElementsByClassName('bay-icon-container-water')
@@ -61,6 +65,7 @@ let statusData = document.getElementById("status-data");
 let ghOutcomeNums = document.getElementsByClassName('gh-outcome-num')
 let bayOutcomeNums = document.getElementsByClassName('bay-outcome-num')
 let actionOutcomes = document.getElementsByClassName('action-outcome')
+let outcomeHeaders = document.getElementsByClassName('outcome-header')
 
 //Outcome Views Home
 let homeLogDisplay = document.getElementById('home-log-display')
@@ -256,7 +261,6 @@ for (const btn of bayBtns) {
     currentBay = btn.id.slice(-2)
 
     //Change the text of the outcome divs to indicate what they clicked on
-    let outcomeHeaders = document.getElementsByClassName('outcome-header')
     for(const header of outcomeHeaders){
       header.style.display = 'flex'
     }
@@ -520,6 +524,10 @@ for(const confirmBtn of confirmBtns){
     }
     for (const text of operationTexts){
       text.style.color = '#FFFFFF'
+    }
+    //Hide outcome headers
+    for(const header of outcomeHeaders){
+      header.style.display = 'none'
     }
   })
 }
@@ -824,17 +832,35 @@ for(const gear of gearDivs){
     for(const gear of gearDivs){
       gear.classList.remove('selected')
     }
+    for(const btn of buildingOperationBtns){
+      btn.style.opacity = '100'
+      btn.style.pointerEvents = 'auto'
+    }
     if(!gear.classList.contains('selected')){
       gear.classList.add('selected')
       buildingSelected = 'true'
       currentBuilding = gear.parentNode.lastElementChild.firstElementChild.innerHTML;
       ghOutcomeNumHome.textContent = currentBuilding;
+      checkIfOfficeSelected()
     } else {
       gear.classList.remove('selected')
       buildingSelected = 'false'
       currentBuilding = ''
     }
   })
+}
+
+function checkIfOfficeSelected(){
+  //If Office is selected, gray out the water and mapping options
+  if(currentBuilding == 'office'){
+    console.log('Office Chosen')
+    for(const btn of buildingOperationIcons){
+      if(btn.lastElementChild.innerHTML == 'water' || btn.lastElementChild.innerHTML == 'mapping'){
+        btn.style.opacity = '50'
+        btn.style.pointerEvents = 'none'
+      }
+    }
+  }
 }
 
 for(const btn of buildingOperationBtns){
@@ -844,6 +870,16 @@ for(const btn of buildingOperationBtns){
       actionOutcomeHome.textContent = action;
       logDataHome.textContent = 'Log data appears here.';
       statusDataHome.textContent = 'Status data appears here.';
+      //Remove Selected Operation Icon Coloring
+      for (const icon of buildingOperationIcons){
+        icon.classList.remove('active')
+      }
+      for (const text of homeOperationTexts){
+        text.style.color = '#FFFFFF'
+      }
+      //Add green selected icon to what was clicked 
+      btn.firstElementChild.classList.add('active')
+      btn.lastElementChild.style.color = '#41EB5C'
     } else {
       alert('Please select a building target')
     }
