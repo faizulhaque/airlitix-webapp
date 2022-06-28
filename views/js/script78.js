@@ -163,6 +163,7 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
+    menuContainerMain.style.display = 'flex'
   	for (const menu of userMenus){
     	menu.style.display = 'none'
     }
@@ -192,6 +193,8 @@ function handleAdminMode(){
 
   } else {
     hamburgerMain.style.display = 'none'
+    menuContainerMain.style.display = 'flex'
+
     for (const menu of userMenus){
     	menu.style.display = 'block'
     }
