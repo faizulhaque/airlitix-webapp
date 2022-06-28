@@ -850,7 +850,7 @@ function checkIfOfficeSelected(){
   if(currentBuilding == 'Office'){
     console.log('Office Chosen')
     for(const btn of buildingOperationIcons){
-      if(btn.lastElementChild.innerHTML == 'Water' || btn.lastElementChild.innerHTML == 'Mapping'){
+      if(btn.lastElementChild.textContent == 'Water' || btn.lastElementChild.textContent == 'Mapping'){
         btn.style.opacity = '50'
         btn.style.pointerEvents = 'none'
       }
