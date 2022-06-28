@@ -851,8 +851,9 @@ function checkIfOfficeSelected(){
     console.log('Office Chosen')
     for(const btn of buildingOperationIcons){
       if(btn.parentNode.lastElementChild.innerHTML == 'Water' || btn.parentNode.lastElementChild.innerHTML == 'Mapping'){
-        btn.style.opacity = '50'
-        btn.style.pointerEvents = 'none'
+        console.log('water or mapping')
+        btn.parentNode.style.opacity = '50'
+        btn.parentNode.style.pointerEvents = 'none'
       }
     }
   }
