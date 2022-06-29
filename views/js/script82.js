@@ -168,7 +168,7 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
-    menuContainerMain.style.display = 'flex'
+    
   	for (const menu of userMenus){
     	menu.style.display = 'none'
     }
@@ -881,10 +881,13 @@ for(const btn of buildingOperationBtns){
       actionOutcomeHome.textContent = action;
       logDataHome.textContent = 'Log data appears here.';
       statusDataHome.textContent = 'Status data appears here.';
-   
-      //Hide all Previous Action Divs and then Find the corresponding action div to display
+      //Hide all Previous Action Divs 
       for(const div of homeActionDivs){
         div.style.display = 'none'
+      }
+      // Find the corresponding action div to display
+      for(const div of homeActionDivs){
+        console.log(div.id)
         if(div.id === 'water-action-home'){
           waterActionHome.style.display = 'flex'
         } else if(div.id === 'mapping-action-home'){
