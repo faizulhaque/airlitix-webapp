@@ -881,17 +881,17 @@ for(const btn of buildingOperationBtns){
       // Find the corresponding action div to display
       for(const div of homeActionDivs){
         console.log(div.id)
-        if(div.id === 'water-action-home'){
+        if(div.id == 'water-action-home'){
           waterActionHome.style.display = 'flex'
-        } else if(div.id === 'mapping-action-home'){
+        } else if(div.id == 'mapping-action-home'){
           mappingActionHome.style.display = 'flex'
-        } else if(div.id === 'wifi-status-action-home'){
+        } else if(div.id == 'wifi-status-action-home'){
           wifiStatusActionHome.style.display = 'flex'
-        } else if(div.id === 'wifi-config-action-home'){
+        } else if(div.id == 'wifi-config-action-home'){
           wifiConfigActionHome.style.display = 'flex'
-        } else if(div.id === 'mpu-status-action-home'){
+        } else if(div.id == 'mpu-status-action-home'){
           mpuStatusActionHome.style.display = 'flex'
-        } else if(div.id === 'mpu-config-action-home'){
+        } else if(div.id == 'mpu-config-action-home'){
           mpuConfigActionHome.style.display = 'flex'
         } else {
           return
