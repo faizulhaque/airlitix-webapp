@@ -68,13 +68,19 @@ let actionOutcomes = document.getElementsByClassName('action-outcome')
 let outcomeHeaders = document.getElementsByClassName('outcome-header')
 
 //Outcome Views Home
-let homeLogDisplay = document.getElementById('home-log-display')
 let ghOutcomeNumHome = document.getElementById("gh-outcome-num-home");
 let actionOutcomeHome = document.getElementById("gh-action-home");
 let gearDivs = document.getElementsByClassName("gear-div");
 let propagationDivs = document.getElementsByClassName("stop-propagation-div");
 let logDataHome = document.getElementById('log-data-home')
 let statusDataHome = document.getElementById('status-data-home')
+let homeActionDivs = document.getElementsByClassName('home-action-display')
+let waterActionHome = document.getElementById('water-action-home')
+let mappingActionHome = document.getElementById('mapping-action-home')
+let wifiStatusActionHome = document.getElementById('wifi-status-action-home')
+let wifiConfigActionHome = document.getElementById('wifi-config-action-home')
+let mpuStatusActionHome = document.getElementById('mpu-status-action-home')
+let mpuConfigActionHome = document.getElementById('mpu-config-action-home')
 
 //Variables and Booleans
 let home = true;
@@ -83,7 +89,6 @@ let currentGreenhouse;
 let currentBay;
 let buildingSelected = false;
 let currentBuilding = '';
-
 
 //Home Button Functionality
 function checkForHome(){
@@ -181,7 +186,7 @@ function handleAdminMode(){
     for (const gear of gearDivs){
       gear.style.display = 'block'
     }
-    outcomeViewHome.style.display = 'flex'
+   
 
     // display the wifi and system bay icons in admin mode
     for (icon of wifiIcons){
@@ -214,6 +219,9 @@ function handleAdminMode(){
       gear.style.display = 'none'
     }
     outcomeViewHome.style.display = 'none'
+    for(const div of homeActionDivs){
+      div.style.display = 'none'
+    }
     for (icon of wifiIcons){
       icon.style.display = 'none'
     }
@@ -868,10 +876,31 @@ function checkIfOfficeSelected(){
 for(const btn of buildingOperationBtns){
   btn.addEventListener('click', () => {
     if(buildingSelected){
+      outcomeViewHome.style.display = 'flex'
       let action = btn.lastElementChild.innerHTML;
       actionOutcomeHome.textContent = action;
       logDataHome.textContent = 'Log data appears here.';
       statusDataHome.textContent = 'Status data appears here.';
+   
+      //Hide all Previous Action Divs and then Find the corresponding action div to display
+      for(const div of homeActionDivs){
+        div.style.display = 'none'
+        if(div.id === 'water-action-home'){
+          waterActionHome.style.display = 'flex'
+        } else if(div.id === 'mapping-action-home'){
+          mappingActionHome.style.display = 'flex'
+        } else if(div.id === 'wifi-status-action-home'){
+          wifiStatusActionHome.style.display = 'flex'
+        } else if(div.id === 'wifi-config-action-home'){
+          wifiConfigActionHome.style.display = 'flex'
+        } else if(div.id === 'mpu-status-action-home'){
+          mpuStatusActionHome.style.display = 'flex'
+        } else if(div.id === 'mpu-config-action-home'){
+          mpuConfigActionHome.style.display = 'flex'
+        } else {
+          return
+        }
+      }
       //Remove Selected Operation Icon Coloring
       for (const icon of buildingOperationIcons){
         icon.classList.remove('active')
