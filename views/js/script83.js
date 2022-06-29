@@ -168,7 +168,6 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
-    
   	for (const menu of userMenus){
     	menu.style.display = 'none'
     }
@@ -178,7 +177,6 @@ function handleAdminMode(){
     for (const menu of menuContainers){
       menu.style.backgroundColor = 'rgb(39, 70, 144)'
     }
-
     // Invisible div to cover the home page greenhouses so you can't click them in admin mode
     for (const div of propagationDivs){
       div.style.display = 'block'
@@ -186,8 +184,6 @@ function handleAdminMode(){
     for (const gear of gearDivs){
       gear.style.display = 'block'
     }
-   
-
     // display the wifi and system bay icons in admin mode
     for (icon of wifiIcons){
       icon.style.display = 'block'
@@ -195,11 +191,8 @@ function handleAdminMode(){
     for (icon of systemIcons){
       icon.style.display = 'block'
     }
-
   } else {
     hamburgerMain.style.display = 'none'
-    menuContainerMain.style.display = 'flex'
-
     for (const menu of userMenus){
     	menu.style.display = 'block'
     }
