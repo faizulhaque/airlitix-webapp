@@ -878,25 +878,27 @@ for(const btn of buildingOperationBtns){
       for(const div of homeActionDivs){
         div.style.display = 'none'
       }
-      // Find the corresponding action div to display
-      for(const div of homeActionDivs){
-        console.log(div.id)
-        if(div.id == 'water-action-home'){
-          waterActionHome.style.display = 'flex'
-        } else if(div.id == 'mapping-action-home'){
-          mappingActionHome.style.display = 'flex'
-        } else if(div.id == 'wifi-status-action-home'){
-          wifiStatusActionHome.style.display = 'flex'
-        } else if(div.id == 'wifi-config-action-home'){
-          wifiConfigActionHome.style.display = 'flex'
-        } else if(div.id == 'mpu-status-action-home'){
-          mpuStatusActionHome.style.display = 'flex'
-        } else if(div.id == 'mpu-config-action-home'){
-          mpuConfigActionHome.style.display = 'flex'
-        } else {
-          return
-        }
+      //Find the corresponding action div to display
+     for(const div of homeActionDivs){
+       if(div.className.contains('water-action-home')){
+         waterActionHome.style.display('flex')
+       }
+       if(div.className.contains('mapping-action-home')){
+        mappingActionHome.style.display('flex')
       }
+       if(div.className.contains('wifi-status-action-home')){
+        wifiStatusActionHome.style.display('flex')
+      }
+      if(div.className.contains('wifi-config-action-home')){
+        wifiConfigActionHome.style.display('flex')
+      }
+      if(div.className.contains('mpu-status-action-home')){
+        mpuStatusActionHome.style.display('flex')
+      }
+      if(div.className.contains('mpu-config-action-home')){
+        mpuConfigActionHome.style.display('flex')
+      }
+     }
       //Remove Selected Operation Icon Coloring
       for (const icon of buildingOperationIcons){
         icon.classList.remove('active')
