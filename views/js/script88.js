@@ -879,26 +879,25 @@ for(const btn of buildingOperationBtns){
         div.style.display = 'none'
       }
       //Find the corresponding action div to display
-     for(const div of homeActionDivs){
-       if(div.classList.contains('water-action-home')){
+       if(btn.classList.contains('water-action-home')){
          waterActionHome.style.display = 'flex'
        }
-       if(div.classList.contains('mapping-action-home')){
+       if(btn.classList.contains('mapping-action-home')){
         mappingActionHome.style.display = 'flex'
       }
-       if(div.classList.contains('wifi-status-action-home')){
+       if(btn.classList.contains('wifi-status-action-home')){
         wifiStatusActionHome.style.display = 'flex'
       }
-      if(div.classList.contains('wifi-config-action-home')){
+      if(btn.classList.contains('wifi-config-action-home')){
         wifiConfigActionHome.style.display = 'flex'
       }
-      if(div.classList.contains('mpu-status-action-home')){
+      if(btn.classList.contains('mpu-status-action-home')){
         mpuStatusActionHome.style.display = 'flex'
       }
-      if(div.classList.contains('mpu-config-action-home')){
+      if(btn.classList.contains('mpu-config-action-home')){
         mpuConfigActionHome.style.display = 'flex'
       }
-     }
+  
       //Remove Selected Operation Icon Coloring
       for (const icon of buildingOperationIcons){
         icon.classList.remove('active')
