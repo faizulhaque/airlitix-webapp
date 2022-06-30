@@ -712,14 +712,14 @@ function handleUserOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-  //Remove Green Backgrounds and text from others
-    for(const icon of operationsIcons){
-      icon.classList.remove('active')
-    }
-    for(const text of operationTexts){
-      text.style.color = 'white'
-    }
-  //Add green selected icon and text to what was clicked 
+  //Remove Selected Operation Icon Coloring
+  for (const icon of operationIcons){
+    icon.classList.remove('active')
+  }
+  for (const text of homeOperationTexts){
+    text.style.color = 'white'
+  }
+  //Add green selected icon to what was clicked 
   btn.firstElementChild.classList.add('active')
   btn.lastElementChild.style.color = '#41EB5C'
   hideOpenOperationViews(actionCategory)
