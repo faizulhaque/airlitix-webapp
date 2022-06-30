@@ -119,12 +119,12 @@ homeBtn.addEventListener('click', () => {
     div.style.display = 'none'
   }
   handleOperationMenuIfOpen()
-  
   handleAdminMode(); 
   home = true;
   checkForHome();
   currentGreenhouse = '';
   currentBay = '';
+  currentGear = ''
   handleResetBtn();
   allGreenhousesView.style.display = 'flex';
   greenhouse1View.style.display = 'none';
@@ -132,6 +132,25 @@ homeBtn.addEventListener('click', () => {
   greenhouse3View.style.display = 'none';
   greenhouse4View.style.display = 'none';
   greenhouse5View.style.display = 'none';
+      //Hide all action Divs
+      for(const div of waterViews){
+        div.style.display = 'none'
+      }
+      for(const div of mappingViews){
+        div.style.display = 'none'
+      }
+      for(const div of wifiViews){
+        div.style.display = 'none'
+      }
+      for(const div of wifiConfigViews){
+        div.style.display = 'none'
+      }
+      for(const div of mpuStatusViews){
+        div.style.display = 'none'
+      }
+      for(const div of mpuConfigViews){
+        div.style.display = 'none'
+      }
 })
 
 //Close operation menu if it's still open when the user clicks to go home
@@ -406,8 +425,6 @@ function handleResetBtn(){
               greenhouse4View.style.display = 'none';
               greenhouse5View.style.display = 'none';
               outcomeView.style.display = 'none';
-
-          
  }
 
 //Display selected Greenhouse, hide the others
@@ -517,7 +534,7 @@ for(const confirmBtn of confirmBtns){
     for(const bayIcon of bayIcons){
     	bayIcon.classList.remove('checked')
     }
-    //Hide action div
+    //Hide main action div
     let actionDiv = overlay.parentNode.getElementsByClassName('main-action-div')[0];
   	actionDiv.style.display = 'none'
     //Clear currently selected and hide reset Button
@@ -533,6 +550,25 @@ for(const confirmBtn of confirmBtns){
     //Hide outcome headers
     for(const header of outcomeHeaders){
       header.style.display = 'none'
+    }
+    //Hide all action Divs
+    for(const div of waterViews){
+      div.style.display = 'none'
+    }
+    for(const div of mappingViews){
+      div.style.display = 'none'
+    }
+    for(const div of wifiViews){
+      div.style.display = 'none'
+    }
+    for(const div of wifiConfigViews){
+      div.style.display = 'none'
+    }
+    for(const div of mpuStatusViews){
+      div.style.display = 'none'
+    }
+    for(const div of mpuConfigViews){
+      div.style.display = 'none'
     }
   })
 }
