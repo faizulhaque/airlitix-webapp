@@ -49,7 +49,6 @@ let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 let disableEyes = document.getElementsByClassName('disable-eye')
 let operationsIcons = document.getElementsByClassName('operation-icon')
-let operationTexts = document.getElementsByClassName('operation-text')
 
 //Middle Category Views
 let waterViews = document.getElementsByClassName('water-panel-container')
@@ -543,7 +542,7 @@ for(const confirmBtn of confirmBtns){
     for (const icon of operationsIcons){
       icon.classList.remove('active')
     }
-    for (const text of operationTexts){
+    for (const text of homeOperationTexts){
       text.style.color = 'white'
     }
     //Hide outcome headers
@@ -628,7 +627,7 @@ function handleAdminOperationBtn(btn){
     for(const icon of operationsIcons){
       icon.classList.remove('active')
     }
-    for(const text of operationTexts){
+    for(const text of homeOperationTexts){
       text.style.color = 'white'
     }
   //Add green selected icon to what was clicked 
@@ -713,7 +712,7 @@ function handleUserOperationBtn(btn){
   //If they have already selected a bay to run a test on:
   if(currentBay){
   //Remove Selected Operation Icon Coloring
-  for (const icon of operationIcons){
+  for (const icon of operationsIcons){
     icon.classList.remove('active')
   }
   for (const text of homeOperationTexts){
