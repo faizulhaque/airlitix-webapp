@@ -544,7 +544,7 @@ for(const confirmBtn of confirmBtns){
       icon.classList.remove('active')
     }
     for (const text of operationTexts){
-      text.style.color = '#FFFFFF'
+      text.style.color = 'white'
     }
     //Hide outcome headers
     for(const header of outcomeHeaders){
@@ -629,7 +629,7 @@ function handleAdminOperationBtn(btn){
       icon.classList.remove('active')
     }
     for(const text of operationTexts){
-      text.style.color = '#FFFFFF'
+      text.style.color = 'white'
     }
   //Add green selected icon to what was clicked 
   btn.firstElementChild.classList.add('active')
@@ -717,7 +717,7 @@ function handleUserOperationBtn(btn){
       icon.classList.remove('active')
     }
     for(const text of operationTexts){
-      text.style.color = '#FFFFFF'
+      text.style.color = 'white'
     }
   //Add green selected icon and text to what was clicked 
   btn.firstElementChild.classList.add('active')
@@ -941,7 +941,7 @@ for(const btn of buildingOperationBtns){
           icon.classList.remove('active')
         }
         for (const text of homeOperationTexts){
-          text.style.color = '#FFFFFF'
+          text.style.color = 'white'
         }
         //Add green selected icon to what was clicked 
         btn.firstElementChild.classList.add('active')
