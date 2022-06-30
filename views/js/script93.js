@@ -293,9 +293,9 @@ for (const btn of bayBtns) {
     for (const text of bayOutcomeNums){
       text.textContent = currentBay;  
     }
-    for (const text of actionOutcomes){
-      text.textContent = action;
-    }
+    // for (const text of actionOutcomes){
+    //   text.textContent = action;
+    // }
     handleResetBtn();
   });
 }
