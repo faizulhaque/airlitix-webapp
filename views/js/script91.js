@@ -124,7 +124,6 @@ homeBtn.addEventListener('click', () => {
   checkForHome();
   currentGreenhouse = '';
   currentBay = '';
-  currentGear = ''
   handleResetBtn();
   allGreenhousesView.style.display = 'flex';
   greenhouse1View.style.display = 'none';
