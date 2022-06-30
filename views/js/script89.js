@@ -89,6 +89,7 @@ let currentGreenhouse;
 let currentBay;
 let buildingSelected = false;
 let currentBuilding = '';
+let currentGear;
 
 //Home Button Functionality
 function checkForHome(){
@@ -841,6 +842,7 @@ for(const gear of gearDivs){
       gear.classList.add('selected')
       buildingSelected = 'true'
       currentBuilding = gear.parentNode.lastElementChild.firstElementChild.innerHTML;
+      currentGear = gear
       ghOutcomeNumHome.textContent = currentBuilding;
       checkIfOfficeSelected()
     } else {
@@ -869,49 +871,75 @@ function checkIfOfficeSelected(){
 for(const btn of buildingOperationBtns){
   btn.addEventListener('click', () => {
     if(buildingSelected){
-      outcomeViewHome.style.display = 'flex'
-      let action = btn.lastElementChild.innerHTML;
-      actionOutcomeHome.textContent = action;
-      logDataHome.textContent = 'Log data appears here.';
-      statusDataHome.textContent = 'Status data appears here.';
-      //Hide all Previous Action Divs 
-      for(const div of homeActionDivs){
-        div.style.display = 'none'
-      }
-      //Find the corresponding action div to display
-       if(btn.classList.contains('water-action-home')){
-         waterActionHome.style.display = 'flex'
-       }
-       if(btn.classList.contains('mapping-action-home')){
-        mappingActionHome.style.display = 'flex'
-      }
-       if(btn.classList.contains('wifi-status-action-home')){
-        wifiStatusActionHome.style.display = 'flex'
-      }
-      if(btn.classList.contains('wifi-config-action-home')){
-        wifiConfigActionHome.style.display = 'flex'
-      }
-      if(btn.classList.contains('mpu-status-action-home')){
-        mpuStatusActionHome.style.display = 'flex'
-      }
-      if(btn.classList.contains('mpu-config-action-home')){
-        mpuConfigActionHome.style.display = 'flex'
-      }
-  
-      //Remove Selected Operation Icon Coloring
-      for (const icon of buildingOperationIcons){
-        icon.classList.remove('active')
-      }
-      for (const text of homeOperationTexts){
-        text.style.color = '#FFFFFF'
-      }
-      //Add green selected icon to what was clicked 
-      btn.firstElementChild.classList.add('active')
-      btn.lastElementChild.style.color = '#41EB5C'
+      //If they clicked a water or mapping action, call function to re-route them to other page view
+      if(btn.classList.contains('water-action-home')){
+        handleHomeWaterClicked()
+      } else if(btn.classList.contains('mapping-action-home')){
+        handleHomeMappingClicked()
+      } else {
+        //If they didn't click water or mapping, proceed
+        outcomeViewHome.style.display = 'flex'
+        let action = btn.lastElementChild.innerHTML;
+        actionOutcomeHome.textContent = action;
+        logDataHome.textContent = 'Log data appears here.';
+        statusDataHome.textContent = 'Status data appears here.';
+        //Hide all Previous Action Divs 
+        for(const div of homeActionDivs){
+          div.style.display = 'none'
+        }
+        //Find the corresponding action div to display
+        if(btn.classList.contains('wifi-status-action-home')){
+          wifiStatusActionHome.style.display = 'flex'
+        }
+        if(btn.classList.contains('wifi-config-action-home')){
+          wifiConfigActionHome.style.display = 'flex'
+        }
+        if(btn.classList.contains('mpu-status-action-home')){
+          mpuStatusActionHome.style.display = 'flex'
+        }
+        if(btn.classList.contains('mpu-config-action-home')){
+          mpuConfigActionHome.style.display = 'flex'
+        }
+    
+        //Remove Selected Operation Icon Coloring
+        for (const icon of buildingOperationIcons){
+          icon.classList.remove('active')
+        }
+        for (const text of homeOperationTexts){
+          text.style.color = '#FFFFFF'
+        }
+        //Add green selected icon to what was clicked 
+        btn.firstElementChild.classList.add('active')
+        btn.lastElementChild.style.color = '#41EB5C'
+      } 
     } else {
       alert('Please select a building target')
     }
   })
+}
+
+function handleHomeWaterClicked(){
+  let targetGreenhouse = currentGear.parentNode.lastElementChild
+  allGreenhousesView.style.display = 'none'
+  targetGreenhouse.click()
+  for(const div of mainActionDivs){
+    div.style.display = 'flex'
+  }
+  for(const div of waterViews){
+    div.style.display = 'block'
+  }
+}
+
+function handleHomeMappingClicked(){
+  let targetGreenhouse = currentGear.parentNode.lastElementChild
+  allGreenhousesView.style.display = 'none'
+  targetGreenhouse.click()
+  for(const div of mainActionDivs){
+    div.style.display = 'flex'
+  }
+  for(const div of mappingViews){
+    div.style.display = 'flex'
+  }
 }
 
 
