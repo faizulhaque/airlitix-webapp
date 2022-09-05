@@ -40,13 +40,13 @@ $(document).ready(() => {
     appendLogs(objectForSocket);
   });
 
-  $('.bay-container').on('click', '.bay-div', (element) => {
+  $('.bay-div').on('click', (element) => {
     objectForSocket.bay = element.currentTarget.children[0].innerHTML;
     appendLogs(objectForSocket);
   });
   
 
-  $('.bay-calculation-div').on('click', '.keypad-btn', (element) => {
+  $('.keypad-btn').on('click', (element) => {
     objectForSocket.key = element.currentTarget.children[0].innerHTML;
     appendLogs(objectForSocket);
 
