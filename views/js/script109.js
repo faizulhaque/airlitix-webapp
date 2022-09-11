@@ -27,7 +27,6 @@ let adminToggleEyes = document.getElementsByClassName('main-eye-toggle')
 let stoplightTriggers = document.getElementsByClassName("stoplight-trigger");
 let stoplightDivs = document.getElementsByClassName("stoplight-div");
 let stoplightBtns = document.getElementsByClassName("status-select");
-let outcomeCloseBtns = document.getElementsByClassName('outcome-close-btn')
 
 //Hamburger and Menus
 let hamburgerMain = document.getElementById("hamburger-main");
@@ -130,6 +129,13 @@ homeBtn.addEventListener('click', () => {
   for (const div of outcomeViews){
     div.style.display = 'none'
   }
+  //Set color of operation icons back to base state
+  for (const icon of operationsIcons){
+    icon.classList.remove('active')
+  }
+  for (const text of homeOperationTexts){
+    text.style.color = 'white'
+  }
   handleOperationMenuIfOpen()
   handleAdminMode(); 
   home = true;
@@ -146,6 +152,10 @@ homeBtn.addEventListener('click', () => {
   greenhouse3View.style.display = 'none';
   greenhouse4View.style.display = 'none';
   greenhouse5View.style.display = 'none';
+  //Hide Outcome Headers
+  for(const header of outcomeHeaders){
+    header.style.display = 'none'
+  }
       //Hide all action Divs
       for(const div of waterViews){
         div.style.display = 'none'
@@ -859,15 +869,6 @@ function hideOpenOperationViews(){
   for(const view of outcomeViews){
     view.style.display = 'none'
   }
-}
-
-//Close Outcome Menu Button
-for(const btn of outcomeCloseBtns){
-  btn.addEventListener('click', () =>{
-    for(const view of outcomeViews){
-      view.style.display = 'none'
-    }
-  })
 }
 
 // Bay Icons Color Changing
