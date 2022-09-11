@@ -139,6 +139,7 @@ homeBtn.addEventListener('click', () => {
   currentBay = '';
   currentAction = ''
   hideEyeballs();
+  resetAdminEyeballs()
   handleResetBtn();
   allGreenhousesView.style.display = 'flex';
   greenhouse1View.style.display = 'none';
@@ -195,6 +196,7 @@ toggleDiv.addEventListener('click', () => {
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
   hideEyeballs()
+  resetAdminEyeballs()
   handleAdminMode()
   handleHomeMenuIfOpen()
 })
@@ -267,6 +269,12 @@ function handleAdminMode(){
 function hideEyeballs(){
   for(const eye of disableEyes){
     eye.style.display = 'none'
+  }
+}
+function resetAdminEyeballs(){
+  for(const eye of adminToggleEyes){
+    eye.classList.remove('not-visible')
+    eye.classList.add('visible')
   }
 }
 
@@ -605,6 +613,7 @@ for (let i = 0; i < greenhouses.length; i++) {
     // 	bayIcon.classList.remove('checked')
     // }
     hideEyeballs()
+    resetAdminEyeballs()
     //Hide main action divs
     for(const div of mainActionDivs){
       div.style.display = 'none'
