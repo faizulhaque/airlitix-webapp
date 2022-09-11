@@ -137,6 +137,8 @@ homeBtn.addEventListener('click', () => {
   checkForHome();
   currentGreenhouse = '';
   currentBay = '';
+  currentAction = ''
+  hideEyeballs();
   handleResetBtn();
   allGreenhousesView.style.display = 'flex';
   greenhouse1View.style.display = 'none';
@@ -192,6 +194,7 @@ toggleDiv.addEventListener('click', () => {
 	bgOverlay.classList.toggle('admin')
   toggleDiv.classList.toggle('admin');
   adminMode = !adminMode;
+  hideEyeballs()
   handleAdminMode()
   handleHomeMenuIfOpen()
 })
@@ -261,6 +264,12 @@ function handleAdminMode(){
   }
 }
 
+function hideEyeballs(){
+  for(const eye of disableEyes){
+    eye.style.display = 'none'
+  }
+}
+
 function handleHomeMenuIfOpen(){
   if(menuContainerMain.style.height == '100%'){
     hamburgerMain.click()
@@ -268,7 +277,6 @@ function handleHomeMenuIfOpen(){
 }
 
 function colorInUserIconToo(){
-  console.log(currentAction)
   if(currentAction != ''){
     if(currentAction == 'Water'){
       for (const icon of userWaterBtns){
@@ -285,7 +293,6 @@ function colorInUserIconToo(){
 }
 
 function colorInAdminIconToo(){
-  console.log(currentAction)
   if(currentAction != ''){
   if(currentAction == 'Water'){
     for (const icon of adminWaterBtns){
@@ -411,7 +418,6 @@ for(const eye of adminToggleEyes){
 // //Disbaled a bay when the eyeball is clicked
 for(const eye of disableEyes){
   eye.addEventListener('click', () => {
-    console.log('eye clicked')
     let bayDiv = eye.parentElement.firstElementChild
     let disableOverlay = bayDiv.getElementsByClassName('disable-overlay')[0]
     if(!bayDiv.classList.contains('disabled')){
@@ -598,14 +604,14 @@ for (let i = 0; i < greenhouses.length; i++) {
     // for(const bayIcon of bayIcons){
     // 	bayIcon.classList.remove('checked')
     // }
-
+    hideEyeballs()
     //Hide main action divs
     for(const div of mainActionDivs){
       div.style.display = 'none'
     }
-  
     //Clear currently selected and hide reset Button
     currentBay = ''
+    currentAction = ''
     handleResetBtn()
     //Remove Selected Operation Icon Coloring
     for (const icon of operationsIcons){
@@ -956,10 +962,8 @@ for(const gear of gearDivs){
 function checkIfOfficeSelected(){
   //If Office is selected, gray out the water and mapping options
   if(currentBuilding == 'Office'){
-    console.log('Office Chosen')
     for(const btn of buildingOperationIcons){
       if(btn.parentNode.lastElementChild.innerHTML == 'Water' || btn.parentNode.lastElementChild.innerHTML == 'Mapping'){
-        console.log('water or mapping')
         btn.classList.add('disabled')
         btn.parentNode.style.pointerEvents = 'none'
         btn.parentNode.lastElementChild.style.color = '#6b6666'
