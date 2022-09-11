@@ -46,7 +46,7 @@ let waterIcons = document.getElementsByClassName('bay-icon-container-water')
 let mapIcons = document.getElementsByClassName('bay-icon-container-map')
 let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
 let systemIcons = document.getElementsByClassName('bay-icon-container-system')
-let disableEyes = document.getElementsByClassName('disable-eye')
+let disableEyes = document.getElementsByClassName('eye')
 let operationsIcons = document.getElementsByClassName('operation-icon')
 
 //User Menu Operation Buttons
@@ -391,6 +391,7 @@ for(const btn of stoplightBtns){
 // //Disbaled a bay when the eyeball is clicked
 for(const eye of disableEyes){
   eye.addEventListener('click', () => {
+    console.log('eye clicked')
     let bayDiv = eye.parentElement.firstElementChild
     let disableOverlay = bayDiv.getElementsByClassName('disable-overlay')[0]
     if(!bayDiv.classList.contains('disabled')){
@@ -398,10 +399,14 @@ for(const eye of disableEyes){
       bayDiv.classList.add('disabled')
       disableOverlay.style.display = 'block'
       bayDiv.style.pointerEvents = 'none'
+      eye.classList.remove('not-visible')
+      eye.classList.add('visible')
     } else {
       bayDiv.classList.remove('disabled')
       disableOverlay.style.display = 'none'
       bayDiv.style.pointerEvents = 'auto'
+      eye.classList.remove('visible')
+      eye.classList.add('not-visible')
     }
   })
 }
