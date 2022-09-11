@@ -1061,7 +1061,7 @@ function handleHomeWaterClicked(){
   }
   //Color in icons and text
   for(icon of operationsIcons){
-    if(icon.classList.contains('Water')){
+    if(icon.classList.contains('water')){
       icon.classList.add('active')
       icon.nextElementSibling.style.color = '#41EB5C'
     }
@@ -1093,7 +1093,7 @@ function handleHomeMappingClicked(){
   }
   //Color in icons and text
   for(icon of operationsIcons){
-    if(icon.classList.contains('Mapping')){
+    if(icon.classList.contains('mapping')){
       icon.classList.add('active')
       icon.nextElementSibling.style.color = '#41EB5C'
     }
