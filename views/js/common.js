@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
   let wifiClient = '';
-  let socket = io.connect('//socketio0.herokuapp.com', {
+  let socket = io.connect('/', {
     transports: ['websocket'],
     upgrade: false,
     rejectUnauthorized: false,
@@ -40,13 +40,13 @@ $(document).ready(() => {
     appendLogs(objectForSocket);
   });
 
-  $('.bay-container').on('click', '.bay-div', (element) => {
+  $('.bay-div').on('click', (element) => {
     objectForSocket.bay = element.currentTarget.children[0].innerHTML;
     appendLogs(objectForSocket);
   });
   
 
-  $('.bay-calculation-div').on('click', '.keypad-btn', (element) => {
+  $('.keypad-btn').on('click', (element) => {
     objectForSocket.key = element.currentTarget.children[0].innerHTML;
     appendLogs(objectForSocket);
 
@@ -68,6 +68,6 @@ function appendLogs(msg) {
   console.table('appendLogs', msg);
 
   if ($('.log-div').length) {
-    $('.log-div').prepend( `<div class='log-text-content'>${JSON.stringify(msg)}</div>`);
+    $('.log-div').html( `<div class='log-text-content'>${JSON.stringify(msg)}</div>`);
   }
 }
