@@ -1059,6 +1059,9 @@ function handleHomeWaterClicked(){
   for (const text of bayOutcomeNums){
     text.textContent = currentBay;  
   }
+  for (const text of actionOutcomes){
+    text.textContent = 'Water';
+  }
   //Color in icons and text
   for(icon of operationsIcons){
     if(icon.classList.contains('water')){
@@ -1090,6 +1093,9 @@ function handleHomeMappingClicked(){
   }
   for (const text of bayOutcomeNums){
     text.textContent = currentBay;  
+  }
+  for (const text of actionOutcomes){
+    text.textContent = 'Mapping';
   }
   //Color in icons and text
   for(icon of operationsIcons){
