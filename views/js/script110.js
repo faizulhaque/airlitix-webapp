@@ -133,6 +133,9 @@ homeBtn.addEventListener('click', () => {
   for (const icon of operationsIcons){
     icon.classList.remove('active')
   }
+  for (const icon of buildingOperationBtns){
+    icon.classList.remove('active')
+  }
   for (const text of homeOperationTexts){
     text.style.color = 'white'
   }
@@ -661,7 +664,9 @@ for (let i = 0; i < greenhouses.length; i++) {
     for(const div of mpuConfigViews){
       div.style.display = 'none'
     }
-
+    for(const gear of gearDivs){
+      gear.classList.remove('selected')
+    }
     //Navigate back to home
     homeBtn.click()
   })
