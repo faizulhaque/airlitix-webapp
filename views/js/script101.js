@@ -193,7 +193,6 @@ toggleDiv.addEventListener('click', () => {
   adminMode = !adminMode;
   handleAdminMode()
   handleHomeMenuIfOpen()
-  handleSelectedActionIconColoring()
 })
 
 function handleAdminMode(){
@@ -262,20 +261,25 @@ function handleHomeMenuIfOpen(){
 }
 
 function colorInUserIconToo(){
-  if(currentAction == 'water'){
-    for (const icon of userWaterBtns){
-      icon.firstElementChild.classList.add('active')
-      icon.lastElementChild.style.color = '#41EB5C'
-    }
-  } else if (currentAction == 'mapping'){
-    for (const icon of userMappingBtns){
-      icon.firstElementChild.classList.add('active')
-      icon.lastElementChild.style.color = '#41EB5C'
+  console.log(currentAction)
+  if(currentAction != ''){
+    if(currentAction == 'water'){
+      for (const icon of userWaterBtns){
+        icon.firstElementChild.classList.add('active')
+        icon.lastElementChild.style.color = '#41EB5C'
+      }
+    } else if (currentAction == 'mapping'){
+      for (const icon of userMappingBtns){
+        icon.firstElementChild.classList.add('active')
+        icon.lastElementChild.style.color = '#41EB5C'
+      }
     }
   }
 }
 
 function colorInAdminIconToo(){
+  console.log(currentAction)
+  if(currentAction != ''){
   if(currentAction == 'water'){
     for (const icon of adminWaterBtns){
       icon.firstElementChild.classList.add('active')
@@ -287,6 +291,7 @@ function colorInAdminIconToo(){
       icon.lastElementChild.style.color = '#41EB5C'
     }
   }
+}
 }
 
 //Bay Button Click Functionality
