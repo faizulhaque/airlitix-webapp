@@ -7,7 +7,7 @@ let greenhouses = document.getElementsByClassName("main-greenhouse-div");
 let office = document.getElementById('office')
 let bgOverlay = document.getElementById("bg-gradient");
 let mainContentSection = document.getElementById("main-content");
-let resetConfirmationOverlay = document.getElementById('.reset-confirmation-overlay')
+let resetConfirmationOverlay = document.getElementById('reset-confirmation-overlay')
 
 //Different Views
 let allGreenhousesView = document.getElementById("all-greenhouses-view");
