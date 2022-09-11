@@ -53,7 +53,6 @@ let operationsIcons = document.getElementsByClassName('operation-icon')
 //User Menu Operation Buttons
 let userWaterBtns = document.getElementsByClassName('user-water')
 let userMappingBtns = document.getElementsByClassName('user-mapping')
-let userInfoBtns = document.getElementsByClassName('user-info')
 
 //Admin Menu Operation Buttons
 let adminWaterBtns = document.getElementsByClassName('admin-water')
@@ -714,12 +713,15 @@ function handleAdminOperationBtn(btn){
   btn.lastElementChild.style.color = '#41EB5C'
   //Also add the highlight colors to the user mode version in case they toggle to that
   colorInUserIconToo()
-  //Display the main action div
+  //Hide all open operation divs and then display the main container to place the appropriate one
+  hideOpenOperationViews()
   for(const div of mainActionDivs){
     div.style.display = 'flex'
   }
-  hideOpenOperationViews(actionCategory)
-  
+ //Show logging outcome divs
+ for (const view of outcomeViews){
+  view.style.display = 'flex'
+}
   // Display the appropriate action div in the middle  
   if (actionCategory === 'admin-water'){
     for (const view of waterViews){
@@ -778,11 +780,6 @@ for(const btn of userMappingBtns){
     handleUserOperationBtn(btn)
   })
 }
-for(const btn of userInfoBtns){
-  btn.addEventListener('click', () => {
-    handleUserOperationBtn(btn)
-  })
-}
 
 function handleUserOperationBtn(btn){
   let action = btn.lastElementChild.innerHTML;
@@ -802,10 +799,14 @@ function handleUserOperationBtn(btn){
   btn.lastElementChild.style.color = '#41EB5C'
   //Also add the highlight colors to the admin mode version in case they toggle to that
   colorInAdminIconToo()
-  hideOpenOperationViews(actionCategory)
-    //Display the main action div
+  hideOpenOperationViews()
+  //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
+  }
+  //Show logging outcome divs
+  for (const view of outcomeViews){
+    view.style.display = 'flex'
   }
      // Display the appropriate action div in the middle  
     if (actionCategory === 'user-water'){
@@ -819,9 +820,7 @@ function handleUserOperationBtn(btn){
       }
     } 
     if (actionCategory === 'user-info'){
-      for (const view of outcomeViews){
-        view.style.display = 'flex'
-      }
+      
     } 
     //Change the text of the outcome divs to indicate what they clicked on
     for (const text of ghOutcomeNums){
@@ -838,11 +837,7 @@ function handleUserOperationBtn(btn){
   }
 }
 
-function hideOpenOperationViews(actionCategory){
-  if(actionCategory == 'user-info'){
-    return 
-  } else {
-  //Unless they click info, hide the middle screens
+function hideOpenOperationViews(){
   for(const view of waterViews){
     view.style.display = 'none'
   }
@@ -863,7 +858,6 @@ function hideOpenOperationViews(actionCategory){
   }
   for(const view of outcomeViews){
     view.style.display = 'none'
-  }
   }
 }
 
