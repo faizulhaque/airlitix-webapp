@@ -1046,6 +1046,26 @@ function handleHomeWaterClicked(){
   for(const div of waterViews){
     div.style.display = 'block'
   }
+  for(const view of outcomeViews){
+    view.style.display = 'block'
+  }
+  //Change the text of the outcome divs to indicate what they clicked on
+  for(const header of outcomeHeaders){
+  header.style.display = 'flex'
+  }
+  for (const text of ghOutcomeNums){
+    text.textContent = currentGreenhouse;
+  }
+  for (const text of bayOutcomeNums){
+    text.textContent = currentBay;  
+  }
+  //Color in icons and text
+  for(icon of operationsIcons){
+    if(icon.classList.contains('Water')){
+      icon.classList.add('active')
+      icon.nextElementSibling.style.color = '#41EB5C'
+    }
+  }
 }
 
 function handleHomeMappingClicked(){
@@ -1057,5 +1077,25 @@ function handleHomeMappingClicked(){
   }
   for(const div of mappingViews){
     div.style.display = 'flex'
+  }
+  for(const view of outcomeViews){
+    view.style.display = 'block'
+  }
+  //Change the text of the outcome divs to indicate what they clicked on
+  for(const header of outcomeHeaders){
+  header.style.display = 'flex'
+  }
+  for (const text of ghOutcomeNums){
+    text.textContent = currentGreenhouse;
+  }
+  for (const text of bayOutcomeNums){
+    text.textContent = currentBay;  
+  }
+  //Color in icons and text
+  for(icon of operationsIcons){
+    if(icon.classList.contains('Mapping')){
+      icon.classList.add('active')
+      icon.nextElementSibling.style.color = '#41EB5C'
+    }
   }
 }
