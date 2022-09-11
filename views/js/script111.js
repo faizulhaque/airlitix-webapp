@@ -667,6 +667,10 @@ for (let i = 0; i < greenhouses.length; i++) {
     for(const gear of gearDivs){
       gear.classList.remove('selected')
     }
+    for(const div of homeActionDivs){
+      div.style.display = 'none'
+    }
+    outcomeViewHome.style.display = 'none'
     //Navigate back to home
     homeBtn.click()
   })
