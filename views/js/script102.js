@@ -263,12 +263,12 @@ function handleHomeMenuIfOpen(){
 function colorInUserIconToo(){
   console.log(currentAction)
   if(currentAction != ''){
-    if(currentAction == 'water'){
+    if(currentAction == 'Water'){
       for (const icon of userWaterBtns){
         icon.firstElementChild.classList.add('active')
         icon.lastElementChild.style.color = '#41EB5C'
       }
-    } else if (currentAction == 'mapping'){
+    } else if (currentAction == 'Mapping'){
       for (const icon of userMappingBtns){
         icon.firstElementChild.classList.add('active')
         icon.lastElementChild.style.color = '#41EB5C'
@@ -280,12 +280,12 @@ function colorInUserIconToo(){
 function colorInAdminIconToo(){
   console.log(currentAction)
   if(currentAction != ''){
-  if(currentAction == 'water'){
+  if(currentAction == 'Water'){
     for (const icon of adminWaterBtns){
       icon.firstElementChild.classList.add('active')
       icon.lastElementChild.style.color = '#41EB5C'
     }
-  } else if (currentAction == 'mapping'){
+  } else if (currentAction == 'Mapping'){
     for (const icon of adminMappingBtns){
       icon.firstElementChild.classList.add('active')
       icon.lastElementChild.style.color = '#41EB5C'
