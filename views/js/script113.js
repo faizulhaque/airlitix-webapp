@@ -956,9 +956,8 @@ for(const gear of gearDivs){
     }
     //Reverse any disabled styling from an office view
     for(const btn of buildingOperationBtns){
-      btn.firstElementChild.classList.remove('disabled')
       btn.style.pointerEvents = 'auto'
-      btn.lastElementChild.style.color = 'white'
+      btn.style.opacity = '100'
     }
     if(!gear.classList.contains('selected')){
       gear.classList.add('selected')
@@ -978,11 +977,10 @@ for(const gear of gearDivs){
 function checkIfOfficeSelected(){
   //If Office is selected, gray out the water and mapping options
   if(currentBuilding == 'Office'){
-    for(const btn of buildingOperationIcons){
-      if(btn.parentNode.lastElementChild.innerHTML == 'Water' || btn.parentNode.lastElementChild.innerHTML == 'Mapping'){
-        btn.classList.add('disabled')
-        btn.parentNode.style.pointerEvents = 'none'
-        btn.parentNode.lastElementChild.style.color = '#6b6666'
+    for(const btn of buildingOperationBtns){
+      if(btn.lastElementChild.innerHTML == 'Water' || btn.lastElementChild.innerHTML == 'Mapping'){
+        btn.style.pointerEvents = 'none'
+        btn.style.opacity = '.50'
       }
     }
   }
