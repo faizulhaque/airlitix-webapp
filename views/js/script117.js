@@ -42,6 +42,7 @@ let buildingOperationIcons = document.getElementsByClassName("operation-btn-home
 let homeOperationTexts = document.getElementsByClassName('home-operation-text')
 
 //Bay Icons
+let bayContainers = document.getElementsByClassName('bay-container')
 let waterIcons = document.getElementsByClassName('bay-icon-container-water')
 let mapIcons = document.getElementsByClassName('bay-icon-container-map')
 let wifiIcons = document.getElementsByClassName('bay-icon-container-wifi')
@@ -367,7 +368,7 @@ for (const btn of bayBtns) {
       header.style.display = 'flex'
     }
     for (const text of ghOutcomeNums){
-      text.textContent = currentGreenhouse;
+      text.textContent = currentGreenhouse;   
     }
     for (const text of bayOutcomeNums){
       text.textContent = currentBay;  
@@ -378,6 +379,9 @@ for (const btn of bayBtns) {
     handleResetBtn();
   });
 }
+
+//Click on bay1 by default 
+
 
 //Display or hide Stoplight Buttons on Arrow Click
 for (const arrow of stoplightTriggers){
@@ -531,7 +535,8 @@ for (let i = 0; i < greenhouses.length; i++) {
         checkForHome();
         handleAdminMode();
     	if(greenhouses[i].id === "gh1"){
-          currentGreenhouse = 1;    
+          currentGreenhouse = 1;   
+          selectBayByDefault() 
           allGreenhousesView.style.display = 'none';
         	greenhouse2View.style.display = 'none';
         	greenhouse3View.style.display = 'none';
@@ -540,6 +545,7 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse1View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh2"){
           currentGreenhouse = 2;    
+          selectBayByDefault() 
           allGreenhousesView.style.display = 'none';
         	greenhouse1View.style.display = 'none';
         	greenhouse3View.style.display = 'none';
@@ -547,7 +553,8 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse5View.style.display = 'none';
         	greenhouse2View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh3"){
-          currentGreenhouse = 3;    
+          currentGreenhouse = 3;   
+          selectBayByDefault()  
           allGreenhousesView.style.display = 'none';
         	greenhouse1View.style.display = 'none';
         	greenhouse2View.style.display = 'none';
@@ -555,7 +562,8 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse5View.style.display = 'none';
         	greenhouse3View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh4"){
-          currentGreenhouse = 4;    
+          currentGreenhouse = 4;   
+          selectBayByDefault()  
           allGreenhousesView.style.display = 'none';
         	greenhouse1View.style.display = 'none';
         	greenhouse2View.style.display = 'none';
@@ -564,6 +572,7 @@ for (let i = 0; i < greenhouses.length; i++) {
         	greenhouse4View.style.display = 'flex';
         } else if (greenhouses[i].id === "gh5"){
           currentGreenhouse = 5; 
+          selectBayByDefault() 
           allGreenhousesView.style.display = 'none';
         	greenhouse1View.style.display = 'none';
         	greenhouse2View.style.display = 'none';
@@ -573,6 +582,25 @@ for (let i = 0; i < greenhouses.length; i++) {
         }
     });
 }
+
+//Select a bay by default to avoid an alert yelling at the user
+function selectBayByDefault(){
+  for(let i = 0; i < bayContainers.length; i++){
+    console.log(currentGreenhouse - 1)
+    let targetBayContainer = bayContainers[currentGreenhouse - 1]
+    console.log(targetBayContainer)
+    let bays = targetBayContainer.getElementsByClassName('bay');
+    for(const bay of bays){
+      if(!bay.firstElementChild.classList.contains('disabled')){
+        bay.classList.add('selected')
+        currentBay = bay.firstElementChild.id.slice(-2)
+        console.log(currentBay)
+      }
+    }
+  }
+} 
+
+
 //Display Popup to confirm a reset
 	resetBtn.addEventListener('click', () => {
     resetConfirmationOverlay.style.display = 'flex';
@@ -647,6 +675,9 @@ for (let i = 0; i < greenhouses.length; i++) {
     //Hide outcome headers
     for(const header of outcomeHeaders){
       header.style.display = 'none'
+    }
+    for (const text of actionOutcomes){
+      text.textContent = '';
     }
     //Hide all action Divs
     for(const div of waterViews){
