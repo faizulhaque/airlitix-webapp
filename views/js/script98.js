@@ -356,11 +356,9 @@ for(const eye of disableEyes){
 //Only display reset buttons if a bay is selected
 function handleResetBtn(){
   if(currentBay != ''){
-    resetBtn.style.display = 'flex'
+    resetBtn.style.display = 'block'
     } else {
-      for(const btn of resetBtns){
-        btn.style.display = 'none'
-      }
+      resetBtn.style.display = 'none'
     }
 }
 
