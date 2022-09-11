@@ -198,6 +198,9 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
+    for (const eye of disableEyes){
+      eye.style.display = 'block'
+    }
   	for (const menu of userMenus){
     	menu.style.display = 'none'
     }
@@ -223,6 +226,9 @@ function handleAdminMode(){
     }
   } else {
     hamburgerMain.style.display = 'none'
+    for (const eye of disableEyes){
+      eye.style.display = 'none'
+    }
     for (const menu of userMenus){
     	menu.style.display = 'block'
     }
