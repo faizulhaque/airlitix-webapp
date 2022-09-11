@@ -23,6 +23,7 @@ let outcomeViewHome = document.getElementById("outcome-view-home");
 let mainActionDivs = document.getElementsByClassName("main-action-div")
 let keypadBtns = document.getElementsByClassName("keypad-btn");
 let bayBtns = document.getElementsByClassName("bay-div");
+let adminToggleEyes = document.getElementsByClassName('main-eye-toggle')
 let stoplightTriggers = document.getElementsByClassName("stoplight-trigger");
 let stoplightDivs = document.getElementsByClassName("stoplight-div");
 let stoplightBtns = document.getElementsByClassName("status-select");
@@ -198,7 +199,7 @@ toggleDiv.addEventListener('click', () => {
 function handleAdminMode(){
 	if(adminMode){
     hamburgerMain.style.display = 'block'
-    for (const eye of disableEyes){
+    for (const eye of adminToggleEyes){
       eye.style.display = 'block'
     }
   	for (const menu of userMenus){
@@ -226,7 +227,7 @@ function handleAdminMode(){
     }
   } else {
     hamburgerMain.style.display = 'none'
-    for (const eye of disableEyes){
+    for (const eye of adminToggleEyes){
       eye.style.display = 'none'
     }
     for (const menu of userMenus){
@@ -384,6 +385,25 @@ for(const btn of stoplightBtns){
       bayDiv.classList.remove('error')
       bayDiv.classList.remove('in-progress')
       bayDiv.classList.add('success')
+    }
+  })
+}
+
+//Ability to toggle all the eyeballs in Admin Mode
+for(const eye of adminToggleEyes){
+  eye.addEventListener('click', () => {
+    if(eye.classList.contains('visible')){
+      eye.classList.remove('visible')
+      eye.classList.add('not-visible')
+      for(const eye of disableEyes){
+        eye.style.display = 'block'
+      }
+    } else {
+      eye.classList.remove('not-visible')
+      eye.classList.add('visible')
+      for(const eye of disableEyes){
+        eye.style.display = 'none'
+      }
     }
   })
 }
