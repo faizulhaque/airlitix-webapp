@@ -133,7 +133,7 @@ homeBtn.addEventListener('click', () => {
   for (const icon of operationsIcons){
     icon.classList.remove('active')
   }
-  for (const icon of buildingOperationBtns){
+  for (const icon of buildingOperationIcons){
     icon.classList.remove('active')
   }
   for (const text of homeOperationTexts){
@@ -636,6 +636,9 @@ for (let i = 0; i < greenhouses.length; i++) {
     handleResetBtn()
     //Remove Selected Operation Icon Coloring
     for (const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for (const icon of buildingOperationIcons){
       icon.classList.remove('active')
     }
     for (const text of homeOperationTexts){
