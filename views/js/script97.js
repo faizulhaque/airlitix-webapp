@@ -1,11 +1,13 @@
 //Main Elements
 let homeBtn = document.getElementById('home-btn')
+let resetBtn = document.getElementById('main-reset-div')
 let toggleDiv = document.getElementById('toggle-div')
 let toggleHandle = document.getElementById('toggle-handle')
 let greenhouses = document.getElementsByClassName("main-greenhouse-div");
 let office = document.getElementById('office')
 let bgOverlay = document.getElementById("bg-gradient");
 let mainContentSection = document.getElementById("main-content");
+let resetConfirmationOverlay = document.getElementById('.reset-confirmation-overlay')
 
 //Different Views
 let allGreenhousesView = document.getElementById("all-greenhouses-view");
@@ -24,9 +26,6 @@ let bayBtns = document.getElementsByClassName("bay-div");
 let stoplightTriggers = document.getElementsByClassName("stoplight-trigger");
 let stoplightDivs = document.getElementsByClassName("stoplight-div");
 let stoplightBtns = document.getElementsByClassName("status-select");
-let resetBtns = document.getElementsByClassName("reset-btn");
-let confirmBtns = document.getElementsByClassName("confirm-btn");
-let cancelBtns = document.getElementsByClassName("cancel-btn");
 let outcomeCloseBtns = document.getElementsByClassName('outcome-close-btn')
 
 //Hamburger and Menus
@@ -171,7 +170,6 @@ function handleOperationMenuIfOpen(){
   if(menuContainer.style.height == '100%'){
     hamburgerMenu.click()
   }
-
 }
 
 //User/Admin Toggle
@@ -358,9 +356,7 @@ for(const eye of disableEyes){
 //Only display reset buttons if a bay is selected
 function handleResetBtn(){
   if(currentBay != ''){
-    for(const btn of resetBtns){
-      btn.style.display = 'block'
-    }
+    resetBtn.style.display = 'flex'
     } else {
       for(const btn of resetBtns){
         btn.style.display = 'none'
@@ -475,22 +471,16 @@ for (let i = 0; i < greenhouses.length; i++) {
         }
     });
 }
-//Display Popup to confirm a greenhouse reset
-for(const resetBtn of resetBtns){
+//Display Popup to confirm a reset
 	resetBtn.addEventListener('click', () => {
-  	let overlay = resetBtn.parentNode.parentNode.parentNode.parentNode.querySelector('.overlay-confirmation')
-    overlay.style.display = 'flex';
+    resetConfirmationOverlay.style.display = 'flex';
   })
-}
-
-//Confirm a greenhouse reset
-for(const confirmBtn of confirmBtns){
-	confirmBtn.addEventListener('click', () => {
-  	let overlay = confirmBtn.parentNode.parentNode.parentNode;
-    overlay.style.display = 'none';
+//Confirm a hard reset
+ let resetConfirmBtn = document.getElementById('reset-confirm-btn')
+	resetConfirmBtn.addEventListener('click', () => {
+    resetConfirmationOverlay.style.display = 'none';
   	//Remove any background status colors from bays
-    let bayDivs = overlay.parentNode.getElementsByClassName('bay-div');
-    for(const bayDiv of bayDivs){
+    for(const bayDiv of bayBtns){
     	bayDiv.classList.remove('success')
       bayDiv.classList.remove('selected')
       bayDiv.classList.remove('error')
@@ -528,13 +518,16 @@ for(const confirmBtn of confirmBtns){
       div.style.display = 'none'
     }
     //Remove checked opacity from all icons
-    let bayIcons = overlay.parentNode.getElementsByClassName('bay-icon');
-    for(const bayIcon of bayIcons){
-    	bayIcon.classList.remove('checked')
+    // let bayIcons = overlay.parentNode.getElementsByClassName('bay-icon');
+    // for(const bayIcon of bayIcons){
+    // 	bayIcon.classList.remove('checked')
+    // }
+
+    //Hide main action divs
+    for(const div of mainActionDivs){
+      div.style.display = 'none'
     }
-    //Hide main action div
-    let actionDiv = overlay.parentNode.getElementsByClassName('main-action-div')[0];
-  	actionDiv.style.display = 'none'
+  
     //Clear currently selected and hide reset Button
     currentBay = ''
     handleResetBtn()
@@ -568,16 +561,17 @@ for(const confirmBtn of confirmBtns){
     for(const div of mpuConfigViews){
       div.style.display = 'none'
     }
-  })
-}
 
-//Cancel a greenhouse reset
-for(const cancelBtn of cancelBtns){
-	cancelBtn.addEventListener('click', () => {
-  	let overlay = cancelBtn.parentNode.parentNode.parentNode;
-    overlay.style.display = 'none';
+    //Navigate back to home
+    homeBtn.click()
   })
-}
+
+
+//Cancel a hard reset
+let resetCancelBtn = document.getElementById('reset-cancel-btn')
+	resetCancelBtn.addEventListener('click', () => {
+  	resetConfirmationOverlay.style.display = 'none'
+  })
 
 //Behavior for clicking an operation button in admin mode
 adminWaterBtns = document.getElementsByClassName('admin-water')
@@ -975,5 +969,3 @@ function handleHomeMappingClicked(){
     div.style.display = 'flex'
   }
 }
-
-
