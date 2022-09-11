@@ -49,6 +49,19 @@ let systemIcons = document.getElementsByClassName('bay-icon-container-system')
 let disableEyes = document.getElementsByClassName('disable-eye')
 let operationsIcons = document.getElementsByClassName('operation-icon')
 
+//User Menu Operation Buttons
+let userWaterBtns = document.getElementsByClassName('user-water')
+let userMappingBtns = document.getElementsByClassName('user-mapping')
+let userInfoBtns = document.getElementsByClassName('user-info')
+
+//Admin Menu Operation Buttons
+let adminWaterBtns = document.getElementsByClassName('admin-water')
+let adminMappingBtns = document.getElementsByClassName('admin-mapping')
+let adminWifiBtns = document.getElementsByClassName('admin-wifi')
+let adminWifiConfigBtns = document.getElementsByClassName('admin-wifi-config')
+let adminMpuBtns = document.getElementsByClassName('admin-mpu')
+let adminMpuConfigBtns = document.getElementsByClassName('admin-mpu-config')
+
 //Middle Category Views
 let waterViews = document.getElementsByClassName('water-panel-container')
 let mappingViews = document.getElementsByClassName('mapping-container')
@@ -88,6 +101,7 @@ let currentBay;
 let buildingSelected = false;
 let currentBuilding = '';
 let currentGear;
+let currentAction = '';
 
 //Home Button Functionality
 function checkForHome(){
@@ -179,6 +193,7 @@ toggleDiv.addEventListener('click', () => {
   adminMode = !adminMode;
   handleAdminMode()
   handleHomeMenuIfOpen()
+  handleSelectedActionIconColoring()
 })
 
 function handleAdminMode(){
@@ -243,6 +258,34 @@ function handleAdminMode(){
 function handleHomeMenuIfOpen(){
   if(menuContainerMain.style.height == '100%'){
     hamburgerMain.click()
+  }
+}
+
+function colorInUserIconToo(){
+  if(currentAction == 'water'){
+    for (const icon of userWaterBtns){
+      icon.firstElementChild.classList.add('active')
+      icon.lastElementChild.style.color = '#41EB5C'
+    }
+  } else if (currentAction == 'mapping'){
+    for (const icon of userMappingBtns){
+      icon.firstElementChild.classList.add('active')
+      icon.lastElementChild.style.color = '#41EB5C'
+    }
+  }
+}
+
+function colorInAdminIconToo(){
+  if(currentAction == 'water'){
+    for (const icon of adminWaterBtns){
+      icon.firstElementChild.classList.add('active')
+      icon.lastElementChild.style.color = '#41EB5C'
+    }
+  } else if (currentAction == 'mapping'){
+    for (const icon of adminMappingBtns){
+      icon.firstElementChild.classList.add('active')
+      icon.lastElementChild.style.color = '#41EB5C'
+    }
   }
 }
 
@@ -337,7 +380,6 @@ for(const btn of stoplightBtns){
 // //Disbaled a bay when the eyeball is clicked
 for(const eye of disableEyes){
   eye.addEventListener('click', () => {
-    console.log('clicked')
     let bayDiv = eye.parentElement.firstElementChild
     let disableOverlay = bayDiv.getElementsByClassName('disable-overlay')[0]
     if(!bayDiv.classList.contains('disabled')){
@@ -572,37 +614,31 @@ let resetCancelBtn = document.getElementById('reset-cancel-btn')
   })
 
 //Behavior for clicking an operation button in admin mode
-adminWaterBtns = document.getElementsByClassName('admin-water')
 for(const btn of adminWaterBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
   })
 }
-adminMappingBtns = document.getElementsByClassName('admin-mapping')
 for(const btn of adminMappingBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
   })
 }
-adminWifiBtns = document.getElementsByClassName('admin-wifi')
 for(const btn of adminWifiBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
   })
 }
-adminWifiConfigBtns = document.getElementsByClassName('admin-wifi-config')
 for(const btn of adminWifiConfigBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
   })
 }
-adminMpuBtns = document.getElementsByClassName('admin-mpu')
 for(const btn of adminMpuBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
   })
 }
-adminMpuConfigBtns = document.getElementsByClassName('admin-mpu-config')
 for(const btn of adminMpuConfigBtns){
   btn.addEventListener('click', () => {
     handleAdminOperationBtn(btn)
@@ -611,11 +647,11 @@ for(const btn of adminMpuConfigBtns){
 
 function handleAdminOperationBtn(btn){
   let action = btn.lastElementChild.innerHTML
+  currentAction = action;
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
   //Remove Green Backgrounds from others
-  console.log(btn.firstElementChild)
     for(const icon of operationsIcons){
       icon.classList.remove('active')
     }
@@ -625,6 +661,8 @@ function handleAdminOperationBtn(btn){
   //Add green selected icon to what was clicked 
   btn.firstElementChild.classList.add('active')
   btn.lastElementChild.style.color = '#41EB5C'
+  //Also add the highlight colors to the user mode version in case they toggle to that
+  colorInUserIconToo()
   //Display the main action div
   for(const div of mainActionDivs){
     div.style.display = 'flex'
@@ -679,19 +717,16 @@ function handleAdminOperationBtn(btn){
 }
 
 //Behavior for clicking an operation button in user mode
-userWaterBtns = document.getElementsByClassName('user-water')
 for(const btn of userWaterBtns){
   btn.addEventListener('click', () => {
     handleUserOperationBtn(btn)
   })
 }
-userMappingBtns = document.getElementsByClassName('user-mapping')
 for(const btn of userMappingBtns){
   btn.addEventListener('click', () => {
     handleUserOperationBtn(btn)
   })
 }
-userInfoBtns = document.getElementsByClassName('user-info')
 for(const btn of userInfoBtns){
   btn.addEventListener('click', () => {
     handleUserOperationBtn(btn)
@@ -700,6 +735,7 @@ for(const btn of userInfoBtns){
 
 function handleUserOperationBtn(btn){
   let action = btn.lastElementChild.innerHTML;
+  currentAction = action
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
@@ -713,6 +749,8 @@ function handleUserOperationBtn(btn){
   //Add green selected icon to what was clicked 
   btn.firstElementChild.classList.add('active')
   btn.lastElementChild.style.color = '#41EB5C'
+  //Also add the highlight colors to the admin mode version in case they toggle to that
+  colorInAdminIconToo()
   hideOpenOperationViews(actionCategory)
     //Display the main action div
   for(const div of mainActionDivs){
