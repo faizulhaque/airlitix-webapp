@@ -586,15 +586,16 @@ for (let i = 0; i < greenhouses.length; i++) {
 //Select a bay by default to avoid an alert yelling at the user
 function selectBayByDefault(){
   for(let i = 0; i < bayContainers.length; i++){
-    console.log(currentGreenhouse - 1)
+    console.log(currentGreenhouse)
     let targetBayContainer = bayContainers[currentGreenhouse - 1]
     console.log(targetBayContainer)
     let bays = targetBayContainer.getElementsByClassName('bay');
     for(const bay of bays){
       if(!bay.firstElementChild.classList.contains('disabled')){
-        bay.classList.add('selected')
+        targetBayContainer.click()
         currentBay = bay.firstElementChild.id.slice(-2)
         console.log(currentBay)
+        return
       }
     }
   }
