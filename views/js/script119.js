@@ -380,9 +380,6 @@ for (const btn of bayBtns) {
   });
 }
 
-//Click on bay1 by default 
-
-
 //Display or hide Stoplight Buttons on Arrow Click
 for (const arrow of stoplightTriggers){
   arrow.addEventListener('click', (e) => {
@@ -592,7 +589,7 @@ function selectBayByDefault(){
     let bays = targetBayContainer.getElementsByClassName('bay');
     for(const bay of bays){
       if(!bay.firstElementChild.classList.contains('disabled')){
-        targetBayContainer.click()
+        bay.firstElementChild.click()
         currentBay = bay.firstElementChild.id.slice(-2)
         console.log(currentBay)
         return
