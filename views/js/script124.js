@@ -1085,10 +1085,9 @@ for(const btn of buildingOperationBtns){
         if(btn.classList.contains('mpu-config-action-home')){
           mpuConfigActionHome.style.display = 'flex'
         }
-    
         //If the icon hasn't been clicked yet...
-        if(!btn.firstElementChild.classList.add('active')){
-         //Remove Selected Operation Icon Coloring
+        if(!btn.firstElementChild.classList.contains('active')){
+         //Remove Selected Operation Icon Coloring from others first
          for (const icon of buildingOperationIcons){
           icon.classList.remove('active')
         }
