@@ -752,15 +752,15 @@ function handleAdminOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-  //Remove Green Backgrounds from others
-    for(const icon of operationsIcons){
+  //If the icon hasn't been clicked yet...
+  if(!btn.firstElementChild.classList.contains('active')){
+     //Remove Green Backgrounds from others
+     for(const icon of operationsIcons){
       icon.classList.remove('active')
     }
     for(const text of homeOperationTexts){
       text.style.color = 'white'
     }
-  //If the icon hasn't been clicked yet...
-  if(!btn.firstElementChild.classList.contains('active')){
     btn.firstElementChild.classList.add('active')
     btn.lastElementChild.style.color = '#41EB5C'
     //Also add the highlight colors to the user mode version in case they toggle to that
@@ -843,15 +843,15 @@ function handleUserOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-  //Remove Selected Operation Icon Coloring from other icons if any
-  for (const icon of operationsIcons){
-    icon.classList.remove('active')
-  }
-  for (const text of homeOperationTexts){
-    text.style.color = 'white'
-  }
   //If the icon hasn't been clicked yet...
   if(!btn.firstElementChild.classList.contains('active')){
+    //Remove Selected Operation Icon Coloring from other icons if any
+    for (const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for (const text of homeOperationTexts){
+      text.style.color = 'white'
+    }
     btn.firstElementChild.classList.add('active')
     btn.lastElementChild.style.color = '#41EB5C'
     //Also add the highlight colors to the admin mode version in case they toggle to that
