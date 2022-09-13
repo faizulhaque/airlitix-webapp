@@ -759,53 +759,53 @@ function handleAdminOperationBtn(btn){
     for(const text of homeOperationTexts){
       text.style.color = 'white'
     }
-  //Add green selected icon to what was clicked 
-  btn.firstElementChild.classList.add('active')
-  btn.lastElementChild.style.color = '#41EB5C'
-  //Also add the highlight colors to the user mode version in case they toggle to that
-  colorInUserIconToo()
-  //Hide all open operation divs and then display the main container to place the appropriate one
-  hideOpenOperationViews()
-  for(const div of mainActionDivs){
-    div.style.display = 'flex'
+  //If the icon hasn't been clicked yet...
+  if(!btn.firstElementChild.classList.contains('active')){
+    btn.firstElementChild.classList.add('active')
+    btn.lastElementChild.style.color = '#41EB5C'
+    //Also add the highlight colors to the user mode version in case they toggle to that
+    colorInUserIconToo()
+    //Hide all open operation divs and then display the main container to place the appropriate one
+    hideOpenOperationViews()
+    for(const div of mainActionDivs){
+      div.style.display = 'flex'
+    }
+  //Show logging outcome divs
+  for (const view of outcomeViews){
+    view.style.display = 'flex'
   }
- //Show logging outcome divs
- for (const view of outcomeViews){
-  view.style.display = 'flex'
-}
-  // Display the appropriate action div in the middle  
-  if (actionCategory === 'admin-water'){
-    for (const view of waterViews){
-      view.style.display = 'block'
-    }
-  } 
-  if (actionCategory === 'admin-mapping'){
-    for (const view of mappingViews){
-      view.style.display = 'flex'
-    }
-  } 
-  if (actionCategory === 'admin-wifi'){
-    for (const view of wifiViews){
-      view.style.display = 'flex'
-    }
-  } 
-  if (actionCategory === 'admin-wifi-config'){
-    for (const view of wifiConfigViews){
-      view.style.display = 'flex'
-    }
-  } 
-  if (actionCategory === 'admin-mpu'){
-    for (const view of mpuStatusViews){
-      view.style.display = 'flex'
-    }
-  } 
-  if (actionCategory === 'admin-mpu-config'){
-    for (const view of mpuConfigViews){
-      view.style.display = 'flex'
-    }
-  } 
-  
-  //Change the text of the outcome divs to indicate what they clicked on
+    // Display the appropriate action div in the middle  
+    if (actionCategory === 'admin-water'){
+      for (const view of waterViews){
+        view.style.display = 'block'
+      }
+    } 
+    if (actionCategory === 'admin-mapping'){
+      for (const view of mappingViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'admin-wifi'){
+      for (const view of wifiViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'admin-wifi-config'){
+      for (const view of wifiConfigViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'admin-mpu'){
+      for (const view of mpuStatusViews){
+        view.style.display = 'flex'
+      }
+    } 
+    if (actionCategory === 'admin-mpu-config'){
+      for (const view of mpuConfigViews){
+        view.style.display = 'flex'
+      }
+    } 
+    //Change the text of the outcome divs to indicate what they clicked on
     for (const text of ghOutcomeNums){
       text.textContent = currentGreenhouse;
     }
@@ -815,7 +815,12 @@ function handleAdminOperationBtn(btn){
     for (const text of actionOutcomes){
       text.textContent = action;
     }
-  }  else {
+  } else {
+    btn.firstElementChild.classList.remove('active')
+    btn.lastElementChild.style.color = 'white'
+  }
+  
+  } else {
   	alert('Select a bay')
   }
 }
@@ -838,27 +843,28 @@ function handleUserOperationBtn(btn){
   let actionCategory = btn.className
   //If they have already selected a bay to run a test on:
   if(currentBay){
-  //Remove Selected Operation Icon Coloring
+  //Remove Selected Operation Icon Coloring from other icons if any
   for (const icon of operationsIcons){
     icon.classList.remove('active')
   }
   for (const text of homeOperationTexts){
     text.style.color = 'white'
   }
-  //Add green selected icon to what was clicked 
-  btn.firstElementChild.classList.add('active')
-  btn.lastElementChild.style.color = '#41EB5C'
-  //Also add the highlight colors to the admin mode version in case they toggle to that
-  colorInAdminIconToo()
-  hideOpenOperationViews()
-  //Display the main action div
-  for(const div of mainActionDivs){
-    div.style.display = 'flex'
-  }
-  //Show logging outcome divs
-  for (const view of outcomeViews){
+  //If the icon hasn't been clicked yet...
+  if(!btn.firstElementChild.classList.contains('active')){
+    btn.firstElementChild.classList.add('active')
+    btn.lastElementChild.style.color = '#41EB5C'
+    //Also add the highlight colors to the admin mode version in case they toggle to that
+    colorInAdminIconToo()
+    hideOpenOperationViews()
+    //Display the main action div
+    for(const div of mainActionDivs){
+      div.style.display = 'flex'
+    }
+    //Show logging outcome divs
+    for (const view of outcomeViews){
     view.style.display = 'flex'
-  }
+    }
      // Display the appropriate action div in the middle  
     if (actionCategory === 'user-water'){
       for (const view of waterViews){
@@ -869,25 +875,29 @@ function handleUserOperationBtn(btn){
       for (const view of mappingViews){
         view.style.display = 'flex'
       }
-    } 
-    if (actionCategory === 'user-info'){
-      
-    } 
-    //Change the text of the outcome divs to indicate what they clicked on
-    for (const text of ghOutcomeNums){
-      text.textContent = currentGreenhouse;
     }
-    for (const text of bayOutcomeNums){
-      text.textContent = currentBay;  
-    }
-    for (const text of actionOutcomes){
-      text.textContent = action;
-    }
+      //Change the text of the outcome divs to indicate what they clicked on
+      for (const text of ghOutcomeNums){
+        text.textContent = currentGreenhouse;
+      }
+      for (const text of bayOutcomeNums){
+        text.textContent = currentBay;  
+      }
+      for (const text of actionOutcomes){
+        text.textContent = action;
+      }
+  } 
+  //If they have already selected an option, make in unselectable and take away stling and hide everything
+  else {
+    btn.firstElementChild.classList.remove('active')
+    btn.lastElementChild.style.color = 'white'
+  }
   }  else {
   	alert('Select a bay')
   }
 }
 
+//Function to hide all operation areas to clear out space for the incoming one that has been clicked
 function hideOpenOperationViews(){
   for(const view of waterViews){
     view.style.display = 'none'
