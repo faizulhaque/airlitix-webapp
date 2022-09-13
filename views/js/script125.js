@@ -220,6 +220,8 @@ toggleDiv.addEventListener('click', () => {
 
 function handleAdminMode(){
 	if(adminMode){
+    //Preselect the first gear from greenhouse 1 to avoid annoying pop-up
+    autoSelectGear()
     hamburgerMain.style.display = 'block'
     for (const eye of adminToggleEyes){
       eye.style.display = 'block'
@@ -282,6 +284,13 @@ function handleAdminMode(){
     }
   }
 }
+
+function autoSelectGear(){
+  //If they switch to admin mode while on the homepage, automatically select the first gear from greenhouse 1
+  if(home){
+    gearDivs[0].click()
+    }
+  }
 
 function hideEyeballs(){
   for(const eye of disableEyes){
