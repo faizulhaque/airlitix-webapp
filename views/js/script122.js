@@ -818,6 +818,18 @@ function handleAdminOperationBtn(btn){
   } else {
     btn.firstElementChild.classList.remove('active')
     btn.lastElementChild.style.color = 'white'
+     //Remove Green Backgrounds from others too
+     for(const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for(const text of homeOperationTexts){
+      text.style.color = 'white'
+    }
+    hideOpenOperationViews()
+    currentAction = ''
+    for (const text of actionOutcomes){
+      text.textContent = action;
+    }
   }
   
   } else {
@@ -891,6 +903,18 @@ function handleUserOperationBtn(btn){
   else {
     btn.firstElementChild.classList.remove('active')
     btn.lastElementChild.style.color = 'white'
+     //Remove Green Backgrounds from others too
+     for(const icon of operationsIcons){
+      icon.classList.remove('active')
+    }
+    for(const text of homeOperationTexts){
+      text.style.color = 'white'
+    }
+    hideOpenOperationViews()
+    currentAction = ''
+    for (const text of actionOutcomes){
+      text.textContent = action;
+    }
   }
   }  else {
   	alert('Select a bay')
