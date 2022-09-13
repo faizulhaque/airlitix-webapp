@@ -156,6 +156,10 @@ homeBtn.addEventListener('click', () => {
   greenhouse3View.style.display = 'none';
   greenhouse4View.style.display = 'none';
   greenhouse5View.style.display = 'none';
+  //Clear the current Action text field
+  for (const text of actionOutcomes){
+    text.textContent = currentAction;
+  }
   //Hide Outcome Headers
   for(const header of outcomeHeaders){
     header.style.display = 'none'
@@ -828,7 +832,7 @@ function handleAdminOperationBtn(btn){
     hideOpenOperationViews()
     currentAction = ''
     for (const text of actionOutcomes){
-      text.textContent = action;
+      text.textContent = currentAction;
     }
   }
   
@@ -913,7 +917,7 @@ function handleUserOperationBtn(btn){
     hideOpenOperationViews()
     currentAction = ''
     for (const text of actionOutcomes){
-      text.textContent = action;
+      text.textContent = currentAction;
     }
   }
   }  else {
@@ -1082,17 +1086,28 @@ for(const btn of buildingOperationBtns){
           mpuConfigActionHome.style.display = 'flex'
         }
     
-        //Remove Selected Operation Icon Coloring
-        for (const icon of buildingOperationIcons){
+        //If the icon hasn't been clicked yet...
+        if(!btn.firstElementChild.classList.add('active')){
+         //Remove Selected Operation Icon Coloring
+         for (const icon of buildingOperationIcons){
           icon.classList.remove('active')
         }
-        for (const text of homeOperationTexts){
+         for (const text of homeOperationTexts){
           text.style.color = 'white'
         }
-        //Add green selected icon to what was clicked 
         btn.firstElementChild.classList.add('active')
         btn.lastElementChild.style.color = '#41EB5C'
-      } 
+      } else {
+        //If the icon has already been selected, unselect it and hide the elements associated
+        btn.firstElementChild.classList.remove('active')
+        btn.lastElementChild.style.color = 'white'
+
+        for(const div of homeActionDivs){
+          div.style.display = 'none'
+        }
+        outcomeViewHome.style.display = 'none'
+        actionOutcomeHome.textContent = '';
+      }}
     } else {
       alert('Please select a building target')
     }
