@@ -258,11 +258,11 @@
   box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, 0.72);
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
-  cursor: pointer;
+  cursor: auto;
 }
 
 .office-div:hover {
-  background-color: #8dabf3;
+  background-color: #ffe6c8;
 }
 
 .office-title {
@@ -316,7 +316,7 @@
 
 .greenhouse-view-heading {
   margin-top: 0px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   font-family: Montserrat, sans-serif;
   color: #315c2b;
   font-size: 1.5vw;
@@ -508,10 +508,16 @@
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
+  -webkit-transition: opacity 200ms ease;
+  transition: opacity 200ms ease;
 }
 
 .main-action-div {
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30%;
   height: auto;
   max-width: 450px;
   margin-right: 20px;
@@ -577,8 +583,8 @@
   border-color: rgba(24, 31, 28, 0.65);
   border-radius: 5px;
   background-color: #ffe6c8;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#eee4d9), to(#ffe6c8));
-  background-image: linear-gradient(180deg, #eee4d9, #ffe6c8);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe6c8), to(#b6a388));
+  background-image: linear-gradient(180deg, #ffe6c8, #b6a388);
   box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, 0.51);
 }
 
@@ -885,7 +891,10 @@
   right: 0%;
   bottom: 0%;
   z-index: 10;
-  display: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -1023,13 +1032,14 @@
   display: -ms-flexbox;
   display: flex;
   margin-left: auto;
-  -webkit-justify-content: space-around;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .toggle-div {
@@ -1916,6 +1926,10 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -1934,11 +1948,15 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #977750;
+  background-color: #8dabf3;
 }
 
 .wifi-config-container {
@@ -1951,11 +1969,15 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #2b8550;
+  background-color: #8dabf3;
 }
 
 .mpu-status-container {
@@ -1968,11 +1990,15 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #d8b93c;
+  background-color: #8dabf3;
 }
 
 .mpu-config-container {
@@ -1985,22 +2011,46 @@
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #742292;
+  background-color: #8dabf3;
 }
 
-.disable-eye {
+.eye {
   position: static;
   left: auto;
   top: auto;
   right: auto;
   bottom: auto;
   z-index: auto;
+  display: block;
   width: 2vw;
+  height: 2vw;
+  background-image: url('../images/eyeball.svg');
+  background-position: 50% 50%;
+  background-size: cover;
   cursor: pointer;
+}
+
+.eye.visible {
+  width: 1.5vw;
+  height: 1.5vw;
+  min-width: 20px;
+  background-image: url('../images/visible.svg');
+}
+
+.eye.not-visible {
+  display: none;
+  width: 1.5vw;
+  height: 1.5vw;
+  min-width: 20px;
+  background-image: url('../images/not-visible.svg');
 }
 
 .disable-overlay {
@@ -2051,6 +2101,10 @@
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 
 .reset-btn {
@@ -2546,7 +2600,7 @@
   -ms-flex-align: center;
   align-items: center;
   border-radius: 5px;
-  background-color: #cfcfcf;
+  background-color: #8dabf3;
   box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.42);
 }
 
@@ -2669,6 +2723,85 @@
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
+.office-overlay-div {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  display: none;
+}
+
+.main-reset-div {
+  display: none;
+  margin-right: 10px;
+  padding: 8px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+}
+
+.main-reset-div:hover {
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #b13b3b;
+}
+
+.reset-text {
+  padding-top: 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.reset-icon {
+  width: 45px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+.reset-confirmation-overlay {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: 10;
+  display: none;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgba(24, 31, 28, 0.68);
+}
+
+.main-eye-toggle {
+  width: 2vw;
+}
+
+.main-eye-toggle.visible {
+  display: none;
+  height: 2vw;
+  min-width: 30px;
+  background-image: url('../images/visible.svg');
+  background-position: 50% 50%;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.main-eye-toggle.not-visible {
+  height: 2vw;
+  min-width: 30px;
+  background-image: url('../images/not-visible.svg');
+  background-position: 50% 50%;
+  background-size: cover;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 991px) {
   .navbar-container {
     position: relative;
@@ -2695,6 +2828,10 @@
     font-size: 1vw;
   }
 
+  .greenhouse-grid {
+    margin-left: 0px;
+  }
+
   .main-greenhouse-div {
     height: 6vw;
     min-height: 150px;
@@ -2709,22 +2846,81 @@
     font-size: 1vw;
   }
 
+  .all-greenhouses-view {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
   .greenhouse-1-view {
     display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
   }
 
   .greenhouse-view-heading {
-    font-size: 3vw;
+    font-size: 2vw;
+  }
+
+  .bay-container {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .bay-div {
+    width: 300px;
   }
 
   .bay-heading {
     font-size: 2vw;
   }
 
+  .main-action-div {
+    display: none;
+    width: 60%;
+    max-width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .bay-info-div {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .water-panel-container {
-    width: 28vw;
+    display: block;
+    width: 50%;
     min-height: 500px;
     min-width: 325px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: auto auto;
+    grid-template-rows: auto auto;
   }
 
   .panel-button-grid {
@@ -2753,8 +2949,216 @@
     font-size: 0.8vw;
   }
 
-  .operation-btn-home.mapping {
+  .home-operation-text {
+    font-size: 1.5vw;
+  }
+
+  .outcome-view {
+    display: none;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .outcome-heading {
+    font-size: 2vw;
+  }
+
+  .log-text-content {
+    font-size: 1.5vw;
+  }
+
+  .status-text-content {
+    font-size: 1.5vw;
+  }
+
+  .location-heading {
+    font-size: 2vw;
+  }
+
+  .outcome-header {
+    display: none;
+  }
+
+  .gh-outcome-num {
+    font-size: 2vw;
+  }
+
+  .user-operation-buttons {
+    margin-top: 100px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+
+  .menu-container-main {
+    display: none;
+  }
+
+  .bay-icon-container-water {
+    width: 2vw;
     height: 2vw;
+  }
+
+  .outcome-view-home {
+    display: none;
+    width: 60%;
+    margin-top: 15px;
+    margin-left: 0px;
+  }
+
+  .outcome-target-home {
+    font-size: 2vw;
+  }
+
+  .action-heading {
+    font-size: 2vw;
+  }
+
+  .action-heading-home {
+    font-size: 2vw;
+  }
+
+  .bay-icon-container-map {
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .bay-icon-container-wifi {
+    display: none;
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .bay-icon-container-system {
+    display: none;
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .mapping-container {
+    display: none;
+    min-height: 300px;
+    padding: 25px;
+    border-radius: 5px;
+  }
+
+  .wifi-container {
+    padding: 25px;
+    border-radius: 5px;
+  }
+
+  .wifi-config-container {
+    padding: 25px;
+    border-radius: 5px;
+  }
+
+  .mpu-status-container {
+    padding: 25px;
+    border-radius: 5px;
+  }
+
+  .mpu-config-container {
+    padding: 25px;
+    border-radius: 5px;
+  }
+
+  .bay-outcome-num {
+    font-size: 2vw;
+  }
+
+  .action-outcome {
+    font-size: 2vw;
+  }
+
+  .operation-icon.water {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .operation-icon.mapping {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .operation-icon.wifi {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .operation-icon.wifi-config {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .operation-icon.mpu {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .operation-icon.mpu-config {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .right-info-div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 auto;
+    -ms-flex: 0 auto;
+    flex: 0 auto;
+  }
+
+  .operation-btn-home.water {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .operation-btn-home.mapping {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .operation-btn-home.wifi {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .operation-btn-home.wifi-config {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .operation-btn-home.mpu {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .operation-btn-home.mpu-config {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .home-action-display {
+    display: none;
+    width: 60%;
+    min-height: 300px;
+    margin-top: 15px;
+    margin-left: 0px;
   }
 
   .greenhouse-2-view {
@@ -2771,6 +3175,13 @@
 
   .greenhouse-5-view {
     display: none;
+  }
+
+  .main-eye-toggle.visible {
+    display: none;
+    width: 2.5vw;
+    height: 2.5vw;
+    min-width: 0px;
   }
 }
 
