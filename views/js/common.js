@@ -59,6 +59,7 @@ $(document).ready(() => {
   });
 
   socket.on('fromiot', (data) => {
+    
     if (data.msg) {
       renderDataOnScreen(data.msg);
     }
@@ -99,7 +100,13 @@ $(document).ready(() => {
   // BAY selected
   $('.bay-div').on('click', (element) => {
     objectToIOT.bayName = element.currentTarget.children[0].innerHTML;
+    objectToIOT.command = CMD_GET_LCD_DATA;
     appendStatus(objectToIOT);
+
+    socket.emit('toiot', {
+      receiverId: wifiClient,
+      senderId: socket.id,
+      msg: objectToIOT
   });
   
   // KEYPAD BUTTON selected
@@ -108,17 +115,25 @@ $(document).ready(() => {
     objectToIOT.command = CMD_SET_LCD_DATA;
     appendStatus(objectToIOT);
 
-    // if (wifiClient === '') {
-    //   alert('No WIFI client is available.');
-    //   return;
-    // }
-
     socket.emit('toiot', {
       receiverId: wifiClient,
       senderId: socket.id,
       msg: objectToIOT
     });
   });
+
+
+// MAPPING menu button selected
+$('.mapping').on('click', (element) => {
+  objectToIOT.command = CMD_GET_MAP_DATA;
+  appendStatus(objectToIOT);
+  
+  socket.emit('toiot', {
+      receiverId: wifiClient,
+      senderId: socket.id,
+      msg: objectToIOT
+  });
+});
 
 });
 
