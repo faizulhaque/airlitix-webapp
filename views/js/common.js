@@ -58,7 +58,7 @@ $(document).ready(() => {
     appendLogs(`Message received from WIFI Client ${JSON.stringify(data.msg, null, 2)}.`);
   });
 
-  socket.on('fromIOT', (data) => {
+  socket.on('fromiot', (data) => {
     if (data.msg && data.msg.data) {
       renderDataOnScreen(data.msg.data);
     }
@@ -113,7 +113,7 @@ $(document).ready(() => {
     //   return;
     // }
 
-    socket.emit('toIOT', {
+    socket.emit('toiot', {
       receiverId: wifiClient,
       senderId: socket.id,
       msg: objectToIOT
