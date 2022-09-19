@@ -69,5 +69,25 @@ module.exports = (io) => {
       io.to(data.receiverId).emit('message', data);
     });
 
+    socket.on('fromIOT', async (data) => {
+      //data.command will be parsed
+      logger.info("fromIOT: ", {
+        socketId: socket.id,
+        data
+      });
+
+      io.to(data.receiverId).emit('fromIOT', data);
+    });
+
+    socket.on('toIOT', async (data) => {
+      //data.command will be parsed
+      logger.info("toIOT: ", {
+        socketId: socket.id,
+        data
+      });
+
+      io.to(data.receiverId).emit('toIOT', data);
+    });
+
   });
 };
