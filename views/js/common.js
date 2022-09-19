@@ -135,7 +135,7 @@ function appendLogs(msg) {
 function appendStatus(msg) {
   console.table('appendStatus', msg);
   if ($('.status-div').length) {
-    $('.status-div').html( `<div class='status-text-content'>${JSON.stringify(msg)}</div>`); // help
+    $('.status-div').html( `<div class='status-text-content'>${JSON.stringify(msg)}</div>`);
   }
 }
 
