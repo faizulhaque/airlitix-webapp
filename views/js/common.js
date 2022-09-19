@@ -59,8 +59,8 @@ $(document).ready(() => {
   });
 
   socket.on('fromiot', (data) => {
-    if (data.msg && data.msg.data) {
-      renderDataOnScreen(data.msg.data);
+    if (data.msg) {
+      renderDataOnScreen(data.msg);
     }
     appendStatus(`Message received from WIFI Client ${JSON.stringify(data.msg, null, 2)}.`);
   });
@@ -139,12 +139,12 @@ function appendStatus(msg) {
   }
 }
 
-function renderDataOnScreen(data) {
+function renderDataOnScreen(msg) {
   try {
-    $(".panel-text-r1").html(data.substring(0,20));
-    $(".panel-text-r2").html(data.substring(20,40));
-    $(".panel-text-r3").html(data.substring(40,60));
-    $(".panel-text-r4").html(data.substring(60,80));
+    $(".panel-text-r1").html(msg.data1);
+    $(".panel-text-r2").html(msg.data2);
+    $(".panel-text-r3").html(msg.data3);
+    $(".panel-text-r4").html(msg.data4);
   } catch (e) {
     console.error('renderDataOnScreen.error', e);
   }
