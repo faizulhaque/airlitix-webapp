@@ -64,7 +64,15 @@ let BAYMAP_MODULE_TYPE     = 4
     msg: objectFromIOT
   }
   appendStatus(`fromIOT received from WIFI Client ${JSON.stringify(data.msg, null, 2)}.`);
-
+    // TODO: Parse COMMAND -
+    //    * If "COMMAND" = CMD_RET_LCD_DATA, parse DATA into LCD '.panel-text-r*', where * = 1, 2, 3, 4
+    //    If "COMMAND" = CMD_RET_MAP_DATA, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
+    //    If "COMMAND" = CMD_RET_WIFI_STATUS, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
+    //    If "COMMAND" = CMD_RET_WIFI_CONFIG, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
+    //    If "COMMAND" = CMD_RET_MPU_STATUS, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
+    //    If "COMMAND" = CMD_RET_MPU_CONFIG, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
+    //    * If "COMMAND" = CMD_RET_LOG, parse DATA=>msg, then post "msg" to LOG text box with "appendLog(msg)"
+    //    * If "COMMAND" = CMD_RET_STATUS, parse DATA=>msg, then post "msg" to STATUS text box with "appendStatus(msg)"
   });
 
   socket.emit('join', {type: 'WEB'});
@@ -78,22 +86,14 @@ let BAYMAP_MODULE_TYPE     = 4
     data: ''             // DATA: KEYPAD input
   };
 
-        //                              \"command\": 13,
-      //                              \"data\": \"12345678901234567890123456789012345678901234567890123456789012345678901234567890\"
   let objectFromIOT = {
     command: '',         // COMMAND
     data: ''             // DATA. ex:LCD return data
+    //  "data1": '1234567890123456789'
+    //  "data2": '1234567890123456789'
+    //  "data3": '1234567890123456789'
+    //  "data4": '1234567890123456789'
   };
-
-    // TODO: Parse COMMAND -
-    //    * If "COMMAND" = CMD_RET_LCD_DATA, parse DATA into LCD '.panel-text-r*', where * = 1, 2, 3, 4
-    //    If "COMMAND" = CMD_RET_MAP_DATA, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
-    //    If "COMMAND" = CMD_RET_WIFI_STATUS, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
-    //    If "COMMAND" = CMD_RET_WIFI_CONFIG, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
-    //    If "COMMAND" = CMD_RET_MPU_STATUS, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
-    //    If "COMMAND" = CMD_RET_MPU_CONFIG, msg="<command> Not Implemented", post to STATUS text box with "appendStatus(msg)"
-    //    * If "COMMAND" = CMD_RET_LOG, parse DATA=>msg, then post "msg" to LOG text box with "appendLog(msg)"
-    //    * If "COMMAND" = CMD_RET_STATUS, parse DATA=>msg, then post "msg" to STATUS text box with "appendStatus(msg)"
 
   // OFFICE GEAR selected (ADMIN mode) 
   $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .gear-div', (element) => { // help

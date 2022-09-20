@@ -78,18 +78,26 @@ $(document).ready(() => {
     data: ''             // DATA: KEYPAD input
   };
 
-  // \"command\": 13,
-  // \"data\": \"12345678901234567890123456789012345678901234567890123456789012345678901234567890\"
+  // FOR: objectFromIOT
+  //    "command": 13
+  //    "data": "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+  // ==> "data" *SHOULD* BE:
+  //    "data1": "12345678901234567890"
+  //    "data2": "12345678901234567890"
+  //    "data3": "12345678901234567890"
+  //    "data4": "12345678901234567890"
   let objectFromIOT = {
     command: '',         // COMMAND
-    data: ''             // DATA. ex:LCD return data
+    data: ''             // LCD, MAP, MPU, WiFi, LOG return data
   };
 
   // GREENHOUSE selected (USER mode)
   $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .main-greenhouse-div', (element) => {
     objectToIOT.greenhouseName = element.currentTarget.children[0].innerHTML;
     objectToIOT.officeName = officeName;
-    objectToIOT.bayName = 'Bay 1'; // webflow main script auto selecting the Bay 1 by default.
+    // webflow main script auto selecting the Bay 1 by default.
+    //    TODO: *SHOULD* be first "selectectable" BAY
+    objectToIOT.bayName = 'Bay 1';
     objectToIOT.targetType =  '';
     objectToIOT.command =  '';
     objectToIOT.data =  '';
@@ -107,6 +115,7 @@ $(document).ready(() => {
       receiverId: wifiClient,
       senderId: socket.id,
       msg: objectToIOT
+    });
   });
   
   // KEYPAD BUTTON selected
