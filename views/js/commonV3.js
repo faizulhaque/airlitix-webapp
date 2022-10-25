@@ -79,7 +79,7 @@ $(document).ready(() => {
     // structure to IOT
     let objectToIOT = {
       office_name: '',     // OFFICE_NAME
-      greenhouse_name: '', // GREENHOUSE_NAME
+      greenHouse_name: '', // GREENHOUSE_NAME
       bay_name: '',        // BAY_NAME
       targetType: '',     // MODULE_TYPE: 1=OFF, 2=GH, 3=BAYWater, 4=BAYMap
       command: '',        // COMMAND
@@ -102,7 +102,7 @@ $(document).ready(() => {
       objectToIOT.office_name = officeName;
       objectToIOT.targetType = OFFICE_MODULE_TYPE;
       objectToIOT.greenHouse_name = '';
-      objectToIOT.bay_name = '';
+      objectToIOT.bay_name = 'Bay 1'; // It's default selected
       appendStatus(objectToIOT, colorINFO);
     });
   
@@ -113,7 +113,7 @@ $(document).ready(() => {
       objectToIOT.office_name = officeName;
       objectToIOT.greenHouse_name = element.parentElement.querySelector("h2").innerHTML;
       objectToIOT.targetType = GREENHOUSE_MODULE_TYPE;
-      objectToIOT.bay_name = '';
+      objectToIOT.bay_name = 'Bay 1'; // It's default selected
       appendStatus(objectToIOT, colorINFO);
     });
 
@@ -124,7 +124,7 @@ $(document).ready(() => {
       objectToIOT.office_name = officeName;
       objectToIOT.greenHouse_name = element.currentTarget.children[0].innerHTML;
       objectToIOT.targetType = GREENHOUSE_MODULE_TYPE;
-      objectToIOT.bay_name = '';
+      objectToIOT.bay_name = 'Bay 1'; // It's default selected
       // set Selected GH Name in LOCATION
       document.querySelector("#gh-outcome-num").innerHTML = document.querySelector("#greenhouse-1-view > div.bay-info-div > div.bay-heading-div > h1").innerHTML;
       // set Selected BAY Name in LOCATION
@@ -137,7 +137,7 @@ $(document).ready(() => {
     // BAY selected
     $('.bay-div').on('click', (element) => {
       // set objectToIOT variables
-      objectToIOT.bayName = element.currentTarget.children[0].innerHTML;
+      objectToIOT.bay_name = element.currentTarget.children[0].innerHTML;
       // set Selected BAY Name in LOCATION
       document.querySelector("#bay-outcome-num").innerHTML = element.currentTarget.children[0].innerHTML;
       appendStatus(objectToIOT, colorINFO);
@@ -308,7 +308,8 @@ function addWaterIcon() {
         waterIconFLAG = true;
     }
     // Set TARGETTYPE to BAYWATER
-    objectToIOT.targetType = BAYWATER_MODULE_TYPE;
+    // Variable: objectToIOT not available in this scope.
+    // objectToIOT.targetType = BAYWATER_MODULE_TYPE;
 }
 
 // Add MAP ICON before BAY location text
@@ -327,7 +328,8 @@ function addMapIcon() {
         mapIconFLAG = true;
     }
     // Set TARGETTYPE to BAYMAP
-    objectToIOT.targetType = BAYMAP_MODULE_TYPE;
+    // Variable: objectToIOT not available in this scope. 
+    //objectToIOT.targetType = BAYMAP_MODULE_TYPE;
 }
 
 // Print colored "msg" to LOG text box
@@ -383,6 +385,9 @@ function appendStatus(msg, color) {
 
     if ($('.status-div').length) {
         $('.status-div').append(`<div class='status-text-content'>${JSON.stringify(msg)}</div>`);
+        try {
+          $(".status-div").scrollTop($(".status-div")[3].scrollHeight);
+        } catch {}
         // IF USER MODE
         if (document.getElementsByClassName('admin').length == 0) {
             switch (color) {
