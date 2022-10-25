@@ -11,7 +11,7 @@ $(document).ready(() => {
     reconnectionAttempts: 10      
   });
 
-  let office_name = document.getSelectorsByClass('office-div').innerHTML; // help
+  let office_name = document.querySelector('h3.office-title').innerHTML;
 
 // COMMANDS
 let CMD_GET_LCD_DATA    = 11 // Get LCD DATA
@@ -96,36 +96,37 @@ let BAYMAP_MODULE_TYPE     = 4
   };
 
   // OFFICE GEAR selected (ADMIN mode) 
-  $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .gear-div', (element) => { // help
-    objectForSocket.office_name = office_name;
+  $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .gear-div', (element) => {
+    objectForSocket.office_name = document.querySelector('h3.office-title').innerHTML;
+    objectForSocket.targetType = OFFICE_MODULE_TYPE;
     objectForSocket.greenHouse_name = '';
     objectForSocket.bay_name = '';
-    objectForSocket.targetType = OFFICE_MODULE_TYPE;
-    appendStatus(objectForSocket);
+    // appendStatus(objectForSocket);
   });
   
   // GREENHOUSE GEAR selected (ADMIN mode)
-  $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .gear-div', (element) => { // help
-    objectForSocket.greenHouse_name = element.parent().querySelector("h2").innerHTML; // help
-    objectForSocket.office_name = office_name;
-    objectForSocket.bay_name = '';
+  $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .gear-div', (element) => {
+    objectForSocket.office_name = document.querySelector('h3.office-title').innerHTML;
+    objectForSocket.greenHouse_name = element.parentElement.querySelector("h2").innerHTML;
     objectForSocket.targetType = GREENHOUSE_MODULE_TYPE;
-    appendStatus(objectForSocket);
+    objectForSocket.bay_name = '';
+    // appendStatus(objectForSocket);
   });
 
   // GREENHOUSE selected (USER mode)
   $('#all-greenhouses-view').on('click', '.greenhouse-grid .greenhouse-cell-div .main-greenhouse-div', (element) => {
+    objectForSocket.office_name = document.querySelector('h3.office-title').innerHTML;
     objectForSocket.greenHouse_name = element.currentTarget.children[0].innerHTML;
-    objectForSocket.office_name = office_name;
-    objectForSocket.bay_name = '';
     objectForSocket.targetType = GREENHOUSE_MODULE_TYPE;
-    appendStatus(objectForSocket);
+    objectForSocket.bay_name = '';
+    // appendStatus(objectForSocket);
   });
 
   // BAY selected
   $('.bay-div').on('click', (element) => {
     objectForSocket.bay_name = element.currentTarget.children[0].innerHTML;
-    appendStatus(objectForSocket);
+    objectForSocket.targetType = 
+    // appendStatus(objectForSocket);
   });
   
   // KEYPAD BUTTON selected
